@@ -1,0 +1,13 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.skipoledata/skipole-connect",
+  "title": "Skipole Connect",
+  "description": "Skipole catalog and usage over remote MCP. Licensed purchases use signed-in website Checkout; provider tools have separate authorization and policy gates.",
+  "version": "0.1.0-alpha.1",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://skipole-data-platform.replit.app/mcp"
+    }
+  ]
+}

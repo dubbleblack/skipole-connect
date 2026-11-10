@@ -1,0 +1,17 @@
+{
+  "name": "skipole-connect",
+  "version": "0.1.0-alpha.1",
+  "description": "Connect coding workflows to Skipole's documented catalog, REST API, and remote MCP service.",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Skipole"
+  },
+  "homepage": "https://skipoledata.com/developers/integrations",
+  "logo": "assets/skipole-mark.svg",
+  "keywords": [
+    "data",
+    "rest-api",
+    "mcp",
+    "developer-tools"
+  ]
+}

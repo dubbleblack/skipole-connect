@@ -1,0 +1,89 @@
+{
+  "name": "skipole-connect",
+  "version": "0.1.0-alpha.1",
+  "license": "Apache-2.0",
+  "status": "prepared-not-published",
+  "authorization": {
+    "publishRepository": false,
+    "publishNpm": false,
+    "publishPyPi": false,
+    "submitCursor": false,
+    "submitReplitPartner": false,
+    "claimOfficialLovableConnector": false
+  },
+  "packages": [
+    {
+      "name": "@skipole/sdk",
+      "version": "0.1.0-alpha.1",
+      "directory": "javascript",
+      "build": "npm run build",
+      "test": "npm test",
+      "dryRun": "npm pack --dry-run"
+    },
+    {
+      "name": "skipole",
+      "version": "0.1.0a1",
+      "directory": "python",
+      "prepare": "python scripts/prepare-release.py",
+      "build": "uv build --wheel --no-build-isolation --out-dir dist",
+      "test": "PYTHONPATH=src python -m unittest discover -s tests"
+    }
+  ],
+  "cursor": {
+    "directory": "cursor",
+    "version": "0.1.0-alpha.1",
+    "manifest": ".cursor-plugin/plugin.json",
+    "submissionAuthorized": false
+  },
+  "productionMcpEndpoint": {
+    "url": "https://skipole-data-platform.replit.app/mcp",
+    "verifiedLive": true,
+    "verifiedClient": "Claude",
+    "verifiedReadOnlyTools": [
+      "skipole_list_products",
+      "skipole_get_usage"
+    ]
+  },
+  "distribution": {
+    "github": {
+      "status": "prepared-local-only",
+      "publicRepository": false
+    },
+    "mcpRegistry": {
+      "status": "metadata-prepared",
+      "submitted": false
+    },
+    "claude": {
+      "status": "verified-custom-connector",
+      "officialListing": false
+    },
+    "chatgpt": {
+      "status": "setup-guide",
+      "clientVerified": false,
+      "officialListing": false
+    },
+    "cursor": {
+      "status": "plugin-prepared",
+      "clientVerified": false,
+      "submitted": false
+    },
+    "replit": {
+      "status": "setup-guide",
+      "partnerSubmitted": false
+    },
+    "lovable": {
+      "status": "setup-guide",
+      "officialConnector": false
+    },
+    "codex": {
+      "status": "setup-guide",
+      "clientVerified": false,
+      "officialListing": false
+    },
+    "vercel": {
+      "status": "server-side-rest-guide",
+      "deploymentVerified": false,
+      "officialListing": false
+    }
+  }
+}

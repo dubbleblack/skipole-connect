@@ -1,0 +1,33 @@
+{
+  "name": "@skipole/sdk",
+  "version": "0.1.0-alpha.1",
+  "description": "Local JavaScript and TypeScript client for the public Skipole REST API",
+  "type": "module",
+  "license": "Apache-2.0",
+  "homepage": "https://skipoledata.com/developers/integrations",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "prepare": "npm run build",
+    "prepack": "npm run build",
+    "test": "node --test test/*.test.mjs"
+  }
+}

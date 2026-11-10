@@ -1,0 +1,712 @@
+openapi: 3.1.0
+info:
+  title: Skipole Public API
+  version: 0.1.0-alpha.1
+  description: >
+    Public catalog and pricing metadata plus authenticated customer REST routes.
+    Provider operations use normalized Skipole request schemas and remain subject
+    to backend capability, credit, purpose, and budget controls. No upstream
+    provider credentials or URLs are exposed.
+servers:
+  - url: https://skipole-data-platform.replit.app/api
+    description: Skipole public origin. The MCP endpoint is separate at /mcp.
+paths:
+  /v1/catalog:
+    get:
+      operationId: listProducts
+      summary: List public catalog categories
+      description: Returns published category metadata. It does not return licensed records.
+      responses:
+        "200":
+          description: Catalog categories, including their current availability status
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CatalogProduct"
+        "500":
+          $ref: "#/components/responses/ServerError"
+  /v1/catalog/{slug}:
+    get:
+      operationId: getProduct
+      summary: Get a public catalog category
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Catalog category metadata
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CatalogProduct"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /v1/pricing:
+    get:
+      operationId: listPricing
+      summary: List active, verified pricing plans
+      description: Draft plans are not returned.
+      responses:
+        "200":
+          description: Active pricing plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PricingPlan"
+  /v1/customer/catalog:
+    get:
+      operationId: getCustomerCatalog
+      summary: Read customer catalog metadata
+      parameters:
+        - $ref: "#/components/parameters/integrationSource"
+      security:
+        - skipoleApiKey: []
+      responses:
+        "200":
+          description: Catalog metadata only
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CatalogProduct"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+  /v1/customer/demo:
+    get:
+      operationId: getSyntheticDemo
+      summary: Get a synthetic-only demo response
+      parameters:
+        - $ref: "#/components/parameters/integrationSource"
+      security:
+        - skipoleApiKey: []
+      responses:
+        "200":
+          description: Fabricated example values. No provider is called.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SyntheticDemo"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+  /v1/customer/topics:
+    get:
+      operationId: searchPublicTopics
+      summary: Search public B2B or B2C topic metadata
+      description: >
+        Requires catalog:read. Returns public topic taxonomy only, not licensed
+        audience records. It does not consume credits. Only keyword mode is exposed.
+      parameters:
+        - $ref: "#/components/parameters/integrationSource"
+        - name: market
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [b2b, b2c]
+        - name: keywords
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 100
+        - name: mode
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [keyword]
+            default: keyword
+      security:
+        - skipoleApiKey: []
+      responses:
+        "200":
+          description: Public topic metadata only
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [market, total, topics, licensedAudienceData]
+                properties:
+                  market:
+                    type: string
+                    enum: [b2b, b2c]
+                  total:
+                    type: integer
+                  topics:
+                    type: array
+                    items:
+                      type: object
+                      required: [id, label, category, subCategory]
+                      properties:
+                        id: { type: string }
+                        label: { type: string }
+                        category: { type: [string, "null"] }
+                        subCategory: { type: [string, "null"] }
+                  licensedAudienceData: { const: false }
+        "400":
+          description: Invalid topic search
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "502":
+          description: Public topic catalog unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Topic discovery is not activated for customer use
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /v1/customer/provider-quotes:
+    post:
+      operationId: quoteProviderRequest
+      summary: Request a signed itemized provider-operation quote
+      description: >
+        Requires catalog:read. Quoting does not call a provider. The backend
+        returns 503 while the requested capability lacks an active commercial
+        policy.
+      parameters:
+        - $ref: "#/components/parameters/integrationSource"
+      security:
+        - skipoleApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderCommerceQuoteInput"
+      responses:
+        "200":
+          description: Short-lived itemized quote
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderQuote"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "503":
+          description: Capability pricing or budget policy is not active
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /v1/customer/provider-requests:
+    post:
+      operationId: createProviderRequest
+      summary: Execute a quoted provider operation using workspace credits
+      description: >
+        Requires data:write, a valid signed quote, sufficient credits, and an
+        active backend capability and budget. This endpoint does not create a
+        Stripe Checkout Session.
+      parameters:
+        - $ref: "#/components/parameters/integrationSource"
+      security:
+        - skipoleApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderCommerceOperationInput"
+      responses:
+        "200":
+          description: Completed enrichment or existing idempotent order
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderOperation"
+        "202":
+          description: Submitted asynchronous job or blocked outcome
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProviderOperation"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          description: Insufficient workspace credits or idempotency conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Capability or supplier budget is not active
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /v1/customer/jobs/{jobId}:
+    get:
+      operationId: getCustomerDataJobStatus
+      summary: Read a customer workspace's data job status
+      parameters:
+        - $ref: "#/components/parameters/integrationSource"
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - skipoleApiKey: []
+      responses:
+        "200":
+          description: Status metadata only; no provider records
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, capabilityId, status, requestedRecords, completedRecords, downloadExpiresAt, createdAt, updatedAt, completedAt]
+                properties:
+                  id: { type: string, format: uuid }
+                  capabilityId: { type: string }
+                  status:
+                    type: string
+                    enum: [submitted, processing, completed, failed, unknown]
+                  requestedRecords: { type: integer }
+                  completedRecords: { type: [integer, "null"] }
+                  downloadExpiresAt: { type: [string, "null"], format: date-time }
+                  createdAt: { type: string, format: date-time }
+                  updatedAt: { type: string, format: date-time }
+                  completedAt: { type: [string, "null"], format: date-time }
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+  /v1/customer/jobs/{jobId}/export:
+    post:
+      operationId: exportCustomerJobCsv
+      summary: Download an authorized completed job as CSV
+      description: >
+        Requires data:write. The job must belong to the API key's workspace and
+        the requested fields must be enabled by its backend policy.
+      parameters:
+        - $ref: "#/components/parameters/integrationSource"
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      security:
+        - skipoleApiKey: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProviderJobExportInput"
+      responses:
+        "200":
+          description: CSV result
+          content:
+            text/csv:
+              schema:
+                type: string
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          description: Job is not ready or export has already been attempted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Provider capability is not active
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /v1/customer/usage:
+    get:
+      operationId: getUsage
+      summary: Read workspace credits and usage
+      description: Requires an API key with the usage:read scope.
+      parameters:
+        - $ref: "#/components/parameters/integrationSource"
+      security:
+        - skipoleApiKey: []
+      responses:
+        "200":
+          description: Current credit balance, monthly usage totals, and shared request limit
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerUsage"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+components:
+  parameters:
+    integrationSource:
+      name: X-Skipole-Integration-Source
+      in: header
+      required: false
+      description: >
+        Optional self-reported usage attribution. It does not change authorization,
+        subscription billing, permissions, or product availability.
+      schema:
+        type: string
+        enum: [replit, cursor, lovable, rest, mcp, javascript, python]
+  securitySchemes:
+    skipoleApiKey:
+      type: http
+      scheme: bearer
+      bearerFormat: Skipole API key
+      description: >
+        Customer key. Create, rotate, and revoke keys from the authenticated Skipole dashboard.
+        Send it only from a trusted server over HTTPS.
+  schemas:
+    CatalogProduct:
+      type: object
+      required: [slug, name, category, description, status, attributes, useCases]
+      properties:
+        slug:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [planned, preview, active]
+        attributes:
+          type: array
+          items:
+            type: string
+        useCases:
+          type: array
+          items:
+            type: string
+        billingUnit:
+          type: [string, "null"]
+        creditCost:
+          type: [integer, "null"]
+        refreshFrequency:
+          type: [string, "null"]
+    PricingPlan:
+      type: object
+      required: [name, monthlyPrice, monthlyCredits, status]
+      properties:
+        name:
+          type: string
+        monthlyPrice:
+          type: [integer, "null"]
+          description: Monthly price in USD. Null means custom pricing.
+        monthlyCredits:
+          type: [integer, "null"]
+        status:
+          type: string
+          const: active
+    SyntheticDemo:
+      type: object
+      required: [synthetic, operation, request, response]
+      properties:
+        synthetic:
+          type: boolean
+          const: true
+        operation:
+          type: string
+        request:
+          type: object
+          additionalProperties: true
+        response:
+          type: object
+          additionalProperties: true
+    ProviderCommerceRequest:
+      oneOf:
+        - type: object
+          additionalProperties: false
+          required: [kind, capabilityId, purpose, request]
+          properties:
+            kind: { type: string, const: enrichment }
+            capabilityId: { type: string, minLength: 1, maxLength: 80 }
+            purpose: { type: string, minLength: 2, maxLength: 80 }
+            request:
+              oneOf:
+                - type: object
+                  additionalProperties: false
+                  required: [method, email]
+                  properties:
+                    method: { type: string, const: email }
+                    email: { type: string, format: email, maxLength: 254 }
+                    customId: { type: string, maxLength: 100 }
+                    intent: { type: [boolean, "null"] }
+                    website: { type: string, maxLength: 2048 }
+                - type: object
+                  additionalProperties: false
+                  required: [method, phone]
+                  properties:
+                    method: { type: string, const: phone }
+                    phone: { type: string, minLength: 7, maxLength: 32 }
+                    customId: { type: string, maxLength: 100 }
+                    website: { type: string, maxLength: 2048 }
+                - type: object
+                  additionalProperties: false
+                  required: [method, md5]
+                  properties:
+                    method: { type: string, const: md5 }
+                    md5: { type: string, pattern: "^[a-fA-F0-9]{32}$" }
+                    customId: { type: string, maxLength: 100 }
+                    website: { type: string, maxLength: 2048 }
+                - type: object
+                  additionalProperties: false
+                  required: [method, ip]
+                  properties:
+                    method: { type: string, const: ip }
+                    ip: { type: string }
+                    customId: { type: string, maxLength: 100 }
+                    website: { type: string, maxLength: 2048 }
+                - type: object
+                  additionalProperties: false
+                  required: [method, vin]
+                  properties:
+                    method: { type: string, const: vehicle }
+                    vin: { type: string, pattern: "^[A-HJ-NPR-Z0-9]{17}$" }
+                    customId: { type: string, maxLength: 100 }
+                    website: { type: string, maxLength: 2048 }
+                - type: object
+                  additionalProperties: false
+                  required: [method, address]
+                  properties:
+                    method: { type: string, const: postal_identity }
+                    address: { type: string, minLength: 2, maxLength: 200 }
+                    firstName: { type: string, maxLength: 100 }
+                    lastName: { type: string, maxLength: 100 }
+                    city: { type: string, maxLength: 100 }
+                    state: { type: string, maxLength: 50 }
+                    zip: { type: string, maxLength: 20 }
+                    customId: { type: string, maxLength: 100 }
+                    website: { type: string, maxLength: 2048 }
+        - type: object
+          additionalProperties: false
+          required: [kind, capabilityId, purpose, request]
+          properties:
+            kind: { type: string, const: audience }
+            capabilityId: { type: string, minLength: 1, maxLength: 80 }
+            purpose: { type: string, minLength: 2, maxLength: 80 }
+            request:
+              type: object
+              additionalProperties: false
+              required: [type, limit]
+              properties:
+                type: { type: string, enum: [advanced_search, b2b, b2c] }
+                limit: { type: integer, minimum: 1, maximum: 100 }
+                name: { type: [string, "null"], maxLength: 200 }
+                website_id: { type: [integer, "null"], minimum: 1 }
+                topic_ids:
+                  type: array
+                  maxItems: 5
+                  items:
+                    oneOf:
+                      - { type: string, minLength: 1, maxLength: 100 }
+                      - { type: integer, minimum: 1 }
+                filters:
+                  type: array
+                  maxItems: 20
+                  items:
+                    type: object
+                    additionalProperties: false
+                    required: [field, operator, value]
+                    properties:
+                      field: { type: string, maxLength: 80 }
+                      operator:
+                        type: string
+                        enum: ["=", "!=", "<", ">", "<=", ">=", between, in, not_in, contains, has_value, has_no_value]
+                      value:
+                        oneOf:
+                          - { type: string, maxLength: 500 }
+                          - { type: array, maxItems: 50, items: { type: string, maxLength: 100 } }
+                          - { type: "null" }
+                      value_to: { type: string, format: date }
+    ProviderCommerceQuoteInput:
+      type: object
+      additionalProperties: false
+      required: [request, idempotencyKey]
+      properties:
+        request: { $ref: "#/components/schemas/ProviderCommerceRequest" }
+        idempotencyKey: { type: string, format: uuid }
+    ProviderQuote:
+      type: object
+      required: [capabilityId, quantity, unit, creditsPerRecord, totalCredits, priceMinorPerRecord, amountMinor, currency, expiresAt, fixtureOnly, quoteToken, quoteId]
+      properties:
+        capabilityId: { type: string }
+        quantity: { type: integer, minimum: 1 }
+        unit: { type: string, const: record }
+        creditsPerRecord: { type: integer, minimum: 1 }
+        totalCredits: { type: integer, minimum: 1 }
+        priceMinorPerRecord: { type: integer, minimum: 1 }
+        amountMinor: { type: integer, minimum: 1 }
+        currency: { type: string, pattern: "^[a-z]{3}$" }
+        expiresAt: { type: string, format: date-time }
+        fixtureOnly: { type: boolean }
+        quoteToken: { type: string }
+        quoteId: { type: string, format: uuid }
+    ProviderCommerceOperationInput:
+      type: object
+      additionalProperties: false
+      required: [request, quoteToken, idempotencyKey]
+      properties:
+        request: { $ref: "#/components/schemas/ProviderCommerceRequest" }
+        quoteToken: { type: string, minLength: 100, maxLength: 8192 }
+        idempotencyKey: { type: string, format: uuid }
+    ProviderOperation:
+      type: object
+      required: [duplicate, capabilityId, status]
+      properties:
+        duplicate: { type: boolean }
+        orderId: { type: [string, "null"], format: uuid }
+        capabilityId: { type: string }
+        status: { type: string, enum: [submitted, processing, delivered, blocked, failed] }
+        jobId: { type: [string, "null"], format: uuid }
+        quantity: { type: integer, minimum: 0 }
+        creditsCharged: { type: integer, minimum: 0 }
+        returnedRecords: { type: integer, minimum: 0 }
+        records: { type: array, items: { type: object, additionalProperties: true } }
+        fixtureOnly: { type: boolean }
+      additionalProperties: true
+    ProviderJobExportInput:
+      type: object
+      additionalProperties: false
+      required: [fields]
+      properties:
+        fields:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items: { type: string, minLength: 1, maxLength: 80 }
+    CustomerUsage:
+      type: object
+      required: [creditsAvailable, periodStart, usageByMetric, rateLimit]
+      properties:
+        creditsAvailable:
+          type: string
+          pattern: "^[0-9]+$"
+        periodStart:
+          type: string
+          format: date-time
+        usageByMetric:
+          type: array
+          items:
+            $ref: "#/components/schemas/UsageMetricTotal"
+        rateLimit:
+          $ref: "#/components/schemas/CustomerRateLimit"
+    UsageMetricTotal:
+      type: object
+      required: [metric, quantity, unit]
+      properties:
+        metric:
+          type: string
+        quantity:
+          type: string
+        unit:
+          type: string
+    CustomerRateLimit:
+      type: object
+      required: [limitPerMinute, currentWindowRequests, remainingRequests, resetsAt]
+      properties:
+        limitPerMinute:
+          type: integer
+        currentWindowRequests:
+          type: integer
+        remainingRequests:
+          type: integer
+        resetsAt:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+        code:
+          type: string
+  responses:
+    Unauthorized:
+      description: Missing, expired, or revoked API key
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    Forbidden:
+      description: The API key does not have the required scope or entitlement
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    RateLimited:
+      description: The shared organization request limit was reached
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    NotFound:
+      description: Catalog category was not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    ServerError:
+      description: The service could not return the catalog
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"

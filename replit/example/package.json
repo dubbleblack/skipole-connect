@@ -1,0 +1,12 @@
+{
+  "name": "skipole-replit-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "@skipole/sdk": "file:../../javascript",
+    "express": "^5.1.0"
+  }
+}
