@@ -1,5 +1,11 @@
 # Skipole setup for Lovable
 
+[Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
+40–100 Marketing Professionals records at $0.05 per delivered record.
+See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quote
+links and authenticated retrieval. Paid MCP/SDK round trips remain unverified;
+the connection instructions below are not evidence of paid-flow verification.
+
 This guide describes two different connection types. Neither is an official Lovable listing or partnership.
 
 ## REST in the generated application

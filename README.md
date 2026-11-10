@@ -1,6 +1,8 @@
 # Skipole Connect
 
-Skipole Connect is the public developer distribution package for Skipole's REST API, remote MCP server, and SDKs. It is designed to use the existing Skipole customer identity, API-key authorization, credit ledger, and usage limits.
+Skipole Connect is the public developer distribution package for Skipole's REST API, remote MCP server, and SDKs. It uses the existing Skipole customer identity, scoped authorization, hosted Checkout, orders, and usage limits.
+
+**Website purchasing is live:** [buy Marketing Professionals](https://skipoledata.com/marketplace#marketing-professionals) at $0.05 per delivered record, with 40–100 requested records and $2–$5 prepaid. Shortfalls are refunded automatically. No subscription or prepaid credits are required.
 
 ## Current service boundary
 
@@ -8,10 +10,10 @@ Skipole Connect is the public developer distribution package for Skipole's REST 
 - Customer API-key routes require a Skipole API key with the matching scope.
 - The customer usage route requires `usage:read`.
 - The synthetic demo route returns fabricated examples and never calls a data provider.
-- The REST contract includes quote, credit-funded request, job-status, and CSV-export routes. These are controlled by the same backend capability, purpose, credit, and budget policies; no live provider capability is currently active.
-- A quote does not call a provider. A provider request requires a signed quote, `data:write`, sufficient workspace credits, and an active capability policy. Enrichment is one lookup per request; batch fan-out is not exposed.
-- Licensed-data website Checkout and encrypted CSV delivery have completed a real paid order. Public Marketing Professionals retail ($0.05 per delivered record, 40–100 requested records) remains disabled until its new Live Price and Production customer path are verified. Do not mistake the historical experimental price for public pricing.
-- The current remote MCP endpoint is `https://skipole-data-platform.replit.app/mcp`. Claude's OAuth connection and read-only catalog and usage calls have been verified. Other client connections are not claimed as tested.
+- The REST contract includes customer-approved hosted purchase quotes, owned-order lookup and authenticated CSV retrieval. Existing legacy credit-funded request, job-status and export routes remain separately gated by their capability, purpose, credit and budget policies.
+- A quote does not contact a supplier or charge a customer. The hosted cash flow requires explicit customer payment in Checkout, not prepaid credits. Legacy credit-funded provider requests require a signed quote, `data:write`, sufficient credits and an active policy; these are not the public cash-purchase path.
+- Licensed-data website Checkout and encrypted CSV delivery have completed a real paid order. Public Marketing Professionals purchasing is active. A non-founder reached genuine Stripe Live Checkout at 40 × $0.05 = $2.00 without paying during verification. The historical experimental $5 order is unchanged.
+- The remote MCP endpoint is `https://skipole-data-platform.replit.app/mcp`. Claude's OAuth connection and catalog/usage calls have been verified. Cash-quote and scoped-order tools are implemented and published, but a paid MCP or SDK round trip is not yet independently verified. Other native client connections are not claimed as tested.
 - The JavaScript and Python SDKs are versioned pre-release packages. Their builds and package contents are verified, but they have not been published to npm or PyPI.
 
 Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's billing and operating entity. This package contains no Stripe implementation, provider credentials, private provider schemas, or customer data.
@@ -20,7 +22,7 @@ Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's
 
 ## Quickstart: find, buy and return
 
-**Prepared developer cash flow:** see [Hosted purchases](./HOSTED-PURCHASES.md)
+**Customer-approved developer cash flow:** see [Hosted purchases](./HOSTED-PURCHASES.md)
 for the new SDK methods, signed customer approval links and scoped retrieval
 of existing licensed deliveries. No prepaid credits are required. This source
 implementation is not yet a verified Production paid developer round trip;
@@ -29,13 +31,15 @@ the historical catalog/usage verification below does not prove the new tools.
 1. Browse [Marketing Professionals](https://skipoledata.com/marketplace#marketing-professionals).
    The page shows current availability; do not submit payment while the offer is unavailable.
 2. Sign in, choose a quantity and review the full price before hosted Checkout.
-3. When buying is enabled, pay once and download the licensed CSV from **My Orders**.
+3. Explicitly approve payment in hosted Checkout, then download the licensed CSV from **My Orders** after fulfillment.
 4. Return to the same page for another purchase. Repeat searches can contain records
    previously purchased; cross-order uniqueness is not promised.
 
-No subscription or prepaid credits are required. MCP currently offers **read-only
-catalog and usage**, not payment or licensed-data purchase tools. SDK provider
-methods use a separate gated, credit-funded contract and do not replace website Checkout.
+No subscription or prepaid credits are required for hosted cash purchases.
+Verified MCP coverage is **catalog and usage**. The new quote and scoped retrieval
+tools do not charge a card; a paid MCP round trip remains unverified. Legacy SDK
+provider methods use a separate gated, credit-funded contract. Use the hosted
+purchase methods for signed approval links and retrieval of existing paid deliveries.
 
 ### Install reviewed SDK source
 
@@ -77,7 +81,7 @@ See [Claude](claude/README.md), [Cursor](cursor/README.md),
 
 Customer SDKs may optionally send `X-Skipole-Integration-Source` using one of the documented values. This is self-reported attribution on authenticated API usage events only. It does not track installations, signups, payments, revenue, or wholesale costs.
 
-The JavaScript and Python clients expose the existing quote, request, job-status, and CSV-export endpoints. They do not retry paid operations automatically. Callers must retain and reuse the same idempotency key when checking the result of an uncertain request. Current provider policies keep the licensed operations unavailable until their metering, pricing, and budget configuration is active.
+The JavaScript and Python clients expose hosted purchase quotes, purchase-intent/order lookup and authenticated stored-CSV retrieval, alongside the legacy provider endpoints. They do not retry paid operations automatically. Retain the same idempotency key when checking an uncertain purchase; use a new key only for a deliberate repeat purchase. Live availability always follows the server's capability, pricing and budget controls.
 
 ## Package builds and tests
 

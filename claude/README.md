@@ -1,5 +1,11 @@
 # Connect Claude to Skipole
 
+[Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
+40–100 Marketing Professionals records at $0.05 per delivered record.
+See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quote
+links and authenticated retrieval. Paid MCP/SDK round trips remain unverified;
+the connection instructions below are not evidence of paid-flow verification.
+
 Skipole's current remote MCP endpoint is:
 
 `https://skipole-data-platform.replit.app/mcp`

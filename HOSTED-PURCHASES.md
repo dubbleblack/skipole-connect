@@ -1,9 +1,15 @@
 # Hosted cash purchases for developers and agents
 
-**Release status:** implementation prepared and tested with mocked payment/supplier
-operations. It is not yet a verified Production developer purchase round trip.
+**Release status:** website pay-as-you-go purchasing is live, and the hosted
+developer API implementation is published and mock-tested. A non-founder reached
+genuine Stripe Live Checkout at 40 records × $0.05 = $2.00 without making a test
+payment. This is not yet a verified paid Production developer purchase round trip.
 Do not advertise paid SDK or paid MCP commerce as operational until the deployed
 customer approval and authenticated retrieval paths are verified.
+
+[Purchase on the live website](https://skipoledata.com/marketplace#marketing-professionals)
+or use the customer-approved flow below. Package registries and optional
+subscriptions are not prerequisites for website purchasing or using this SDK source.
 
 This flow reuses Skipole's existing orders, hosted Stripe Checkout, payment
 verification, once-only audience build, supplier budget, shortfall refunds and

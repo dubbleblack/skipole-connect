@@ -1,5 +1,11 @@
 # Connect Codex to Skipole
 
+[Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
+40–100 Marketing Professionals records at $0.05 per delivered record.
+See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quote
+links and authenticated retrieval. Paid MCP/SDK round trips remain unverified;
+the connection instructions below are not evidence of paid-flow verification.
+
 This is a custom remote MCP connection, not an official Codex listing or partnership.
 The instructions follow [OpenAI's MCP guide](https://developers.openai.com/codex/mcp).
 An authenticated Codex session and tool call have not yet been verified.
