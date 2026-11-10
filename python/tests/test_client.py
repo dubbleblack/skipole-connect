@@ -46,6 +46,16 @@ class SkipoleClientTests(unittest.TestCase):
         self.assertEqual(requests[2].get_header("Accept"), "text/csv")
 
     @patch("skipole.client.urlopen")
+    def test_configured_audience_quote_preserves_explicit_criteria(self, urlopen_mock):
+        urlopen_mock.return_value = FakeResponse({"requiresCustomerPaymentApproval": True})
+        client = SkipoleClient(api_key="non-secret-fixture")
+        criteria = {"departments": ["marketing", "sales"], "emailDomain": "example.com"}
+        client.quote_hosted_purchase(quantity=100, idempotency_key="new-configured-intent", criteria=criteria)
+        request = urlopen_mock.call_args.args[0]
+        self.assertEqual(json.loads(request.data), {
+            "quantity": 100, "idempotencyKey": "new-configured-intent", "criteria": criteria})
+
+    @patch("skipole.client.urlopen")
     def test_public_catalog_does_not_send_an_api_key(self, urlopen_mock):
         urlopen_mock.return_value = FakeResponse([])
         client = SkipoleClient()

@@ -137,7 +137,7 @@ export declare class SkipoleApiError extends Error {
 
 export declare class SkipoleClient {
   /** Staged cash-commerce API: customer must explicitly approve hosted payment. No automatic charge. */
-  quoteHostedPurchase(input: { quantity: number; idempotencyKey: string }): Promise<{
+  quoteHostedPurchase(input: { quantity: number; idempotencyKey: string; criteria?: { departments: string[]; emailDomain?: string } }): Promise<{
     quoteToken: string; idempotencyKey: string; quantity: number; amountMinor: string;
     priceMinorPerRecord: number; currency: string; expiresAt: string; approvalUrl: string;
     requiresCustomerPaymentApproval: true;

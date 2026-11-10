@@ -95,6 +95,34 @@ Honor the workspace API rate limit and `Retry-After`; do not spin in tight loops
 
 ## MCP
 
+### Configurable audiences and repeat purchases
+
+The upcoming website release adds optional `criteria` to the existing signed
+quote request. **Publish that release before sending this parameter to
+Production.** Omitting it continues to select the live Marketing Professionals
+configuration.
+
+```js
+const quote = await skipole.quoteHostedPurchase({
+  quantity: 40,
+  idempotencyKey: crypto.randomUUID(), // persist this NEW intentional purchase
+  criteria: { departments: ["marketing", "sales"], emailDomain: "example.com" },
+});
+// Present approvalUrl to the customer. Never approve or pay on their behalf.
+```
+
+Python accepts the same object as `criteria=...`; MCP's `skipole_quote_purchase`
+accepts optional `criteria`. Department values are supplied search criteria, not
+guaranteed coverage. No consumer or intent fields are enabled by this parameter.
+The four licensed output columns remain `first_name`, `last_name`,
+`business_email`, `linkedin_url`. Fulfillment and refunds use actual delivery.
+
+Customers can save configurations in the website and reuse them with a new
+quote and explicitly approved purchase. Saved criteria are not automatic supplier
+jobs or payment permission. Repeat purchases may contain previously purchased
+records. Quantity remains 40–100 for pay-as-you-go; a membership is not required
+to increase quantity within that range.
+
 The prepared server adds:
 
 | Tool | Required scope | Effect |

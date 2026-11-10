@@ -21,6 +21,17 @@ test("hosted purchase SDK only quotes, reads status and downloads an existing CS
   assert.equal(requests[2].options.headers.Authorization, "Bearer non-secret-fixture");
 });
 
+test("configured audience criteria are forwarded with a fresh explicit purchase intent", async () => {
+  let sent;
+  const client = new SkipoleClient({ apiKey: "non-secret-fixture", fetchImpl: async (_url, options) => {
+    sent = JSON.parse(options.body);
+    return Response.json({ requiresCustomerPaymentApproval: true });
+  } });
+  const criteria = { departments: ["marketing", "sales"], emailDomain: "example.com" };
+  await client.quoteHostedPurchase({ quantity: 100, idempotencyKey: "new-configured-intent", criteria });
+  assert.deepEqual(sent, { quantity: 100, idempotencyKey: "new-configured-intent", criteria });
+});
+
 test("public catalog uses the documented path without sending an API key", async () => {
   let request;
   const client = new SkipoleClient({

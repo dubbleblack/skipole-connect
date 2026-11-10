@@ -22,6 +22,12 @@ Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's
 
 ## Quickstart: find, buy and return
 
+The next website release expands the same audience engine with department/domain
+criteria and saved configurations. It does not activate consumer, enrichment or
+intent datasets. See [configured and repeat purchases](./HOSTED-PURCHASES.md#configurable-audiences-and-repeat-purchases)
+for the additive SDK/MCP input and its publication boundary. Paid developer
+fulfillment remains unverified until a real customer-approved purchase completes.
+
 **Customer-approved developer cash flow:** see [Hosted purchases](./HOSTED-PURCHASES.md)
 for the new SDK methods, signed customer approval links and scoped retrieval
 of existing licensed deliveries. No prepaid credits are required. This source

@@ -147,8 +147,8 @@ export class SkipoleClient {
    * The idempotency key must be a caller-generated UUID and reused for this
    * exact request; do not auto-retry a purchase with a new key.
    */
-  quoteHostedPurchase({ quantity, idempotencyKey }) {
-    return this.#post("/api/v1/customer/purchase-quotes", { quantity, idempotencyKey });
+  quoteHostedPurchase({ quantity, idempotencyKey, criteria }) {
+    return this.#post("/api/v1/customer/purchase-quotes", { quantity, idempotencyKey, ...(criteria ? { criteria } : {}) });
   }
 
   getOrder(orderId) {
