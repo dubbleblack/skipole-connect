@@ -11,6 +11,116 @@ servers:
   - url: https://skipole-data-platform.replit.app/api
     description: Skipole public origin. The MCP endpoint is separate at /mcp.
 paths:
+  /v1/customer/orders/{orderId}/csv:
+    get:
+      security:
+        - skipoleApiKey: []
+      operationId: getHostedPurchaseCsv
+      tags: [commerce]
+      summary: Download an existing encrypted licensed delivery without a new supplier operation
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Existing licensed CSV
+          content:
+            text/csv:
+              schema:
+                type: string
+        "401":
+          description: API key required
+        "403":
+          description: orders:read scope required
+        "404":
+          description: Delivery not available in workspace
+  /v1/customer/orders/{orderId}:
+    get:
+      security:
+        - skipoleApiKey: []
+      operationId: getHostedPurchaseOrder
+      tags: [commerce]
+      summary: Read a paid cash order without initiating fulfillment or supplier polling
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Workspace-owned order status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HostedPurchaseOrder"
+        "401":
+          description: API key required
+        "403":
+          description: orders:read scope required
+        "404":
+          description: Order not found in workspace
+  /v1/customer/purchases/{idempotencyKey}:
+    get:
+      security:
+        - skipoleApiKey: []
+      operationId: getHostedPurchaseByIntent
+      tags: [commerce]
+      summary: Find the existing order for a developer-issued purchase intent
+      parameters:
+        - name: idempotencyKey
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Workspace-owned order status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HostedPurchaseOrder"
+        "401":
+          description: API key required
+        "403":
+          description: orders:read scope required
+        "404":
+          description: No order for this purchase intent in workspace
+  /v1/customer/purchase-quotes:
+    post:
+      security:
+        - skipoleApiKey: []
+      operationId: createHostedPurchaseQuote
+      tags: [commerce]
+      summary: Get a signed cash quote and hosted customer approval link
+      description: Requires catalog:read. No credits, charge, supplier call or Checkout session is created. A signed-in customer must approve Checkout.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HostedPurchaseInput"
+      responses:
+        "200":
+          description: Expiring quote and hosted approval link
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HostedPurchaseQuote"
+        "400":
+          description: Invalid quantity or quote
+        "401":
+          description: API key required
+        "403":
+          description: Scope required
+        "503":
+          description: Purchasing unavailable
   /v1/catalog:
     get:
       operationId: listProducts
@@ -401,6 +511,69 @@ components:
         Customer key. Create, rotate, and revoke keys from the authenticated Skipole dashboard.
         Send it only from a trusted server over HTTPS.
   schemas:
+    HostedPurchaseOrder:
+      type: object
+      required: [orderId, status, quantity, amountMinor, currency, returnedRecords, refundAmountMinor, refundPending, netAmountMinor, paidAt, csvAvailable]
+      properties:
+        orderId:
+          type: string
+        status:
+          type: string
+        quantity:
+          type: integer
+        amountMinor:
+          type: string
+        currency:
+          type: string
+        returnedRecords:
+          type: [integer, "null"]
+        refundAmountMinor:
+          type: string
+        refundPending:
+          type: boolean
+        netAmountMinor:
+          type: string
+        paidAt:
+          type: [string, "null"]
+          format: date-time
+        csvAvailable:
+          type: boolean
+    HostedPurchaseQuote:
+      type: object
+      required: [quoteToken, idempotencyKey, amountMinor, priceMinorPerRecord, currency, quantity, expiresAt, approvalUrl, requiresCustomerPaymentApproval]
+      properties:
+        quoteToken:
+          type: string
+        idempotencyKey:
+          type: string
+        amountMinor:
+          type: string
+        priceMinorPerRecord:
+          type: integer
+        currency:
+          type: string
+        quantity:
+          type: integer
+        expiresAt:
+          type: string
+          format: date-time
+        approvalUrl:
+          type: string
+          format: uri
+        requiresCustomerPaymentApproval:
+          type: boolean
+    HostedPurchaseInput:
+      type: object
+      additionalProperties: false
+      required: [quantity, idempotencyKey]
+      properties:
+        quantity:
+          type: integer
+          minimum: 40
+          maximum: 100
+        idempotencyKey:
+          type: string
+          format: uuid
     CatalogProduct:
       type: object
       required: [slug, name, category, description, status, attributes, useCases]

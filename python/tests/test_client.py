@@ -30,6 +30,22 @@ class FakeCsvResponse(FakeResponse):
 
 class SkipoleClientTests(unittest.TestCase):
     @patch("skipole.client.urlopen")
+    def test_hosted_cash_quote_status_and_existing_csv(self, urlopen_mock):
+        urlopen_mock.side_effect = [
+            FakeResponse({"requiresCustomerPaymentApproval": True}),
+            FakeResponse({"status": "delivered"}),
+            FakeCsvResponse("business_email\r\nfixture@example.invalid"),
+        ]
+        client = SkipoleClient(api_key="non-secret-fixture")
+        self.assertTrue(client.quote_hosted_purchase(quantity=40, idempotency_key="fixture")["requiresCustomerPaymentApproval"])
+        self.assertEqual(client.get_order("fixture")["status"], "delivered")
+        self.assertIn("fixture@example.invalid", client.download_order_csv("fixture"))
+        requests = [call.args[0] for call in urlopen_mock.call_args_list]
+        self.assertEqual([request.get_method() for request in requests], ["POST", "GET", "GET"])
+        self.assertEqual(json.loads(requests[0].data), {"quantity": 40, "idempotencyKey": "fixture"})
+        self.assertEqual(requests[2].get_header("Accept"), "text/csv")
+
+    @patch("skipole.client.urlopen")
     def test_public_catalog_does_not_send_an_api_key(self, urlopen_mock):
         urlopen_mock.return_value = FakeResponse([])
         client = SkipoleClient()

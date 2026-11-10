@@ -175,6 +175,23 @@ class SkipoleClient:
             rate_limit=value["rateLimit"],
         )
 
+    def quote_hosted_purchase(self, *, quantity: int, idempotency_key: str) -> dict[str, Any]:
+        """Get a cash quote and customer approval link. Never charges or calls a supplier."""
+        return self._post("/api/v1/customer/purchase-quotes",
+                          {"quantity": quantity, "idempotencyKey": idempotency_key})
+
+    def get_order(self, order_id: str) -> dict[str, Any]:
+        """Read a workspace-owned order, without supplier polling."""
+        return self._get(f"/api/v1/customer/orders/{quote(order_id, safe='')}")
+
+    def get_purchase(self, idempotency_key: str) -> dict[str, Any]:
+        """Find the existing order for your original purchase intent; never creates one."""
+        return self._get(f"/api/v1/customer/purchases/{quote(idempotency_key, safe='')}")
+
+    def download_order_csv(self, order_id: str) -> str:
+        """Read an existing licensed delivery. No credits, charge or supplier export."""
+        return self._request(f"/api/v1/customer/orders/{quote(order_id, safe='')}/csv", response_type="csv")
+
     def quote_provider_request(
         self,
         *,

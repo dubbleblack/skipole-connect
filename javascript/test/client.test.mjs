@@ -2,6 +2,25 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { SkipoleApiError, SkipoleClient } from "../dist/index.js";
 
+test("hosted purchase SDK only quotes, reads status and downloads an existing CSV", async () => {
+  const requests = [];
+  const client = new SkipoleClient({ apiKey: "non-secret-fixture", fetchImpl: async (url, options) => {
+    requests.push({ url: String(url), options });
+    return options.headers.Accept === "text/csv" ? new Response("business_email\r\nfixture@example.invalid")
+      : Response.json({ approvalUrl: "https://skipoledata.com/marketplace#marketing-professionals", requiresCustomerPaymentApproval: true });
+  } });
+  assert.equal((await client.quoteHostedPurchase({ quantity: 40, idempotencyKey: "fixture-id" })).requiresCustomerPaymentApproval, true);
+  await client.getOrder("fixture-id");
+  assert.match(await client.downloadOrderCsv("fixture-id"), /fixture@example.invalid/);
+  assert.equal(requests.length, 3);
+  assert.equal(requests[0].options.method, "POST");
+  assert.deepEqual(JSON.parse(requests[0].options.body), { quantity: 40, idempotencyKey: "fixture-id" });
+  assert.equal(requests[1].options.method, "GET");
+  assert.equal(requests[2].options.method, "GET");
+  assert.match(requests[2].url, /customer\/orders\/fixture-id\/csv$/);
+  assert.equal(requests[2].options.headers.Authorization, "Bearer non-secret-fixture");
+});
+
 test("public catalog uses the documented path without sending an API key", async () => {
   let request;
   const client = new SkipoleClient({

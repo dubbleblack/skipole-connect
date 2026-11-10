@@ -20,6 +20,12 @@ Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's
 
 ## Quickstart: find, buy and return
 
+**Prepared developer cash flow:** see [Hosted purchases](./HOSTED-PURCHASES.md)
+for the new SDK methods, signed customer approval links and scoped retrieval
+of existing licensed deliveries. No prepaid credits are required. This source
+implementation is not yet a verified Production paid developer round trip;
+the historical catalog/usage verification below does not prove the new tools.
+
 1. Browse [Marketing Professionals](https://skipoledata.com/marketplace#marketing-professionals).
    The page shows current availability; do not submit payment while the offer is unavailable.
 2. Sign in, choose a quantity and review the full price before hosted Checkout.

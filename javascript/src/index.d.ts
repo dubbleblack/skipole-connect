@@ -136,6 +136,19 @@ export declare class SkipoleApiError extends Error {
 }
 
 export declare class SkipoleClient {
+  /** Staged cash-commerce API: customer must explicitly approve hosted payment. No automatic charge. */
+  quoteHostedPurchase(input: { quantity: number; idempotencyKey: string }): Promise<{
+    quoteToken: string; idempotencyKey: string; quantity: number; amountMinor: string;
+    priceMinorPerRecord: number; currency: string; expiresAt: string; approvalUrl: string;
+    requiresCustomerPaymentApproval: true;
+  }>;
+  getOrder(orderId: string): Promise<{
+    orderId: string; status: string; quantity: number; amountMinor: string; currency: string;
+    returnedRecords: number | null; refundAmountMinor: string; refundPending: boolean; netAmountMinor: string;
+    paidAt: string | null; csvAvailable: boolean;
+  }>;
+  getPurchase(idempotencyKey: string): ReturnType<SkipoleClient["getOrder"]>;
+  downloadOrderCsv(orderId: string): Promise<string>;
   constructor(options?: SkipoleClientOptions);
   listProducts(): Promise<CatalogProduct[]>;
   getProduct(slug: string): Promise<CatalogProduct>;
