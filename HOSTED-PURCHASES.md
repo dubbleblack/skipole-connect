@@ -14,9 +14,22 @@ subscriptions are not prerequisites for website purchasing or using this SDK sou
 This flow reuses Skipole's existing orders, hosted Stripe Checkout, payment
 verification, once-only audience build, supplier budget, shortfall refunds and
 encrypted My Orders delivery. No monthly plan or prepaid credits are required.
-Only Marketing Professionals is supported: 40–100 requested records at the
-standard $0.05 delivered-record rate, $2–$5 prepaid. Active optional memberships,
-when separately enabled, can change the record rate and minimum quantity.
+Licensed B2B contact audiences use the existing advanced-search product;
+Marketing Professionals is the default configuration. The next website
+publication removes the temporary 100-record ceiling. Enter a quantity up to
+1,000,000 per supplier build, subject to the available authorized allowance.
+Pricing is $0.05/record PAYG, $0.04 with an active Builder membership ($29/month),
+or $0.03 with an active Scale membership ($99/month). Memberships, when separately
+enabled, change price, not volume limits. The $2 minimum means at least
+40/50/67 records respectively. No included records or prepaid credits.
+
+Quotes check the current supplier ledger; Checkout atomically reserves capacity
+before creating the hosted payment session. A quote does not hold records.
+Supplier overages are prohibited. Large jobs run asynchronously after verified
+payment and deliver through authenticated My Orders and the same CSV API.
+CSV input is bounded at 512 MiB and compressed delivery at 32 MiB inside the
+existing encrypted envelope. An unusable bulk export is not delivered; its
+existing order receives the existing full-refund handling without a rebuild.
 
 ## One flow, with explicit human payment approval
 
@@ -120,8 +133,14 @@ The four licensed output columns remain `first_name`, `last_name`,
 Customers can save configurations in the website and reuse them with a new
 quote and explicitly approved purchase. Saved criteria are not automatic supplier
 jobs or payment permission. Repeat purchases may contain previously purchased
-records. Quantity remains 40–100 for pay-as-you-go; a membership is not required
-to increase quantity within that range.
+records. A developer can quote 100 records and later 100,000 through the same
+method and account, without upgrading or contacting sales. The supplier ceiling
+and currently reservable allowance apply equally to all pricing tiers.
+
+Bulk MCP retrieval returns authenticated download locations rather than placing
+the contact list in the model's context. Use My Orders with the owning browser
+session or the CSV API with an `orders:read` API key. This is prepared behavior,
+not evidence of an independently verified paid Production MCP round trip.
 
 The prepared server adds:
 

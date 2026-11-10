@@ -32,6 +32,19 @@ test("configured audience criteria are forwarded with a fresh explicit purchase 
   assert.deepEqual(sent, { quantity: 100, idempotencyKey: "new-configured-intent", criteria });
 });
 
+test("large hosted quantities use the same method without a client-side plan cap", async () => {
+  const quantities = [];
+  const client = new SkipoleClient({ apiKey: "non-secret-fixture", fetchImpl: async (_url, options) => {
+    quantities.push(JSON.parse(options.body).quantity);
+    return new Response(JSON.stringify({ requiresCustomerPaymentApproval: true }), {
+      headers: { "content-type": "application/json" },
+    });
+  } });
+  for (const quantity of [100, 100000, 1000000])
+    await client.quoteHostedPurchase({ quantity, idempotencyKey: "fixture-intent" });
+  assert.deepEqual(quantities, [100, 100000, 1000000]);
+});
+
 test("public catalog uses the documented path without sending an API key", async () => {
   let request;
   const client = new SkipoleClient({

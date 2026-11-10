@@ -18,7 +18,7 @@ the existing Marketing Professionals commerce policy for public operation:
   Prices and transactions are immutable. No new Product, webhook or Checkout system.
 - Enable only this proven licensed policy, with endpoint, license, pricing,
   fulfillment and metering verification set after review.
-- Use 40–100 requested records at five USD cents per delivered record ($2–$5 prepaid),
+- Use the customer's requested quantity up to the supplier ceiling and available allowance, with a $2 minimum (PAYG five USD cents per delivered record),
   and the output allowlist exactly first_name, last_name, business_email, linkedin_url.
 - Use actual `records_count` metering, never matching-population `counts`.
 - Keep supplier budget terms verified, the budget enabled and overages forbidden.
@@ -60,7 +60,7 @@ from the standard worker.
 
 The supplier's current [API reference](https://docs.datamoon.com/api) documents
 saved record limits from 1 to 1,000,000, inherited by exports. This supports the
-requested 40–100 range at the documented API-contract level, not proof that a new
+expanded quantity contract, not proof that a new large
 live account order has been fulfilled. Each new retail order still must confirm
 its own persisted cap and actual record count before export. No new live build
 or export was performed to prepare this change.

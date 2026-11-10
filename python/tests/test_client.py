@@ -30,6 +30,17 @@ class FakeCsvResponse(FakeResponse):
 
 class SkipoleClientTests(unittest.TestCase):
     @patch("skipole.client.urlopen")
+    def test_large_quantities_have_no_client_side_plan_cap(self, urlopen_mock):
+        urlopen_mock.side_effect = [FakeResponse({}) for _ in range(3)]
+        client = SkipoleClient(api_key="non-secret-fixture")
+        for quantity in [100, 100000, 1000000]:
+            client.quote_hosted_purchase(quantity=quantity, idempotency_key="fixture-intent")
+        self.assertEqual(
+            [json.loads(call.args[0].data)["quantity"] for call in urlopen_mock.call_args_list],
+            [100, 100000, 1000000],
+        )
+
+    @patch("skipole.client.urlopen")
     def test_hosted_cash_quote_status_and_existing_csv(self, urlopen_mock):
         urlopen_mock.side_effect = [
             FakeResponse({"requiresCustomerPaymentApproval": True}),

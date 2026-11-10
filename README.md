@@ -2,7 +2,7 @@
 
 Skipole Connect is the public developer distribution package for Skipole's REST API, remote MCP server, and SDKs. It uses the existing Skipole customer identity, scoped authorization, hosted Checkout, orders, and usage limits.
 
-**Website purchasing is live:** [buy Marketing Professionals](https://skipoledata.com/marketplace#marketing-professionals) at $0.05 per delivered record, with 40–100 requested records and $2–$5 prepaid. Shortfalls are refunded automatically. No subscription or prepaid credits are required.
+**Website purchasing is live:** [buy Marketing Professionals](https://skipoledata.com/marketplace#marketing-professionals) at $0.05 per delivered record with a $2 minimum Checkout. The next website publication removes the temporary 100-record ceiling: up to 1,000,000 per supplier build, subject to remaining supplier allowance and delivery capacity. All plans share those limits; membership changes the unit price, not permitted volume. Shortfalls are refunded automatically. No subscription or prepaid credits are required.
 
 ## Current service boundary
 

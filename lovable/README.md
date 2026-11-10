@@ -1,7 +1,9 @@
 # Skipole setup for Lovable
 
 [Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
-40–100 Marketing Professionals records at $0.05 per delivered record.
+Marketing Professionals at $0.05 per delivered record, $2 minimum Checkout.
+The next website release supports up to 1,000,000 per build, subject to supplier
+allowance and delivery capacity. No plan upgrade is required for larger orders.
 See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quote
 links and authenticated retrieval. Paid MCP/SDK round trips remain unverified;
 the connection instructions below are not evidence of paid-flow verification.
@@ -28,5 +30,5 @@ Skipole's current remote endpoint is `https://skipole-data-platform.replit.app/m
 
 - No official Lovable connector or marketplace entry is claimed.
 - Runtime licensed-data API access is separately gated; a chat MCP connection does not grant paid data access.
-- Marketing Professionals public retail is $0.05 per delivered record: request 40–100 records, prepay $2–$5 and receive shortfall refunds. The earlier $5/ten-record delivery was experimental, not public retail pricing. Public release remains gated on the new Price and quantity/customer-path validation.
+- Marketing Professionals public retail is $0.05 per delivered record with a $2 minimum and shortfall refunds. The prepared volume expansion supports up to 1,000,000 per build within available allowance and delivery capacity, without a required subscription. The earlier $5/ten-record delivery was experimental, not public retail pricing. Actual volume expansion requires the next website publication.
 - No app runtime is created by a chat MCP connection.
