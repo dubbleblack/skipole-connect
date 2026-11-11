@@ -63,10 +63,16 @@ requirement or reason to contact sales.
 ## Verification boundary
 
 The website has completed a real paid licensed-data delivery. Claude catalog and
-usage access has been verified. Hosted REST/MCP and SDK contract checks are
-mocked; **a paid Production developer round trip and other native host sessions
-are not independently verified**. Do not describe those as operational merely
-because their setup guide or implementation is public.
+usage access has been verified. An ordinary Production customer also verified
+the scoped REST quote and authenticated, signed approval review for 40 records
+at $0.05 each ($2.00), without creating Checkout or paying during the check.
+The temporary narrowly scoped verification key was revoked afterward.
+
+MCP and SDK purchase contract checks are mocked. The Production test account had
+no delivered order, so developer CSV retrieval, **a full paid Production developer
+round trip and other native host sessions remain independently unverified**.
+Do not describe those as operational merely because their setup guide or
+implementation is public.
 
 A no-payment verification may create a quote, check that its approval is bound
 to the correct workspace and inspect the displayed price. It must not pay or
