@@ -1,5 +1,12 @@
 # Changelog
 
+## JavaScript 0.1.0-alpha.1 — npm publication
+
+- Published the original tested GitHub archive through owner-approved npm staging, without rebuilding or changing SDK code.
+- Verified unauthenticated public installation through the `alpha` tag, `SkipoleClient` import and bundled TypeScript declarations.
+- Updated public installation instructions to `npm install @skipole/sdk@alpha`; the registry's `latest` tag still points to the staging placeholder.
+- Paid SDK/MCP purchases and future npm OIDC publication remain independently unverified.
+
 ## Python 0.1.0a2 — PyPI documentation update
 
 - Published `skipole-data` on PyPI through the owner's existing trusted publisher.
