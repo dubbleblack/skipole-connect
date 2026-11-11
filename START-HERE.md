@@ -12,6 +12,10 @@ No subscription, prepaid credits or enterprise approval is required.
 
 ## Choose your entry point
 
+Start with [five practical customer examples](CUSTOMER-EXAMPLES.md): prospecting,
+targeted B2B audiences, human-approved AI agents, Replit/Vercel REST, and published
+JavaScript/Python clients. Every recipe links to the live purchase flow.
+
 Coding agents can start with [AGENTS.md](AGENTS.md). It states the real API
 contract, human payment boundary, idempotency rules and verification limits.
 

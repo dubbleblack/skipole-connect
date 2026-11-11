@@ -30,6 +30,12 @@ Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's
 
 ## Quickstart: find, buy and return
 
+**Build your first workflow:** [practical customer examples](./CUSTOMER-EXAMPLES.md)
+cover prospecting apps, targeted audiences, AI agents, Replit/Vercel REST and
+JavaScript/Python purchase-to-CSV retrieval using the published packages.
+[Public launch copy and submission guidance](./LAUNCH.md) distinguish owned
+GitHub publication from community posts that still require an authorized owner.
+
 The audience engine supports department/domain criteria and saved configurations.
 The live marketplace includes named Marketing, Sales, Engineering,
 Finance, Human Resources and Operations search configurations. They are presets

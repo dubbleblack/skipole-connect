@@ -63,7 +63,8 @@ signed purchase silently. Do not put approval URLs in logs or public repositorie
 
 ## JavaScript
 
-Install the SDK from this repository as described in the root README.
+Install the published client with `npm install @skipole/sdk`. See the
+[practical prospecting and retrieval example](CUSTOMER-EXAMPLES.md).
 
 ```js
 import { randomUUID } from "node:crypto";
@@ -89,6 +90,8 @@ if (order.csvAvailable) {
 ```
 
 ## Python
+
+Install the published client with `python -m pip install skipole-data`.
 
 ```python
 import os
@@ -136,9 +139,11 @@ The four licensed output columns remain `first_name`, `last_name`,
 Customers can save configurations in the website and reuse them with a new
 quote and explicitly approved purchase. Saved criteria are not automatic supplier
 jobs or payment permission. Repeat purchases may contain previously purchased
-records. A developer can quote 100 records and later 100,000 through the same
-method and account, without upgrading or contacting sales. The supplier ceiling
-and currently reservable allowance apply equally to all pricing tiers.
+records. Larger supported purchases use the same method and account, without
+upgrading or contacting sales. A documented supplier ceiling does not establish
+Skipole's current deliverable quantity: the live delivery bound and reservable
+allowance apply equally to all pricing tiers. Do not assume a 100,000-record
+purchase is admitted merely because the API accepts a numeric quantity.
 
 Bulk MCP retrieval returns authenticated download locations rather than placing
 the contact list in the model's context. Use My Orders with the owning browser
