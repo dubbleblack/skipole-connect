@@ -2,8 +2,8 @@
 
 [Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
 Marketing Professionals at $0.05 per delivered record, $2 minimum Checkout.
-The next website release supports up to 1,000,000 per build, subject to supplier
-allowance and delivery capacity. No plan upgrade is required for larger orders.
+The live quote enforces current supplier allowance and reliable delivery
+capacity. No plan upgrade or sales call is required for supported quantities.
 See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quote
 links and authenticated retrieval. Paid MCP/SDK round trips remain unverified;
 the connection instructions below are not evidence of paid-flow verification.
@@ -24,7 +24,10 @@ The Claude OAuth connection has been verified for the read-only catalog and usag
 
 If Claude asks how to identify its OAuth client, use Claude's published identity or automatic registration as appropriate for the workspace. Do not paste a Skipole API key into OAuth client fields.
 
-Only catalog and usage reads are available as live operations. Data retrieval, enrichment, audience builds, and exports remain unavailable until the applicable product, price, license, and fulfillment gates are active.
+Catalog and usage reads are verified. The implemented hosted purchase tools
+prepare a signed customer approval link and retrieve existing owned orders.
+A paid Production MCP round trip remains unverified. Legacy credit-funded
+enrichment/build tools remain separately gated; they are not this cash flow.
 
 ## Claude Desktop
 
@@ -49,6 +52,9 @@ test, directory listing or partnership.
 
 ## Purchase licensed records
 
-Open [hosted Checkout availability](https://skipoledata.com/marketplace#marketing-professionals)
-in your browser. After a successful purchase, download the CSV from **My Orders**.
-MCP cannot approve a charge or purchase records.
+Use `skipole_quote_purchase` with a quantity and a new purchase-intent UUID,
+then open its signed approval link in your browser. Review the criteria and
+amount and explicitly approve hosted payment. After delivery,
+`skipole_get_order` and `skipole_download_order` retrieve your owned order with
+`orders:read` consent. MCP cannot approve a charge on your behalf.
+See [the purchase guide](../START-HERE.md) and [full contract](../HOSTED-PURCHASES.md).
