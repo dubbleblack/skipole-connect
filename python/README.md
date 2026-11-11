@@ -2,9 +2,23 @@
 
 **Do not install the unrelated `skipole` project from PyPI.** Our proposed
 distribution name is `skipole-data`; its Python import remains `skipole`.
-Registry ownership/publisher setup is pending. No PyPI publication is claimed.
+PyPI ownership/publisher setup is pending. No PyPI publication is claimed.
 
-## Install from the public source now
+## Install the published GitHub wheel
+
+Python 3.10+ is required. This is a tested GitHub prerelease, **not a PyPI
+release**:
+
+```sh
+python -m pip install "https://github.com/dubbleblack/skipole-connect/releases/download/sdk-v0.1.0-alpha.1/skipole_data-0.1.0a1-py3-none-any.whl"
+```
+
+The [release page](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1)
+includes SHA256SUMS and a source archive. The Python import remains
+`from skipole import SkipoleClient`. Paid Python SDK purchases are independently
+unverified.
+
+## Alternatively, install from public source
 
 ```sh
 python -m pip install "git+https://github.com/dubbleblack/skipole-connect.git#subdirectory=python"
