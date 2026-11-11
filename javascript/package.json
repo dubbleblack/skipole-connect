@@ -5,6 +5,11 @@
   "type": "module",
   "license": "Apache-2.0",
   "homepage": "https://skipoledata.com/developers/integrations",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dubbleblack/skipole-connect.git",
+    "directory": "javascript"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
