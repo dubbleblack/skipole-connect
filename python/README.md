@@ -1,6 +1,24 @@
-# `skipole` Python SDK source
+# `skipole-data` Python SDK source
 
-This is the versioned pre-release source for a Python client that uses Skipole's documented REST endpoints. Provider operations remain controlled by the backend capability and budget policy and are currently unavailable.
+**Do not install the unrelated `skipole` project from PyPI.** Our proposed
+distribution name is `skipole-data`; its Python import remains `skipole`.
+Registry ownership/publisher setup is pending. No PyPI publication is claimed.
+
+## Install from the public source now
+
+```sh
+python -m pip install "git+https://github.com/dubbleblack/skipole-connect.git#subdirectory=python"
+```
+
+Python 3.10+ and Git are required. This uses the existing package build, not an
+unrelated registry project. Keep the key server-side and follow the
+[customer-approved purchase example](../HOSTED-PURCHASES.md#python).
+The paid REST path is Production verified; an independently paid Python SDK
+round trip is not.
+
+This is the versioned pre-release Python client for Skipole's documented REST
+endpoints. Customer-approved hosted REST purchasing is live. The separate legacy
+credit-funded provider operations remain controlled by capability and budget policy.
 
 The public catalog and pricing routes need no API key. Customer catalog, synthetic demo, and usage routes require a customer API key with the relevant scope. Keep that key in server-side secrets and never place it in a browser app.
 
