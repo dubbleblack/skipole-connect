@@ -1,6 +1,12 @@
 # Find data. See the price. Pay. Receive it. Repeat.
 
-[Buy on Skipole](https://skipoledata.com/marketplace#marketing-professionals)
+**Paid REST commerce is Production verified.** An explicitly authorized internal
+test collected $2.00, automatically delivered 40 licensed Marketing records and
+retrieved all 40 through authenticated REST CSV access (HTTP 200). Payment
+reconciled exactly once. This is not a claim of outside customers, paid SDK/MCP
+verification or official platform approval.
+
+[Buy on Skipole](https://skipoledata.com/marketplace?utm_source=github#marketing-professionals)
 or integrate the same customer-approved purchase flow into your app or agent.
 No subscription, prepaid credits or enterprise approval is required.
 
@@ -62,17 +68,14 @@ requirement or reason to contact sales.
 
 ## Verification boundary
 
-The website has completed a real paid licensed-data delivery. Claude catalog and
-usage access has been verified. An ordinary Production customer also verified
-the scoped REST quote and authenticated, signed approval review for 40 records
-at $0.05 each ($2.00), without creating Checkout or paying during the check.
-The temporary narrowly scoped verification key was revoked afterward.
+The scoped REST quote → signed customer approval → customer-paid Stripe Live
+Checkout → automated encrypted fulfillment → authenticated CSV retrieval flow
+passed in Production for 40 Marketing records at $0.05 each ($2.00). The temporary
+verification key was revoked. The original historical orders were unchanged.
 
-MCP and SDK purchase contract checks are mocked. The Production test account had
-no delivered order, so developer CSV retrieval, **a full paid Production developer
-round trip and other native host sessions remain independently unverified**.
-Do not describe those as operational merely because their setup guide or
-implementation is public.
+Claude catalog/usage access is verified. **Paid SDK and MCP round trips and other
+native host sessions remain independently unverified.** Their source and mocked
+contract tests do not establish paid native-client operation.
 
 A no-payment verification may create a quote, check that its approval is bound
 to the correct workspace and inspect the displayed price. It must not pay or
