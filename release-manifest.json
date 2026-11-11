@@ -2,11 +2,11 @@
   "name": "skipole-connect",
   "version": "0.1.0-alpha.1",
   "license": "Apache-2.0",
-  "status": "github-sdk-archives-and-mcp-registry-published-npm-pypi-unpublished",
+  "status": "github-sdk-archives-pypi-and-mcp-registry-published-npm-unpublished",
   "authorization": {
     "publishRepository": true,
     "publishNpm": false,
-    "publishPyPi": false,
+    "publishPyPi": true,
     "submitCursor": false,
     "submitReplitPartner": false,
     "claimOfficialLovableConnector": false
@@ -22,7 +22,7 @@
     },
     {
       "name": "skipole-data",
-      "version": "0.1.0a1",
+      "version": "0.1.0a2",
       "directory": "python",
       "prepare": "python scripts/prepare-release.py",
       "build": "uv build --wheel --no-build-isolation --out-dir dist",
@@ -56,6 +56,10 @@
     "paidSdkRoundTrip": false
   },
   "distribution": {
+    "pypi": {
+      "status": "published",
+      "url": "https://pypi.org/project/skipole-data/"
+    },
     "github": {
       "status": "published",
       "publicRepository": true,
