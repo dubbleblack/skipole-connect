@@ -21,6 +21,8 @@ Skipole Connect is the public developer distribution package for Skipole's REST 
 - Licensed-data website Checkout and encrypted CSV delivery have completed a real paid order. Public Marketing Professionals purchasing is active. A non-founder reached genuine Stripe Live Checkout at 40 × $0.05 = $2.00 without paying during verification. The historical experimental $5 order is unchanged.
 - The remote MCP endpoint is `https://skipole-data-platform.replit.app/mcp`. Claude's OAuth connection and catalog/usage calls have been verified. Cash-quote and scoped-order tools are implemented and published. The complete paid REST path and authenticated CSV retrieval are Production verified. Paid MCP and SDK round trips remain independently unverified. Other native client connections are not claimed as tested.
 - The JavaScript and Python SDKs are versioned pre-release packages. Their builds and package contents are verified, but they have not been published to npm or PyPI.
+- Tested installable SDK archives are [published as a GitHub prerelease](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1).
+- The official MCP Registry reports [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect) version `0.1.0-alpha.1` as active. Registry publication is not paid MCP verification or official client approval.
 
 Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's billing and operating entity. This package contains no Stripe implementation, provider credentials, private provider schemas, or customer data.
 
@@ -63,7 +65,20 @@ tools do not charge a card; a paid MCP round trip remains unverified. Legacy SDK
 provider methods use a separate gated, credit-funded contract. Use the hosted
 purchase methods for signed approval links and retrieval of existing paid deliveries.
 
-### Install reviewed SDK source
+### Install the published SDK archives
+
+Use the tested [GitHub prerelease](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1);
+npm and PyPI publication remain pending:
+
+```sh
+npm install "https://github.com/dubbleblack/skipole-connect/releases/download/sdk-v0.1.0-alpha.1/skipole-sdk-0.1.0-alpha.1.tgz"
+```
+
+```sh
+python -m pip install "https://github.com/dubbleblack/skipole-connect/releases/download/sdk-v0.1.0-alpha.1/skipole_data-0.1.0a1-py3-none-any.whl"
+```
+
+### Alternatively, install reviewed SDK source
 
 The public source is [dubbleblack/skipole-connect](https://github.com/dubbleblack/skipole-connect).
 Until actual registry publication, do not use unverified `npm install @skipole/sdk`
