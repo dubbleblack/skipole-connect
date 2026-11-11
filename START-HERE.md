@@ -15,6 +15,13 @@ No subscription, prepaid credits or enterprise approval is required.
 Coding agents can start with [AGENTS.md](AGENTS.md). It states the real API
 contract, human payment boundary, idempotency rules and verification limits.
 
+**Installable SDK packages:** the tested JavaScript archive and Python wheel are
+[published on GitHub](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1).
+See the language guides below for one-command installation. npm and PyPI
+publication remain pending. The official MCP Registry lists
+[`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect)
+as active; paid MCP/SDK purchases remain independently unverified.
+
 | Environment | Existing setup guide | What it connects |
 | --- | --- | --- |
 | Claude / Claude Code | [Claude](claude/README.md) | Remote MCP with customer OAuth |
