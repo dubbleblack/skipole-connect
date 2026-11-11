@@ -2,7 +2,7 @@
 
 Skipole Connect is the public developer distribution package for Skipole's REST API, remote MCP server, and SDKs. It uses the existing Skipole customer identity, scoped authorization, hosted Checkout, orders, and usage limits.
 
-**Website purchasing is live:** [buy Marketing Professionals](https://skipoledata.com/marketplace#marketing-professionals) at $0.05 per delivered record with a $2 minimum Checkout. The next website publication removes the temporary 100-record ceiling: up to 1,000,000 per supplier build, subject to remaining supplier allowance and delivery capacity. All plans share those limits; membership changes the unit price, not permitted volume. Shortfalls are refunded automatically. No subscription or prepaid credits are required.
+**Website purchasing is live:** [buy business-contact audiences](https://skipoledata.com/marketplace#marketing-professionals) at $0.05 per delivered record with a $2 minimum Checkout. The current conservative single-file delivery maximum is 3,965 records for the four licensed fields, or less if supplier allowance is lower. This is an operational delivery constraint, not a commercial package or enterprise-sales threshold. All plans share the same capacity checks; membership changes the unit price, not permitted volume. Shortfalls are refunded automatically. No subscription or prepaid credits are required.
 
 ## Current service boundary
 
@@ -22,9 +22,12 @@ Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's
 
 ## Quickstart: find, buy and return
 
-The next website release expands the same audience engine with department/domain
-criteria and saved configurations. It does not activate consumer, enrichment or
-intent datasets. See [configured and repeat purchases](./HOSTED-PURCHASES.md#configurable-audiences-and-repeat-purchases)
+The audience engine supports department/domain criteria and saved configurations.
+The prepared marketplace update adds named Marketing, Sales, Engineering,
+Finance, Human Resources and Operations search configurations. They are presets
+of one licensed product, not six independently proven datasets. It does not
+activate consumer, enrichment or intent datasets.
+See [configured and repeat purchases](./HOSTED-PURCHASES.md#configurable-audiences-and-repeat-purchases)
 for the additive SDK/MCP input and its publication boundary. Paid developer
 fulfillment remains unverified until a real customer-approved purchase completes.
 
@@ -33,6 +36,10 @@ for the new SDK methods, signed customer approval links and scoped retrieval
 of existing licensed deliveries. No prepaid credits are required. This source
 implementation is not yet a verified Production paid developer round trip;
 the historical catalog/usage verification below does not prove the new tools.
+
+Start with the [platform setup and purchase guide](./START-HERE.md) for Claude,
+Cursor, Replit, Codex, Lovable and Vercel. The guides distinguish implemented
+purchase tools from verified native-client sessions.
 
 1. Browse [Marketing Professionals](https://skipoledata.com/marketplace#marketing-professionals).
    The page shows current availability; do not submit payment while the offer is unavailable.
