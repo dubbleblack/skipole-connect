@@ -19,7 +19,11 @@ contract, human payment boundary, idempotency rules and verification limits.
 [published on GitHub](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1).
 The Python SDK is also [published on PyPI](https://pypi.org/project/skipole-data/):
 `python -m pip install skipole-data`. See the language guides below for usage.
-npm publication remains pending. The official MCP Registry lists
+JavaScript is [published on npm](https://www.npmjs.com/package/@skipole/sdk):
+`npm install @skipole/sdk@alpha` (verified version `0.1.0-alpha.1`).
+The explicit tag is required because `latest` still points to the staging
+placeholder. Public installation, import and TypeScript declarations are verified.
+The official MCP Registry lists
 [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect)
 as active; paid MCP/SDK purchases remain independently unverified.
 
@@ -31,7 +35,7 @@ as active; paid MCP/SDK purchases remain independently unverified.
 | Codex | [Codex](codex/README.md) | Remote HTTP MCP with customer OAuth |
 | Lovable | [Lovable](lovable/README.md) | Server-side REST; chat MCP is separate |
 | Vercel | [Vercel](vercel/README.md) | Server-side REST / SDK with secret API keys |
-| JavaScript / TypeScript | [SDK source](javascript/README.md) | Signed quotes, owned orders and CSV retrieval |
+| JavaScript / TypeScript | [npm installation and usage](javascript/README.md) | Signed quotes, owned orders and CSV retrieval |
 | Python | [SDK source](python/README.md) | The same customer-approved purchase contract |
 
 These are setup guides and source code, not official platform listings or
