@@ -14,7 +14,7 @@
   "packages": [
     {
       "name": "@skipole/sdk",
-      "version": "0.1.0-alpha.1",
+      "version": "0.1.0-alpha.2",
       "directory": "javascript",
       "build": "npm run build",
       "test": "npm test",
@@ -59,14 +59,18 @@
     "npm": {
       "status": "published",
       "url": "https://www.npmjs.com/package/@skipole/sdk",
-      "version": "0.1.0-alpha.1",
-      "installTag": "alpha",
-      "latestTagIsStagingPlaceholder": true,
+      "version": "0.1.0-alpha.2",
+      "installTag": "latest",
+      "latestTagIsStagingPlaceholder": false,
       "installVerified": true,
+      "defaultInstallVerified": true,
       "clientImportVerified": true,
       "typeDeclarationsVerified": true,
-      "archiveSha1": "b0fe4ecbb844012c88d744c4e8f2c3cb3f33874e",
-      "trustedPublisherStatus": "awaiting-owner-configuration"
+      "compiledSdkUnchanged": true,
+      "archiveSha1": "83ef1271ae217f2e1242d2d25444be391effc8a3",
+      "trustedPublisherStatus": "verified-oidc",
+      "verificationRunUrl": "https://github.com/dubbleblack/skipole-connect/actions/runs/43061641083",
+      "provenanceUrl": "https://registry.npmjs.org/-/npm/v1/attestations/@skipole%2fsdk@0.1.0-alpha.2"
     },
     "pypi": {
       "status": "published",
