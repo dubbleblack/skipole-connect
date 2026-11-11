@@ -47,6 +47,9 @@ Start with the [platform setup and purchase guide](./START-HERE.md) for Claude,
 Cursor, Replit, Codex, Lovable and Vercel. The guides distinguish implemented
 purchase tools from verified native-client sessions.
 
+[Coding-agent instructions](AGENTS.md) describe the same verified REST flow
+without granting an agent permission to pay, retry a supplier or expose records.
+
 1. Browse [Marketing Professionals](https://skipoledata.com/marketplace#marketing-professionals).
    The page shows current availability; do not submit payment while the offer is unavailable.
 2. Sign in, choose a quantity and review the full price before hosted Checkout.
