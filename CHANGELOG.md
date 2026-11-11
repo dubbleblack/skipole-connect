@@ -1,5 +1,12 @@
 # Changelog
 
+## JavaScript 0.1.0-alpha.2 — documentation-only default-install correction
+
+- Corrected the README included on npm without changing SDK API behavior.
+- Published with the existing GitHub distribution workflow using trusted OIDC authentication and signed provenance, without an npm token.
+- Set `latest` to the real SDK so `npm install @skipole/sdk` selects it rather than the staging placeholder.
+- Paid SDK/MCP purchases remain independently unverified.
+
 ## JavaScript 0.1.0-alpha.1 — npm publication
 
 - Published the original tested GitHub archive through owner-approved npm staging, without rebuilding or changing SDK code.
