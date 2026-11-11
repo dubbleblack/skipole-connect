@@ -21,7 +21,7 @@
       "dryRun": "npm pack --dry-run"
     },
     {
-      "name": "skipole",
+      "name": "skipole-data",
       "version": "0.1.0a1",
       "directory": "python",
       "prepare": "python scripts/prepare-release.py",
@@ -50,8 +50,8 @@
     "verifiedQuantity": 40,
     "verifiedUnitMinor": 5,
     "verifiedAmountMinor": 200,
-    "productionDeveloperCsvRetrieval": false,
-    "paidProductionDeveloperRoundTrip": false,
+    "productionDeveloperCsvRetrieval": true,
+    "paidProductionDeveloperRoundTrip": true,
     "paidMcpRoundTrip": false,
     "paidSdkRoundTrip": false
   },
