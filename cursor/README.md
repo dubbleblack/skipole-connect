@@ -2,8 +2,8 @@
 
 [Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
 Marketing Professionals at $0.05 per delivered record, $2 minimum Checkout.
-The next website release supports up to 1,000,000 per build, subject to supplier
-allowance and delivery capacity. No plan upgrade is required for larger orders.
+The live quote enforces current supplier allowance and reliable delivery
+capacity. No plan upgrade or sales call is required for supported quantities.
 See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quote
 links and authenticated retrieval. Paid MCP/SDK round trips remain unverified;
 the connection instructions below are not evidence of paid-flow verification.
@@ -29,8 +29,11 @@ in the browser when prompted. Review the requested catalog and usage scopes.
 Test listing catalog metadata and reading your own usage before calling this
 client connection verified. Do not put private keys or OAuth secrets in this file.
 
-Purchases use [hosted website Checkout](https://skipoledata.com/marketplace#marketing-professionals)
-when the product is enabled, not a paid MCP tool.
+The implemented `skipole_quote_purchase` tool prepares a signed approval link
+for customer-approved hosted Checkout. `skipole_get_order` and
+`skipole_download_order` read the customer's existing licensed delivery with
+`orders:read` consent; no tool approves payment. This paid Cursor journey has
+not been independently verified. See [the purchase guide](../START-HERE.md).
 
 REST remains available separately. Use API keys only from trusted server-side code. The public catalog does not return licensed records. Paid enrichment, search, and export tools are disabled.
 
