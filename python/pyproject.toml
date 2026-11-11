@@ -3,9 +3,9 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "skipole"
+name = "skipole-data"
 version = "0.1.0a1"
-description = "Local Python client for the public Skipole REST API"
+description = "Python client for Skipole licensed-data discovery and customer-approved purchasing"
 requires-python = ">=3.10"
 readme = "README.md"
 license = "Apache-2.0"
@@ -17,6 +17,11 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
 ]
+
+[project.urls]
+Homepage = "https://skipoledata.com/developers"
+Source = "https://github.com/dubbleblack/skipole-connect"
+Documentation = "https://github.com/dubbleblack/skipole-connect/blob/main/HOSTED-PURCHASES.md"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
