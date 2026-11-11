@@ -18,9 +18,27 @@ on:
         description: Publish after the npm owner bootstraps @skipole/sdk and configures trust
         type: boolean
         default: false
+      verify_pypi:
+        description: Verify public pip installation only, without publishing
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
+  verify-pypi:
+    if: inputs.verify_pypi
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Verify public installation and isolated import without any API calls
+        working-directory: ${{ runner.temp }}
+        run: |
+          python -m pip --isolated install --no-cache-dir --index-url https://pypi.org/simple skipole-data
+          python -I -c "from importlib.metadata import version; from skipole import SkipoleClient; assert version('skipole-data') == '0.1.0a2'; print('Public PyPI install and SkipoleClient import verified: ' + version('skipole-data'))"
   pypi:
     if: inputs.publish_pypi && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
