@@ -44,6 +44,17 @@
       "skipole_get_usage"
     ]
   },
+  "hostedPurchaseVerification": {
+    "productionRestQuote": true,
+    "productionAuthenticatedApprovalReview": true,
+    "verifiedQuantity": 40,
+    "verifiedUnitMinor": 5,
+    "verifiedAmountMinor": 200,
+    "productionDeveloperCsvRetrieval": false,
+    "paidProductionDeveloperRoundTrip": false,
+    "paidMcpRoundTrip": false,
+    "paidSdkRoundTrip": false
+  },
   "distribution": {
     "github": {
       "status": "published",
