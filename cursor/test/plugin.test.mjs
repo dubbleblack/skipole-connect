@@ -4,9 +4,28 @@ import { tmpdir } from "node:os";
 import { dirname, resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+import { createHash } from "node:crypto";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const json = (path) => JSON.parse(readFileSync(path, "utf8"));
+
+test("integration branding uses the exact owner-approved PNG", () => {
+  const manifest = json(join(root, "cursor/.cursor-plugin/plugin.json"));
+  assert.equal(manifest.logo, "assets/skipole-icon-512.png");
+  const bytes = readFileSync(join(root, "cursor", manifest.logo));
+  assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
+  assert.equal(bytes.readUInt32BE(16), 512);
+  assert.equal(bytes.readUInt32BE(20), 512);
+  assert.equal(createHash("sha256").update(bytes).digest("hex"),
+    "10398663c2cc6735a0aaa375349fea7e94a7c127767527ea333531dd04d062fa");
+  const registry = json(join(root, "registry/server.json"));
+  assert.deepEqual(registry.icons, [{
+    src: "https://raw.githubusercontent.com/dubbleblack/skipole-connect/main/cursor/assets/skipole-icon-512.png",
+    mimeType: "image/png",
+    sizes: ["512x512"],
+  }]);
+  assert.equal(existsSync(join(root, "cursor/assets/skipole-mark.svg")), false);
+});
 
 test("repository marketplace resolves the existing plugin in a clean package copy", () => {
   const marketplace = json(join(root, ".cursor-plugin/marketplace.json"));
