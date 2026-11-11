@@ -1,0 +1,75 @@
+name: Publish developer distribution
+on:
+  workflow_dispatch:
+    inputs:
+      release_sdk:
+        description: Publish tested SDK archives as a GitHub prerelease
+        type: boolean
+        default: true
+      publish_mcp:
+        description: Publish the remote MCP metadata using verified GitHub ownership
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  sdk:
+    if: inputs.release_sdk
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Build and test JavaScript archive
+        working-directory: javascript
+        run: |
+          npm test
+          mkdir -p ../release-assets
+          npm pack --pack-destination ../release-assets
+      - name: Build and test Python archive
+        working-directory: python
+        run: |
+          PYTHONPATH=src python -m unittest discover -s tests
+          python -m pip install build
+          python -m build --outdir ../release-assets
+      - name: Publish controlled GitHub prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          tag="sdk-v$(node -p 'require("./javascript/package.json").version')"
+          sha256sum release-assets/* > release-assets/SHA256SUMS
+          gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --target "$GITHUB_SHA" --prerelease --title "Skipole SDK source packages" --notes "Installable JavaScript and Python SDK archives. Paid REST commerce is Production verified for an authorized internal 40-record / 2 USD purchase. Paid SDK and MCP round trips remain independently unverified. These are GitHub release assets, not npm or PyPI releases. No registry ownership or platform endorsement is implied."
+          gh release upload "$tag" release-assets/* --clobber
+  mcp:
+    if: inputs.publish_mcp
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      MCP_PUBLISHER_VERSION: v1.8.1
+    steps:
+      - uses: actions/checkout@v5
+      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6
+      - name: Verify the official publisher
+        run: |
+          set -euo pipefail
+          archive="mcp-publisher_linux_amd64.tar.gz"
+          base="https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}"
+          curl --fail --location --silent --show-error -o "$archive" "$base/$archive"
+          curl --fail --location --silent --show-error -o "$archive.sigstore.json" "$base/$archive.sigstore.json"
+          cosign verify-blob --bundle "$archive.sigstore.json" --certificate-identity "https://github.com/modelcontextprotocol/registry/.github/workflows/release.yml@refs/tags/${MCP_PUBLISHER_VERSION}" --certificate-oidc-issuer "https://token.actions.githubusercontent.com" "$archive"
+          tar xzf "$archive" mcp-publisher
+      - name: Validate and publish remote metadata
+        run: |
+          ./mcp-publisher validate registry/server.json
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher publish registry/server.json
