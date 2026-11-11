@@ -27,17 +27,64 @@ establish npm scope ownership. Once verified, register the exact repository and
 workflow as a trusted publisher, then publish with npm's OIDC workflow. Never
 paste an npm token in an issue, guide, browser bundle or chat.
 
+### Exact npm owner action
+
+1. Confirm that your signed-in npm account controls the **`skipole` organization**
+   and may publish **`@skipole/sdk`**. A public 404 is not ownership evidence.
+2. Bootstrap the **actual tested package**, not a placeholder or another package,
+   from the controlled npm account. After `npm login`, the first publication is:
+
+   ```sh
+   npm publish "https://github.com/dubbleblack/skipole-connect/releases/download/sdk-v0.1.0-alpha.1/skipole-sdk-0.1.0-alpha.1.tgz" --access public --tag alpha
+   ```
+
+3. Independently verify `@skipole/sdk@0.1.0-alpha.1` on npm. Do not republish that
+   immutable version. In its npm package Settings → Trusted publishing, add:
+   **GitHub owner `dubbleblack`**, **repository `skipole-connect`**,
+   **workflow `distribution.yml`**, **environment blank**. Permit `npm publish`
+   if direct publication is intended; newer configurations can default to
+   stage-only publication.
+4. The existing workflow's `publish_npm=true` input publishes a **future,
+   newly versioned** release after trust is configured. Keep `release_sdk`,
+   `publish_mcp` and `publish_pypi` false when publishing npm alone.
+
+The workflow has no stored npm token and cannot bootstrap an unowned namespace.
+The owner login is a registry authorization step, not another GitHub reconnect.
+
 ## PyPI — avoid the unrelated project
 
 The existing PyPI project **`skipole` is unrelated to this product**.
 Use **`skipole-data`** as the proposed distribution name; the source module stays
 `skipole`. Availability is not ownership. An authorized PyPI account must reserve
-the project/pending publisher and bind it to this repository, workflow and release
-environment before publication. No registry account is configured in this
+the project/pending publisher and bind it to this repository and workflow before
+publication. A pending publisher **does not reserve the name**; first successful
+publication creates the project under that account. No registry account is configured in this
 workspace, and no claim of PyPI ownership or publication is made.
 
 Before registry release, rerun SDK tests and package-content checks. Never change
 the live API or require membership merely to release a client library.
+
+### Exact PyPI owner action — no API key required
+
+In your own PyPI account, open
+[Publishing](https://pypi.org/manage/account/publishing/) and add a **pending
+GitHub publisher** with these exact values:
+
+| Field | Value |
+| --- | --- |
+| PyPI project name | `skipole-data` |
+| GitHub owner | `dubbleblack` |
+| Repository | `skipole-connect` |
+| Workflow filename | `distribution.yml` |
+| Environment | Leave blank |
+
+Confirm that the pending publisher is saved in **your account**. Then the
+existing GitHub workflow can be dispatched with **`publish_pypi=true`** and
+**`release_sdk=false`, `publish_mcp=false`, `publish_npm=false`**. Its OIDC identity
+must match the owner-authorized publisher before PyPI accepts the upload.
+Independently verify `https://pypi.org/pypi/skipole-data/0.1.0a1/json` after the
+job succeeds. A failed or missing owner configuration is a blocker, not evidence
+of publication.
 
 ## MCP Registry
 
