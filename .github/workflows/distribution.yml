@@ -29,6 +29,7 @@ jobs:
       - name: Build and test JavaScript archive
         working-directory: javascript
         run: |
+          npm run build
           npm test
           mkdir -p ../release-assets
           npm pack --pack-destination ../release-assets
