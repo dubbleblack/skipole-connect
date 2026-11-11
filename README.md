@@ -20,7 +20,7 @@ Skipole Connect is the public developer distribution package for Skipole's REST 
 - A quote does not contact a supplier or charge a customer. The hosted cash flow requires explicit customer payment in Checkout, not prepaid credits. Legacy credit-funded provider requests require a signed quote, `data:write`, sufficient credits and an active policy; these are not the public cash-purchase path.
 - Licensed-data website Checkout and encrypted CSV delivery have completed a real paid order. Public Marketing Professionals purchasing is active. A non-founder reached genuine Stripe Live Checkout at 40 × $0.05 = $2.00 without paying during verification. The historical experimental $5 order is unchanged.
 - The remote MCP endpoint is `https://skipole-data-platform.replit.app/mcp`. Claude's OAuth connection and catalog/usage calls have been verified. Cash-quote and scoped-order tools are implemented and published. The complete paid REST path and authenticated CSV retrieval are Production verified. Paid MCP and SDK round trips remain independently unverified. Other native client connections are not claimed as tested.
-- The JavaScript and Python SDKs are versioned pre-release packages. The Python SDK is [published on PyPI as `skipole-data`](https://pypi.org/project/skipole-data/). npm publication remains pending.
+- The JavaScript and Python SDKs are published pre-release packages: [`@skipole/sdk` on npm](https://www.npmjs.com/package/@skipole/sdk) and [`skipole-data` on PyPI](https://pypi.org/project/skipole-data/). Public JavaScript installation and import are verified; this is not independent paid SDK purchase verification.
 - Tested installable SDK archives are [published as a GitHub prerelease](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1).
 - The official MCP Registry reports [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect) version `0.1.0-alpha.1` as active. Registry publication is not paid MCP verification or official client approval.
 
@@ -67,22 +67,27 @@ purchase methods for signed approval links and retrieval of existing paid delive
 
 ### Install the published SDK packages
 
-Use the tested [GitHub prerelease](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1);
-npm publication remains pending. Python is available directly from PyPI:
+Install JavaScript from npm and Python from PyPI. The tested
+[GitHub prerelease](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1)
+remains available as an alternative:
 
 ```sh
-npm install "https://github.com/dubbleblack/skipole-connect/releases/download/sdk-v0.1.0-alpha.1/skipole-sdk-0.1.0-alpha.1.tgz"
+npm install @skipole/sdk@alpha
 ```
 
 ```sh
 python -m pip install skipole-data
 ```
 
+The verified JavaScript release is `0.1.0-alpha.1`; pin it with
+`npm install @skipole/sdk@0.1.0-alpha.1`. Do not omit the tag/version:
+`latest` still points to npm's staging placeholder.
+
 ### Alternatively, install reviewed SDK source
 
 The public source is [dubbleblack/skipole-connect](https://github.com/dubbleblack/skipole-connect).
-Until actual registry publication, do not use unverified `npm install @skipole/sdk`
-or `pip install skipole` commands: those names might resolve to other publishers.
+The Python distribution is `skipole-data`, not the unrelated PyPI project
+`skipole`. For JavaScript, use the explicit `alpha` tag or verified version above.
 
 ```sh
 git clone https://github.com/dubbleblack/skipole-connect.git
