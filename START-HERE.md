@@ -12,6 +12,9 @@ No subscription, prepaid credits or enterprise approval is required.
 
 ## Choose your entry point
 
+Coding agents can start with [AGENTS.md](AGENTS.md). It states the real API
+contract, human payment boundary, idempotency rules and verification limits.
+
 | Environment | Existing setup guide | What it connects |
 | --- | --- | --- |
 | Claude / Claude Code | [Claude](claude/README.md) | Remote MCP with customer OAuth |
