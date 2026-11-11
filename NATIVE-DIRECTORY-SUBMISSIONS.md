@@ -10,8 +10,8 @@ proof of submission, acceptance, partnership or paid native verification.
 
 - **Name:** Skipole
 - **Category:** GTM Data / Sales & Marketing Data
-- **One-liner:** Self-service licensed B2B audience data for GTM teams, developers and AI agents.
-- **Description:** Discover supported B2B audience configurations, request itemized pricing, approve a purchase in hosted Checkout and securely retrieve licensed records. Pay as you go without a mandatory subscription or sales call; optional memberships discount usage. A human customer must approve every payment. Existing licensed output includes first name, last name, business email and LinkedIn URL; do not promise phone, title, enrichment or email-deliverability guarantees. Paid REST commerce is Production verified; paid native MCP/SDK purchases are not independently verified.
+- **One-liner:** Self-service licensed data for businesses, marketers, developers and AI agents.
+- **Description:** Discover currently available licensed data products and their permitted fields, request itemized pricing, approve a purchase in hosted Checkout and securely retrieve licensed records. Pay as you go without a mandatory subscription or sales call; optional memberships discount eligible audience usage. A human customer must approve every payment. The live catalog determines available products, output fields and billing units; do not substitute one B2B field profile for every product or promise unlisted fields. Paid REST commerce is Production verified; paid native MCP/SDK purchases are not independently verified.
 - **Company:** DubbleBlack LLC
 - **Website:** https://skipoledata.com
 - **Purchase:** https://skipoledata.com/marketplace
@@ -76,12 +76,12 @@ Never list `checkout.stripe.com` as our owned origin or bypass its human approva
 
 ### Honest submission blockers
 
-- Publish the narrow server metadata update adding tool titles and safety hints.
-  Supplier-capable legacy operations are explicitly marked non-read-only and
+- Confirm that the submitted deployment exposes the current tool titles and
+  safety hints. Supplier-capable legacy operations are marked non-read-only and
   destructive; their permissions and behavior are unchanged.
 - The directory portal requires a populated reviewer account and confirmation
-  that every exposed tool has been tested. Existing Claude catalog/usage reads
-  and paid REST verification do not satisfy this all-tools statement.
+  that every exposed tool has been tested. Verified Cursor catalog access
+  and paid REST delivery do not satisfy this all-tools statement.
 - The owner must authorize suitable reviewer access through the secure portal.
   Do not put passwords or tokens in this repository, chat or an application draft.
   Do not disclose a customer's historical contact records without authorization.
@@ -90,6 +90,22 @@ Never list `checkout.stripe.com` as our owned origin or bypass its human approva
   Anthropic retains discretion under its Directory Policy.
 - The agent has no authenticated Claude owner portal session and no submission
   receipt. A saved draft is not a submitted application or approved listing.
+
+### Minimal reviewer access and confirmed evidence
+
+- Use a dedicated ordinary, non-founder Skipole account and workspace. Start
+  with `catalog:read` consent and `skipole_list_products` only.
+- Complete normal OAuth. If the portal requires test credentials, the owner
+  supplies them only through its secure reviewer fields, never through this
+  repository or chat. Do not share founder access or a supplier/Stripe API key.
+- Do not grant access to JMG's historical orders or licensed contact records.
+  Populated order data and additional tool tests require separate owner approval.
+- Confirmed evidence: Cursor completed Production OAuth and
+  `skipole_list_products`; a separate paid REST transaction collected $2,
+  delivered 40 licensed records and retrieved the authenticated CSV.
+- That REST transaction is not a paid Claude, MCP or SDK test. Do not attest that
+  every exposed tool is tested, or initiate a quote, payment, build or export
+  merely to complete the application.
 
 Official requirements:
 https://claude.com/docs/connectors/building/submission

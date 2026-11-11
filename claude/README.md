@@ -5,8 +5,9 @@ Paid REST commerce is Production verified; paid Claude/MCP purchases remain inde
 
 [Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
 Marketing Professionals at $0.05 per delivered record, $2 minimum Checkout.
-The live quote enforces current supplier allowance and reliable delivery
-capacity. No plan upgrade or sales call is required for supported quantities.
+The live quote checks reserved supplier spend and reliable delivery
+capacity. The included supplier allowance is not an inventory ceiling.
+No plan upgrade or sales call is required for supported quantities.
 See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quote
 links and authenticated retrieval. Paid MCP/SDK round trips remain unverified;
 the connection instructions below are not evidence of paid-flow verification.
@@ -15,7 +16,9 @@ Skipole's current remote MCP endpoint is:
 
 `https://skipole-data-platform.replit.app/mcp`
 
-The Claude OAuth connection has been verified for the read-only catalog and usage tools. No official Claude directory listing or partnership is implied.
+Production OAuth and read-only catalog access are verified in Cursor.
+That does not independently verify a Claude client or imply an official Claude
+directory listing or partnership.
 
 ## Connect
 
@@ -27,7 +30,8 @@ The Claude OAuth connection has been verified for the read-only catalog and usag
 
 If Claude asks how to identify its OAuth client, use Claude's published identity or automatic registration as appropriate for the workspace. Do not paste a Skipole API key into OAuth client fields.
 
-Catalog and usage reads are verified. The implemented hosted purchase tools
+The confirmed native-client evidence is Cursor's read-only catalog check.
+The implemented hosted purchase tools
 prepare a signed customer approval link and retrieve existing owned orders.
 A paid Production MCP round trip remains unverified. Legacy credit-funded
 enrichment/build tools remain separately gated; they are not this cash flow.
@@ -49,8 +53,8 @@ or approved directory URL is claimed here.
 
 Use the remote connector above through **Settings → Connectors**, where supported
 by your Desktop version and plan, and complete Skipole OAuth in your browser.
-The verified Claude connection does not establish that every Desktop version has
-been tested. Do not put a private customer API key into an OAuth client field.
+A custom connection does not establish that every Desktop version has been
+tested. Do not put a private customer API key into an OAuth client field.
 
 ## Claude Code
 
