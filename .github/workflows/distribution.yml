@@ -43,6 +43,11 @@ jobs:
         uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086
         with:
           packages-dir: pypi-dist/
+      - name: Verify installation from public PyPI without contacting Skipole
+        working-directory: ${{ runner.temp }}
+        run: |
+          python -m pip --isolated install --no-cache-dir --index-url https://pypi.org/simple skipole-data
+          python -I -c "from importlib.metadata import version; from skipole import SkipoleClient; assert version('skipole-data') == '0.1.0a2'; print('Public PyPI install and SkipoleClient import verified: ' + version('skipole-data'))"
   npm:
     if: inputs.publish_npm && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
