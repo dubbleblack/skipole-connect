@@ -7,27 +7,28 @@ The official MCP Registry independently reports
 [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect)
 version `0.1.0-alpha.1` as **active**.
 [Python is published on PyPI as `skipole-data`](https://pypi.org/project/skipole-data/).
-[`@skipole/sdk@0.1.0-alpha.1` is published on npm](https://www.npmjs.com/package/@skipole/sdk/v/0.1.0-alpha.1).
-Public installation through `@alpha`, the client import and TypeScript declarations
-are verified. Its tarball matches the original tested GitHub archive.
+[`@skipole/sdk@0.1.0-alpha.2` is published on npm](https://www.npmjs.com/package/@skipole/sdk/v/0.1.0-alpha.2).
+Default public installation, the client import and TypeScript declarations are
+verified. The compiled SDK code is unchanged from the original tested archive.
 
 Paid REST commerce is Production verified. Neither paid SDK nor paid MCP
 native-client purchases are independently verified.
 
 ## Install the published packages today
 
-- JavaScript: run `npm install @skipole/sdk@alpha`; see the [JavaScript guide](javascript/README.md).
+- JavaScript: run `npm install @skipole/sdk`; see the [JavaScript guide](javascript/README.md).
 - Python: run `python -m pip install skipole-data`; see the [Python guide](python/README.md).
 - The manual **Publish developer distribution** GitHub Action tests both clients
   and publishes installable archives under this repository's controlled GitHub
   release namespace. It does not publish to npm/PyPI or contact a data supplier.
 
-## npm — published; configure trust for future releases
+## npm — published; GitHub OIDC publication verified
 
-The organization owner approved the existing tested archive through npm's
-browser-based staged publishing. No rebuild or SDK code change was needed.
-Use `@alpha` or the exact verified version: the `latest` tag still identifies
-the staging placeholder, not the SDK. Do not republish an immutable version.
+The organization owner approved the original tested archive through npm's
+browser-based staged publishing. The documentation-only alpha update corrected
+the npm README and was published by the existing GitHub OIDC workflow with signed
+provenance. Its `latest` tag selects the real SDK. Do not republish an immutable
+version. This remains prerelease software, not independent paid SDK verification.
 
 In the package's Settings → Trusted publishing, select GitHub Actions:
 
@@ -38,7 +39,8 @@ In the package's Settings → Trusted publishing, select GitHub Actions:
 - Allowed actions: enable **npm publish**, as used by the existing workflow
 
 Under Publishing access, select **Require two-factor authentication and disallow
-tokens**. Saving the publisher is not proof of a successful OIDC release.
+tokens**. The owner confirmed configuration and the subsequent OIDC publication
+succeeded; saving a publisher alone would not establish that verification.
 New configurations must complete their first successful workflow publication
 within two days or be recreated before a later legitimate release. Do not issue
 an unnecessary release merely to validate trust.
