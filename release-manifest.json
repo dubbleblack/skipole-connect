@@ -58,7 +58,10 @@
   "distribution": {
     "pypi": {
       "status": "published",
-      "url": "https://pypi.org/project/skipole-data/"
+      "url": "https://pypi.org/project/skipole-data/",
+      "version": "0.1.0a2",
+      "installVerified": true,
+      "verificationRunUrl": "https://github.com/dubbleblack/skipole-connect/actions/runs/43053179257"
     },
     "github": {
       "status": "published",
