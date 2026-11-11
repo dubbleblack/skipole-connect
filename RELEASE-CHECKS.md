@@ -9,9 +9,9 @@ This confirmation does not authorize another purchase or supplier request.
 
 ## Public-commerce release boundary
 
-Preparation does not enable purchasing or mutate deployment configuration.
-Before public activation, publish the reviewed standard-order changes and approve
-the existing Marketing Professionals commerce policy for public operation:
+Public pay-as-you-go Marketing Professionals purchasing is active. The criteria
+below describe the original activation controls, not a new launch prerequisite.
+Keep the existing Marketing Professionals commerce policy for public operation:
 
 - Keep the existing audience capability and dedicated Product. Public retail
   requires a new one-time USD Price of five cents per record; historical $5 pack
@@ -80,9 +80,9 @@ Zero valid records means a full refund.
 
 ## Developer publication blockers
 
-1. Approve a public GitHub destination and release the existing distribution source.
-   Repository publication is separate from app publication; nothing is public
-   merely because a README or registry manifest exists locally.
+1. The source and setup guides are public at
+   [dubbleblack/skipole-connect](https://github.com/dubbleblack/skipole-connect).
+   Repository publication is separate from app publication and package registries.
 2. Establish authorized package-publisher access and name ownership before npm/PyPI
    releases. Until then use local source; installation commands for registry
    packages are explicitly post-publication instructions.
@@ -93,11 +93,11 @@ Zero valid records means a full refund.
    authenticated-client verified. Their setup guides must stay labeled unverified
    until an actual authorized connection and non-billable read succeeds. These
    optional checks do not block a truthful GitHub source release or website sales.
-5. MCP is read-only catalog/usage. SDK paid provider methods use a separately gated
-   credit-funded API; they do not create website Checkout or deliver paid website
-   orders. Enabling this website product explicitly does not enable its generic
-   credit-funded audience API. Do not market the SDKs as a completed no-credit
-   paid-commerce API.
+5. Hosted cash purchase quotes, customer approval links, owned-order lookup and
+   authenticated CSV retrieval are implemented in REST, MCP and both SDKs and
+   have mocked contract coverage. A paid Production developer round trip remains
+   unverified. The legacy credit-funded provider API is separate; website
+   purchasing does not activate it. See [the purchase guide](START-HERE.md).
 
 The existing canonical MCP/API origin remains the Replit deployment origin:
 `https://skipole-data-platform.replit.app`. Production's custom-domain OAuth
