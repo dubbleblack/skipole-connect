@@ -1,5 +1,13 @@
 # Changelog
 
+## Python 0.1.0a2 — PyPI documentation update
+
+- Published `skipole-data` on PyPI through the owner's existing trusted publisher.
+- Updated the PyPI description and public guides to use `python -m pip install skipole-data`.
+- Python SDK code is unchanged; this alpha update corrects the pre-publication description.
+- Paid SDK/MCP purchases remain independently unverified.
+- npm and the existing GitHub/MCP releases were not republished.
+
 ## 0.1.0-alpha.1 (source release; npm/PyPI unpublished)
 
 - Added versioned npm and Python package manifests with reproducible package build paths.
