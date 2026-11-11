@@ -2,9 +2,9 @@
   "name": "skipole-connect",
   "version": "0.1.0-alpha.1",
   "license": "Apache-2.0",
-  "status": "prepared-not-published",
+  "status": "github-source-published-registries-unpublished",
   "authorization": {
-    "publishRepository": false,
+    "publishRepository": true,
     "publishNpm": false,
     "publishPyPi": false,
     "submitCursor": false,
@@ -46,8 +46,9 @@
   },
   "distribution": {
     "github": {
-      "status": "prepared-local-only",
-      "publicRepository": false
+      "status": "published",
+      "publicRepository": true,
+      "url": "https://github.com/dubbleblack/skipole-connect"
     },
     "mcpRegistry": {
       "status": "metadata-prepared",
