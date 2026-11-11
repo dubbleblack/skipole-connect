@@ -24,7 +24,7 @@ OAuth connection and read-only tool call remain unverified.
 - `.cursor-plugin/plugin.json`: Cursor plugin manifest.
 - `mcp.json`: proposed remote MCP connection with no embedded credentials.
 - `skills/skipole/SKILL.md`: agent guidance for accurate, safe Skipole integration.
-- `assets/skipole-mark.svg`: package icon.
+- `assets/skipole-icon-512.png`: official, unmodified 512×512 PNG icon.
 - `../.cursor-plugin/marketplace.json`: repository-root marketplace manifest,
   resolving this existing plugin from the `cursor` directory.
 
