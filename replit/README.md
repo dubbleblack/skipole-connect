@@ -1,5 +1,8 @@
 # Skipole integration starter for Replit
 
+[Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=replit#marketing-professionals).
+Paid REST commerce is Production verified; a native paid Replit/SDK session is not independently verified.
+
 [Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
 Marketing Professionals at $0.05 per delivered record, $2 minimum Checkout.
 The live quote enforces current supplier allowance and reliable delivery
