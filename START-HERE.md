@@ -20,9 +20,9 @@ contract, human payment boundary, idempotency rules and verification limits.
 The Python SDK is also [published on PyPI](https://pypi.org/project/skipole-data/):
 `python -m pip install skipole-data`. See the language guides below for usage.
 JavaScript is [published on npm](https://www.npmjs.com/package/@skipole/sdk):
-`npm install @skipole/sdk@alpha` (verified version `0.1.0-alpha.1`).
-The explicit tag is required because `latest` still points to the staging
-placeholder. Public installation, import and TypeScript declarations are verified.
+`npm install @skipole/sdk` (verified version `0.1.0-alpha.2`).
+The default `latest` tag selects the real SDK rather than the staging placeholder.
+Public installation, import and TypeScript declarations are verified.
 The official MCP Registry lists
 [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect)
 as active; paid MCP/SDK purchases remain independently unverified.
