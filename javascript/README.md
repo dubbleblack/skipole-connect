@@ -6,7 +6,19 @@ The package is prepared for npm distribution but has not been published. npm sco
 ownership/publisher access must be verified before release. The paid REST commerce
 path is Production verified; an independently paid SDK round trip is not.
 
-## Install from the public source now
+## Install the published GitHub archive
+
+Node 20+ is required. This is a tested GitHub prerelease, **not an npm registry
+release**:
+
+```sh
+npm install "https://github.com/dubbleblack/skipole-connect/releases/download/sdk-v0.1.0-alpha.1/skipole-sdk-0.1.0-alpha.1.tgz"
+```
+
+The [release page](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1)
+includes SHA256SUMS. The package imports as `@skipole/sdk`.
+
+## Alternatively, install from public source
 
 Node 20+ and Git are required. From your application directory:
 
