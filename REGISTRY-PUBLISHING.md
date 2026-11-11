@@ -5,7 +5,9 @@ the [tested GitHub SDK prerelease](https://github.com/dubbleblack/skipole-connec
 Its JavaScript archive, Python wheel/source archive and SHA256SUMS are public.
 The official MCP Registry independently reports
 [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect)
-version `0.1.0-alpha.1` as **active**. npm and PyPI remain unpublished.
+version `0.1.0-alpha.1` as **active**.
+[Python is published on PyPI as `skipole-data`](https://pypi.org/project/skipole-data/).
+npm remains unpublished.
 
 Paid REST commerce is Production verified. Neither paid SDK nor paid MCP
 native-client purchases are independently verified.
@@ -13,7 +15,7 @@ native-client purchases are independently verified.
 ## Install the published GitHub packages today
 
 - JavaScript: follow [install the released archive](javascript/README.md).
-- Python: follow [install the released wheel](python/README.md).
+- Python: run `python -m pip install skipole-data`; see the [Python guide](python/README.md).
 - The manual **Publish developer distribution** GitHub Action tests both clients
   and publishes installable archives under this repository's controlled GitHub
   release namespace. It does not publish to npm/PyPI or contact a data supplier.
@@ -54,21 +56,19 @@ The owner login is a registry authorization step, not another GitHub reconnect.
 ## PyPI — avoid the unrelated project
 
 The existing PyPI project **`skipole` is unrelated to this product**.
-Use **`skipole-data`** as the proposed distribution name; the source module stays
-`skipole`. Availability is not ownership. An authorized PyPI account must reserve
-the project/pending publisher and bind it to this repository and workflow before
-publication. A pending publisher **does not reserve the name**; first successful
-publication creates the project under that account. No registry account is configured in this
-workspace, and no claim of PyPI ownership or publication is made.
+The official published distribution is **`skipole-data`**; the source module
+stays `skipole`. The owner authorized the existing workflow through a PyPI
+pending trusted publisher. The first successful publication created the project
+under that account. Publication is independently verified through the public
+PyPI API, not inferred from a GitHub job or name availability.
 
 Before registry release, rerun SDK tests and package-content checks. Never change
 the live API or require membership merely to release a client library.
 
-### Exact PyPI owner action — no API key required
+### Existing owner-authorized PyPI publisher — no API key required
 
-In your own PyPI account, open
-[Publishing](https://pypi.org/manage/account/publishing/) and add a **pending
-GitHub publisher** with these exact values:
+The owner configured the publisher through
+[PyPI Publishing](https://pypi.org/manage/account/publishing/) with these values:
 
 | Field | Value |
 | --- | --- |
@@ -78,13 +78,15 @@ GitHub publisher** with these exact values:
 | Workflow filename | `distribution.yml` |
 | Environment | Leave blank |
 
-Confirm that the pending publisher is saved in **your account**. Then the
-existing GitHub workflow can be dispatched with **`publish_pypi=true`** and
+For an authorized future release, bump the Python version first: PyPI versions
+are immutable. The existing workflow can then be dispatched with **`publish_pypi=true`** and
 **`release_sdk=false`, `publish_mcp=false`, `publish_npm=false`**. Its OIDC identity
 must match the owner-authorized publisher before PyPI accepts the upload.
-Independently verify `https://pypi.org/pypi/skipole-data/0.1.0a1/json` after the
-job succeeds. A failed or missing owner configuration is a blocker, not evidence
-of publication.
+Independently verify the new version through `https://pypi.org/pypi/skipole-data/json`
+after the job succeeds. The same job performs a clean `pip install skipole-data`
+and isolated import without calling Skipole or a supplier. Update its expected
+installed version when preparing a new release. A failed owner configuration
+is a blocker, not evidence of publication.
 
 ## MCP Registry
 
