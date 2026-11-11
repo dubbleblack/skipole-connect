@@ -2,22 +2,22 @@
 
 Pre-release JavaScript client for Skipole's documented REST API.
 
-[`@skipole/sdk@0.1.0-alpha.1` is published on npm](https://www.npmjs.com/package/@skipole/sdk/v/0.1.0-alpha.1).
-Public installation through the `alpha` tag, the `SkipoleClient` import and bundled
-TypeScript declarations are verified. The paid REST commerce path is Production
-verified; an independently paid SDK round trip is not.
+[`@skipole/sdk` is the official npm package](https://www.npmjs.com/package/@skipole/sdk).
+This documentation-only alpha update corrects installation guidance without
+changing SDK API behavior. TypeScript declarations are bundled. The paid REST
+commerce path is Production verified; an independently paid SDK round trip is not.
 
 ## Install from npm
 
 Node 20+ is required:
 
 ```sh
-npm install @skipole/sdk@alpha
+npm install @skipole/sdk
 ```
 
-To pin the verified release, use `npm install @skipole/sdk@0.1.0-alpha.1`.
-Use the explicit tag or version: the registry's `latest` tag still points to its
-staging placeholder, not the SDK.
+To pin this documentation-only release, use
+`npm install @skipole/sdk@0.1.0-alpha.2`. This remains prerelease software even
+when selected by the `latest` distribution tag.
 
 ## Alternative: published GitHub archive
 
@@ -40,7 +40,7 @@ cd skipole-connect/javascript
 npm run build
 npm pack --pack-destination ../..
 cd ../..
-npm install ./skipole-sdk-0.1.0-alpha.1.tgz
+npm install ./skipole-sdk-0.1.0-alpha.2.tgz
 ```
 
 For the customer-approved purchase, use `quoteHostedPurchase`, present
