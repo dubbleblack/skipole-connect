@@ -1,5 +1,9 @@
 # Package publication and name ownership
 
+**Publication status:** the distribution workflow is prepared locally but is not
+installed on GitHub yet. The existing GitHub connection needs the `workflow`
+permission. No GitHub SDK archive release or MCP Registry submission is claimed.
+
 Paid REST commerce is Production verified. Neither paid SDK nor paid MCP
 native-client purchases are independently verified.
 
