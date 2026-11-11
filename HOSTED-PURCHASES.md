@@ -15,9 +15,12 @@ This flow reuses Skipole's existing orders, hosted Stripe Checkout, payment
 verification, once-only audience build, supplier budget, shortfall refunds and
 encrypted My Orders delivery. No monthly plan or prepaid credits are required.
 Licensed B2B contact audiences use the existing advanced-search product;
-Marketing Professionals is the default configuration. The next website
-publication removes the temporary 100-record ceiling. Enter a quantity up to
-1,000,000 per supplier build, subject to the available authorized allowance.
+Marketing Professionals is the default configuration. The supplier documents
+up to 1,000,000 records per build, but the current reliable single-file delivery
+bound is 3,965 records for these four fields, or less if allowance is lower.
+Use the maximum returned by the quote/approval flow; a supplier ceiling is not
+a promise that Skipole currently delivers that quantity. Larger requests receive
+the supported quantity before payment, not an enterprise-sales requirement.
 Pricing is $0.05/record PAYG, $0.04 with an active Builder membership ($29/month),
 or $0.03 with an active Scale membership ($99/month). Memberships, when separately
 enabled, change price, not volume limits. The $2 minimum means at least
