@@ -20,7 +20,8 @@ proof of submission, acceptance, partnership or paid native verification.
 - **Privacy:** https://skipoledata.com/privacy
 - **Support:** support@skipoledata.com
 - **Security:** https://github.com/dubbleblack/skipole-connect/blob/main/SECURITY.md
-- **Icon:** `cursor/assets/skipole-mark.svg` in the repository
+- **Icon / Cursor Logotype URL:** https://raw.githubusercontent.com/dubbleblack/skipole-connect/main/cursor/assets/skipole-icon-512.png
+- **Bundled icon:** `cursor/assets/skipole-icon-512.png` — official, unmodified 512×512 PNG.
 - **Server:** https://skipole-data-platform.replit.app/mcp
 - **Transport:** HTTPS Streamable HTTP
 - **Authentication:** OAuth authorization code + PKCE; dynamic client registration
