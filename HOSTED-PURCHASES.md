@@ -1,9 +1,13 @@
 # Hosted cash purchases for developers and agents
 
 **Release status:** website pay-as-you-go purchasing is live, and the hosted
-developer API implementation is published and mock-tested. A non-founder reached
-genuine Stripe Live Checkout at 40 records × $0.05 = $2.00 without making a test
-payment. This is not yet a verified paid Production developer purchase round trip.
+developer API implementation is published and mock-tested. Production verification
+also passed an ordinary customer's scoped REST quote and authenticated signed
+approval review at 40 records × $0.05 = $2.00, without creating a Checkout session
+or paying during that check. A prior non-founder website check reached genuine
+Stripe Live Checkout without paying. The current developer test account had no
+delivered order, so Production developer CSV retrieval and a full paid developer
+round trip remain unverified.
 Do not advertise paid SDK or paid MCP commerce as operational until the deployed
 customer approval and authenticated retrieval paths are verified.
 
