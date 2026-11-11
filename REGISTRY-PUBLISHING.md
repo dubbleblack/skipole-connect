@@ -7,51 +7,49 @@ The official MCP Registry independently reports
 [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect)
 version `0.1.0-alpha.1` as **active**.
 [Python is published on PyPI as `skipole-data`](https://pypi.org/project/skipole-data/).
-npm remains unpublished.
+[`@skipole/sdk@0.1.0-alpha.1` is published on npm](https://www.npmjs.com/package/@skipole/sdk/v/0.1.0-alpha.1).
+Public installation through `@alpha`, the client import and TypeScript declarations
+are verified. Its tarball matches the original tested GitHub archive.
 
 Paid REST commerce is Production verified. Neither paid SDK nor paid MCP
 native-client purchases are independently verified.
 
-## Install the published GitHub packages today
+## Install the published packages today
 
-- JavaScript: follow [install the released archive](javascript/README.md).
+- JavaScript: run `npm install @skipole/sdk@alpha`; see the [JavaScript guide](javascript/README.md).
 - Python: run `python -m pip install skipole-data`; see the [Python guide](python/README.md).
 - The manual **Publish developer distribution** GitHub Action tests both clients
   and publishes installable archives under this repository's controlled GitHub
   release namespace. It does not publish to npm/PyPI or contact a data supplier.
 
-## npm — ownership required
+## npm — published; configure trust for future releases
 
-`@skipole/sdk` is a proposed scope/package, not an asserted owned npm namespace.
-An npm account with ownership of the `skipole` organization must establish
-publisher access before its first release. GitHub repository ownership does not
-establish npm scope ownership. Once verified, register the exact repository and
-workflow as a trusted publisher, then publish with npm's OIDC workflow. Never
-paste an npm token in an issue, guide, browser bundle or chat.
+The organization owner approved the existing tested archive through npm's
+browser-based staged publishing. No rebuild or SDK code change was needed.
+Use `@alpha` or the exact verified version: the `latest` tag still identifies
+the staging placeholder, not the SDK. Do not republish an immutable version.
 
-### Exact npm owner action
+In the package's Settings → Trusted publishing, select GitHub Actions:
 
-1. Confirm that your signed-in npm account controls the **`skipole` organization**
-   and may publish **`@skipole/sdk`**. A public 404 is not ownership evidence.
-2. Bootstrap the **actual tested package**, not a placeholder or another package,
-   from the controlled npm account. After `npm login`, the first publication is:
+- Organization or user: **dubbleblack**
+- Repository: **skipole-connect**
+- Workflow filename: **distribution.yml**
+- Environment: **leave blank**
+- Allowed actions: enable **npm publish**, as used by the existing workflow
 
-   ```sh
-   npm publish "https://github.com/dubbleblack/skipole-connect/releases/download/sdk-v0.1.0-alpha.1/skipole-sdk-0.1.0-alpha.1.tgz" --access public --tag alpha
-   ```
+Under Publishing access, select **Require two-factor authentication and disallow
+tokens**. Saving the publisher is not proof of a successful OIDC release.
+New configurations must complete their first successful workflow publication
+within two days or be recreated before a later legitimate release. Do not issue
+an unnecessary release merely to validate trust.
 
-3. Independently verify `@skipole/sdk@0.1.0-alpha.1` on npm. Do not republish that
-   immutable version. In its npm package Settings → Trusted publishing, add:
-   **GitHub owner `dubbleblack`**, **repository `skipole-connect`**,
-   **workflow `distribution.yml`**, **environment blank**. Permit `npm publish`
-   if direct publication is intended; newer configurations can default to
-   stage-only publication.
-4. The existing workflow's `publish_npm=true` input publishes a **future,
-   newly versioned** release after trust is configured. Keep `release_sdk`,
-   `publish_mcp` and `publish_pypi` false when publishing npm alone.
+After configuration, delete the temporary staging secret from Replit Secrets and
+revoke its token on npm. Never paste tokens, passwords or 2FA codes into chat,
+source or logs. Future workflow releases need no stored npm token.
 
-The workflow has no stored npm token and cannot bootstrap an unowned namespace.
-The owner login is a registry authorization step, not another GitHub reconnect.
+For an explicitly authorized future release with a new JavaScript version,
+set only `publish_npm=true`; keep `release_sdk`, `publish_mcp`, `publish_pypi`
+and `verify_pypi` false. The existing workflow retains its build/test safeguards.
 
 ## PyPI — avoid the unrelated project
 
