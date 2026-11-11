@@ -95,8 +95,10 @@ Zero valid records means a full refund.
    optional checks do not block a truthful GitHub source release or website sales.
 5. Hosted cash purchase quotes, customer approval links, owned-order lookup and
    authenticated CSV retrieval are implemented in REST, MCP and both SDKs and
-   have mocked contract coverage. A paid Production developer round trip remains
-   unverified. The legacy credit-funded provider API is separate; website
+   have mocked contract coverage. The paid Production REST round trip and CSV
+   retrieval passed for 40 records / $2.00 in an authorized internal test.
+   Paid SDK/MCP native-client round trips remain unverified.
+   The legacy credit-funded provider API is separate; website
    purchasing does not activate it. See [the purchase guide](START-HERE.md).
 
 The existing canonical MCP/API origin remains the Replit deployment origin:
