@@ -2,10 +2,10 @@
   "name": "skipole-connect",
   "version": "0.1.0-alpha.1",
   "license": "Apache-2.0",
-  "status": "github-sdk-archives-pypi-and-mcp-registry-published-npm-unpublished",
+  "status": "github-sdk-archives-npm-pypi-and-mcp-registry-published",
   "authorization": {
     "publishRepository": true,
-    "publishNpm": false,
+    "publishNpm": true,
     "publishPyPi": true,
     "submitCursor": false,
     "submitReplitPartner": false,
@@ -56,6 +56,18 @@
     "paidSdkRoundTrip": false
   },
   "distribution": {
+    "npm": {
+      "status": "published",
+      "url": "https://www.npmjs.com/package/@skipole/sdk",
+      "version": "0.1.0-alpha.1",
+      "installTag": "alpha",
+      "latestTagIsStagingPlaceholder": true,
+      "installVerified": true,
+      "clientImportVerified": true,
+      "typeDeclarationsVerified": true,
+      "archiveSha1": "b0fe4ecbb844012c88d744c4e8f2c3cb3f33874e",
+      "trustedPublisherStatus": "awaiting-owner-configuration"
+    },
     "pypi": {
       "status": "published",
       "url": "https://pypi.org/project/skipole-data/",
