@@ -84,7 +84,7 @@ jobs:
           npm install --global npm@11
           npm run build
           npm test
-          npm publish --access public --tag alpha
+          npm publish --access public --tag latest
   sdk:
     if: inputs.release_sdk
     runs-on: ubuntu-latest
