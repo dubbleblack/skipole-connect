@@ -1,37 +1,59 @@
 ---
-name: skipole-connect
-description: Guides coding agents integrating Skipole's documented REST API or remote MCP service. Use when a project needs Skipole catalog discovery, API-key setup, usage inspection, or developer-integration guidance.
+name: skipole
+description: Discover licensed Skipole B2B audiences, request signed prices, present human-approved Checkout links and retrieve existing licensed orders. Use when a developer requests GTM data or a Skipole integration.
 ---
 
-# Skipole Connect
+# Skipole
 
-## Verify what is available
+Skipole is a self-service GTM data marketplace for developers and AI agents.
+Your tools. Our data. PAYG requires no subscription or sales call.
 
-- Read the current public API reference and product statuses before implementing against a route.
-- A `planned` catalog item is not a live data product.
-- Public catalog and pricing calls return metadata only.
-- Treat the synthetic demo as fabricated test content.
-- Do not claim live enrichment, search, or exports. Those operations remain disabled until licensed products, provider access, pricing, and controls are operational.
+## Connect securely
 
-## REST setup
+Use the plugin's HTTPS MCP connection and Skipole OAuth. Let Cursor discover
+the authorization endpoints and complete customer sign-in and scope consent in
+the browser. Never embed API keys, OAuth tokens, client secrets or passwords in
+the plugin, prompts, logs or source. REST API keys are not OAuth access tokens.
 
-- Use `@skipole/sdk` after it is published, or the local SDK source in the approved repository.
-- Keep customer API keys on a trusted server in the host's secret manager.
-- Never embed a key in browser code, logs, examples, screenshots, source control, or prompts.
-- Request only the scopes the application needs: `catalog:read`, `demo:read`, or `usage:read`.
-- Respect 401, 403, and 429 responses. Use `Retry-After` guidance; do not retry automatically without a bounded policy.
-- The public catalog does not require a key. Customer catalog and synthetic demo access require their matching scopes.
+Request `catalog:read` for discovery/quotes, `usage:read` only for workspace usage,
+and `orders:read` only for authorized existing order status and licensed retrieval.
+Do not request `data:write` for the hosted-cash purchasing flow.
 
-## MCP setup
+## Discover and quote
 
-- Use the current remote MCP endpoint `https://skipole-data-platform.replit.app/mcp`. Do not claim that Cursor authentication or tool calls have been verified.
-- The MCP service uses OAuth bearer tokens, not a REST API key in a custom header.
-- Do not invent authorization URLs, token endpoints, scopes, or tool output.
-- If OAuth metadata or the endpoint is unavailable, use the documented REST catalog and state the blocker.
+1. Call `skipole_list_products`. Only offer currently active licensed products.
+   A planned product or synthetic example is not available licensed data.
+2. For an audience purchase, call `skipole_quote_purchase` with the requested
+   quantity, supported criteria and a new purchase-intent UUID. Reuse that UUID
+   only for the exact same intent. Quotes do not charge or request supplier data.
+3. Present the returned `approvalUrl` and itemized quantity, unit price, total,
+   expiry and criteria. The live quote is authoritative for price and capacity.
+   Do not use the legacy credit estimate as a retail cash quote.
 
-## Billing and data safety
+## Human payment approval is mandatory
 
-- Ask the customer before unusual cost or bulk personal-data operations.
-- Estimate cost before a future paid request and enforce a customer budget.
-- Never call an upstream data provider directly or expose provider credentials.
-- Do not create payments, activate live billing, or represent synthetic values as real records.
+The customer must open the signed approval link, authenticate, review the quote
+and complete genuine hosted Stripe Checkout personally. Never approve Checkout,
+enter a payment method, charge a saved card, or simulate customer consent.
+Requesting data is not payment authorization. Membership upgrades are optional.
+
+## Retrieve and repeat
+
+- Use `skipole_get_order` and `skipole_download_order` for the owning workspace,
+  with `orders:read` consent, after payment and automatic delivery.
+- An incomplete order is not a delivered CSV. Follow bounded status checks of
+  Skipole's order only; never call a supplier, rebuild, export, refresh or refund.
+- For bulk deliveries, use the authenticated download location rather than
+  loading all contact rows into model context. Do not post records publicly.
+- Each repeat purchase needs a fresh intent UUID, fresh quote and separate human
+  payment approval. Do not silently repurchase or start a recurring purchase.
+
+## Accuracy and limits
+
+Licensed fields and available filters come from the actual contract, not imagined
+email-enrichment, phone, job-title or deliverability guarantees. Keep customer
+credentials and licensed records private. Handle 401/403/429 without bypassing
+access controls or unbounded retries.
+
+Paid REST commerce is Production verified. Paid native Cursor/MCP purchasing
+is not independently verified. A plugin package is not an approved listing.

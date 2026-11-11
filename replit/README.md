@@ -16,11 +16,17 @@ This is a code starter and agent-readable setup guide, not an official Replit in
 ## Setup
 
 1. Add the customer's API key as a Replit Secret named `SKIPOLE_API_KEY`. Do not paste it into source files or chat.
-2. Use the local `@skipole/sdk` package from `../javascript` or wait for an approved package publication.
+2. Install the published `@skipole/sdk` from npm, or `skipole-data` from PyPI for Python.
 3. Call Skipole from backend routes. Keep authenticated responses behind the application's own user authorization.
 4. Start with the public catalog. It returns metadata only and may contain planned products.
-5. For customer usage, use a key with `usage:read`. For customer catalog use `catalog:read`; for fabricated examples use `demo:read`.
-6. Do not implement a live enrichment workflow until product availability, licensing, pricing, budgets, and provider readiness are confirmed.
+5. Use `catalog:read` for catalog and signed cash quotes, `orders:read` for owned
+   licensed deliveries, and `usage:read` only when needed. Do not request
+   `data:write` for customer-approved hosted purchasing.
+6. Use `quoteHostedPurchase`, present its `approvalUrl` to the human customer,
+   then use `getOrder` and `downloadOrderCsv` after delivery. Never approve
+   Checkout, charge a card, or call a supplier on the customer's behalf.
+7. For repeat purchases, request a fresh quote and separate customer approval.
+   Do not treat a past payment as permission to buy again.
 
 The example in `example/` demonstrates a public catalog route and a customer usage route that fails closed unless the host app's existing authentication middleware marks the signed-in user as an authorized customer admin. It does not create a payment or call an upstream data provider.
 
@@ -42,4 +48,9 @@ This is a personal custom connection, not a curated integration or partnership.
 
 ## Partner submission status
 
-`partner-submission.md` is a draft for review. It has not been submitted to Replit.
+The official route is <https://replit.com/partners>, **Integration Partners**,
+not the Solutions Partners consulting application. Its public form requires
+contact name, business city, email, website, partnership type and proposal.
+The prepared proposal is in `partner-submission.md`. A submission receipt and
+Replit's acceptance are separate from packaging this starter or skill.
+No native listing or first-class partnership is claimed without confirmation.

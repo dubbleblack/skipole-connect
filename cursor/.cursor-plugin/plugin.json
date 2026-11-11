@@ -1,17 +1,22 @@
 {
   "name": "skipole-connect",
   "version": "0.1.0-alpha.1",
-  "description": "Connect coding workflows to Skipole's documented catalog, REST API, and remote MCP service.",
+  "description": "Self-service licensed B2B audience data for GTM teams, developers and AI agents. Discover audiences, request pricing, approve purchases and securely retrieve licensed records.",
   "license": "Apache-2.0",
   "author": {
-    "name": "Skipole"
+    "name": "DubbleBlack LLC",
+    "email": "support@skipoledata.com"
   },
   "homepage": "https://skipoledata.com/developers/integrations",
+  "repository": "https://github.com/dubbleblack/skipole-connect",
   "logo": "assets/skipole-mark.svg",
   "keywords": [
     "data",
     "rest-api",
     "mcp",
-    "developer-tools"
+    "developer-tools",
+    "gtm-data",
+    "sales",
+    "pay-as-you-go"
   ]
 }

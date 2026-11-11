@@ -1,5 +1,8 @@
 # Skipole Connect for Cursor
 
+Skipole is a self-service GTM data marketplace for developers and AI agents.
+**Your tools. Our data.** PAYG requires no mandatory subscription or sales call.
+
 [Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=cursor#marketing-professionals).
 Paid REST commerce is Production verified; paid Cursor/MCP purchases remain independently unverified.
 
@@ -11,7 +14,10 @@ See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quot
 links and authenticated retrieval. Paid MCP/SDK round trips remain unverified;
 the connection instructions below are not evidence of paid-flow verification.
 
-This is a prepared Cursor plugin package. It is not published, submitted, or listed in the Cursor marketplace. The current remote MCP URL is `https://skipole-data-platform.replit.app/mcp`. A real Cursor authorization and tool call have not been verified.
+This is a Cursor plugin package in the public Skipole repository. It has not been
+submitted to or approved by the official Cursor Marketplace. The existing service
+is `https://skipole-data-platform.replit.app/mcp`. An actual Cursor installation,
+OAuth connection and read-only tool call remain unverified.
 
 ## Package contents
 
@@ -19,6 +25,29 @@ This is a prepared Cursor plugin package. It is not published, submitted, or lis
 - `mcp.json`: proposed remote MCP connection with no embedded credentials.
 - `skills/skipole/SKILL.md`: agent guidance for accurate, safe Skipole integration.
 - `assets/skipole-mark.svg`: package icon.
+- `../.cursor-plugin/marketplace.json`: repository-root marketplace manifest,
+  resolving this existing plugin from the `cursor` directory.
+
+## Native submission and installation
+
+The owner must sign in at <https://cursor.com/marketplace/publish> and apply as
+a publisher, then submit <https://github.com/dubbleblack/skipole-connect>.
+The repository contains a multi-plugin-layout manifest with exactly one plugin,
+`skipole-connect`. Choose Sales / GTM Data where the form offers those categories.
+See [the prepared application details](../NATIVE-DIRECTORY-SUBMISSIONS.md).
+
+Do not claim that a GitHub package, a manually configured MCP connection or an
+owner-operated repository marketplace is a listing in Cursor's public directory.
+An official install link will be reported only when Cursor provides a real listing.
+No `/add-plugin skipole-connect` public-directory installation is claimed today.
+
+For a no-terminal pre-publication install, download this repository's ZIP from
+GitHub, extract it, then use Cursor **Customize → Import from Disk** and select
+the extracted `cursor` folder. Reload Cursor and inspect the skill and MCP server.
+If local imports are disabled by an Enterprise administrator, do not bypass that
+policy. A team admin can alternatively import the repository under
+**Dashboard → Plugins & MCPs → Team Marketplaces → Add Marketplace**.
+These local/team installations do not establish public marketplace discovery.
 
 ## Current connection status
 
@@ -26,7 +55,7 @@ The deployed Skipole API service contains a Streamable HTTP MCP endpoint with OA
 
 ## Configure Cursor
 
-Copy the `mcpServers` entry from `mcp.json` into your project's `.cursor/mcp.json`
+For an independent custom-connection check, copy the `mcpServers` entry from `mcp.json` into your project's `.cursor/mcp.json`
 or your global Cursor MCP settings. Enable the server and complete Skipole OAuth
 in the browser when prompted. Review the requested catalog and usage scopes.
 Test listing catalog metadata and reading your own usage before calling this
@@ -42,8 +71,13 @@ REST remains available separately. Use API keys only from trusted server-side co
 
 ## Marketplace release blockers
 
-1. Test an actual Cursor OAuth connection and read-only tool calls against the deployed endpoint.
-2. Verify this package with Cursor's current plugin checks.
-3. Obtain explicit authorization before submitting it to the Cursor marketplace.
+1. The owner completes a genuine Cursor installation, OAuth connection and
+   `skipole_list_products` read-only check. No purchase or supplier call is needed.
+2. Sign in to the official publisher application and submit the repository.
+3. Record the actual application/review result; public submission authorization
+   has been given, but the agent has no Cursor owner session or approval receipt.
+
+Package checks run with `node --test cursor/test/plugin.test.mjs` from the
+repository root. These validate packaging, not an authenticated Cursor session.
 
 This integration package is licensed under Apache-2.0. No Cursor partnership or approval is claimed.

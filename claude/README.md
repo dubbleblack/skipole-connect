@@ -32,6 +32,19 @@ prepare a signed customer approval link and retrieve existing owned orders.
 A paid Production MCP round trip remains unverified. Legacy credit-funded
 enrichment/build tools remain separately gated; they are not this cash flow.
 
+## Official Connectors Directory submission
+
+The native directory route is <https://claude.ai/directory/manage>, choosing
+**MCP connector**. A custom connection and an official MCP Registry entry are
+not Claude directory acceptance. Use the prepared listing fields, sample prompts
+and honest remaining requirements in
+[Native directory submissions](../NATIVE-DIRECTORY-SUBMISSIONS.md).
+The narrow server update adds the tool titles and safety annotations required
+for review; it must be published before testing that deployed metadata.
+The owner must provide suitable reviewer access through the secure portal and
+complete its truthful tool-test and policy acknowledgments. No submission receipt
+or approved directory URL is claimed here.
+
 ## Claude Desktop
 
 Use the remote connector above through **Settings → Connectors**, where supported

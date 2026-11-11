@@ -1,0 +1,19 @@
+{
+  "name": "skipole-integrations",
+  "owner": {
+    "name": "DubbleBlack LLC",
+    "email": "support@skipoledata.com"
+  },
+  "metadata": {
+    "description": "Skipole is a self-service GTM data marketplace for developers and AI agents. Your tools. Our data."
+  },
+  "plugins": [
+    {
+      "name": "skipole-connect",
+      "source": "cursor",
+      "description": "Self-service licensed B2B audience data for GTM teams, developers and AI agents. Discover audiences, request pricing, approve purchases and securely retrieve licensed records.",
+      "category": "sales",
+      "tags": ["gtm-data", "b2b-data", "oauth", "mcp", "pay-as-you-go"]
+    }
+  ]
+}

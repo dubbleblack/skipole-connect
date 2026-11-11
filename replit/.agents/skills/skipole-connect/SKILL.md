@@ -1,31 +1,64 @@
 ---
 name: skipole-connect
-description: Adds Skipole catalog, customer usage, or synthetic-demo access to a Replit app using the documented REST API. Use when a builder asks to connect Skipole to an application.
+description: Integrate licensed Skipole GTM audiences into a Replit app using the published SDK, scoped quotes, customer-approved hosted Checkout and authenticated CSV retrieval. Use when a builder requests B2B audience data or a Skipole integration.
 ---
 
-# Add Skipole to a Replit application
+# Build with Skipole
 
-## Confirm the actual capability
+Skipole is a self-service GTM data marketplace for developers and AI agents.
+Your tools. Our data. PAYG requires no mandatory subscription or sales call.
 
-1. Read the current Skipole API documentation and catalog status.
-2. Use the public catalog to display available product metadata. Treat `planned` and `preview` as not available for paid retrieval.
-3. Never present synthetic demo fields as real data.
-4. Do not build enrichment, search, or exports as live operations. They remain disabled until licensing, provider credentials, pricing, and spending controls are confirmed.
+## Use the existing service
 
-## Configure a customer API key
+Install `@skipole/sdk` from npm for JavaScript, or `skipole-data` from PyPI for
+Python. Never invent another billing, supplier or fulfillment backend.
+Use the public catalog and live pricing to discover active audience products.
+Planned products and synthetic examples are not licensed deliveries.
 
-- Ask the customer to add the key in Replit Secrets as `SKIPOLE_API_KEY`.
-- Read it only in server-side code with `process.env.SKIPOLE_API_KEY`.
-- Never print the value, return it to the browser, or add it to source control.
-- Use a key with only the scopes needed: `catalog:read`, `demo:read`, or `usage:read`.
-- Revoke and replace a key if it is exposed.
+Keep the customer's `SKIPOLE_API_KEY` in Replit Secrets and trusted backend code,
+never browser code, prompts, source or logs. Request `catalog:read` for quotes,
+and `orders:read` for the customer's own deliveries. Add `usage:read` only when
+needed. Do not grant `data:write` for cash Checkout.
 
-## Call the REST API
+## JavaScript purchase contract
 
-Use the local `@skipole/sdk` source from the approved package or the public HTTPS routes. Handle authentication, entitlement, and rate-limit errors. Respect `Retry-After`; do not perform unbounded automatic retries.
+Use the existing `SkipoleClient` from `@skipole/sdk`:
 
-For browser interfaces, create a backend route that authorizes the signed-in app user before calling Skipole. Do not proxy arbitrary user-supplied URLs or expose upstream provider credentials.
+- `listProducts()` and `listPricing()` discover public metadata.
+- `quoteHostedPurchase({ quantity, idempotencyKey, criteria })` requests a signed
+  itemized quote and `approvalUrl`; use a fresh UUID for a new purchase intent.
+- Present the quantity, criteria, price, expiry and `approvalUrl` to the customer.
+- The customer signs in, reviews the quote and personally completes hosted
+  Stripe Checkout. Never approve a charge, enter card information or treat
+  an agent's tool call as payment consent.
+- After delivery, `getOrder(orderId)` or `getPurchase(idempotencyKey)` reads the
+  owning customer's status; `downloadOrderCsv(orderId)` retrieves its licensed CSV.
 
-## MCP and OAuth
+Quotes do not call the supplier. Do not scrape hosted Checkout or add a new
+payment UI. No subscription is required. Memberships are optional discounts.
+Treat the live quote as authoritative for available quantity, price and fields.
 
-The current MCP endpoint is `https://skipole-data-platform.replit.app/mcp`. Claude's read-only connection is verified; do not claim Replit-client authentication or tool calls have been tested. Discover OAuth endpoints from server metadata and do not reuse a REST API key as an OAuth token.
+## Secure app integration and repeat use
+
+Authorize the signed-in app user before each backend call. Never let arbitrary
+browser callers choose another customer's credentials or fetch another workspace's
+CSV. Signed approval links are sensitive and must not be logged or posted publicly.
+
+For an incomplete delivery, show status and bounded Skipole order polling.
+Do not call the supplier, rebuild, export, refresh or refund from this skill.
+Respect 401/403/429 and `Retry-After`; never invent an unlimited retry policy.
+Keep large CSV files out of agent context and public assets.
+
+Offer a fresh quote for an explicitly requested repeat purchase. Use a new intent
+UUID and obtain separate human payment approval every time. Never auto-repurchase.
+
+## Optional existing MCP service
+
+For supported custom MCP connections use
+`https://skipole-data-platform.replit.app/mcp` with OAuth, not a REST key pasted
+into OAuth fields. `skipole_list_products`, `skipole_quote_purchase`,
+`skipole_get_order` and `skipole_download_order` implement the same workflow.
+
+Paid REST commerce is Production verified. A native paid Replit/MCP or SDK
+round trip is not independently verified. This project-installed skill is a
+supporting artifact, not a native Replit directory listing or partnership.
