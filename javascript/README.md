@@ -2,7 +2,28 @@
 
 Pre-release JavaScript client for Skipole's documented REST API.
 
-The package is prepared for npm distribution but has not been published. It uses the existing Skipole API and customer API keys. Provider operations are gated by the live backend policy and are currently unavailable.
+The package is prepared for npm distribution but has not been published. npm scope
+ownership/publisher access must be verified before release. The paid REST commerce
+path is Production verified; an independently paid SDK round trip is not.
+
+## Install from the public source now
+
+Node 20+ and Git are required. From your application directory:
+
+```sh
+git clone https://github.com/dubbleblack/skipole-connect.git
+cd skipole-connect/javascript
+npm run build
+npm pack --pack-destination ../..
+cd ../..
+npm install ./skipole-sdk-0.1.0-alpha.1.tgz
+```
+
+For the customer-approved purchase, use `quoteHostedPurchase`, present
+`approvalUrl` to the customer, and use `getPurchase` / `downloadOrderCsv` after
+payment. Copy the complete [hosted purchase example](../HOSTED-PURCHASES.md#javascript).
+Never put a key in a browser bundle. No package install, quote or status read
+automatically charges a customer or requests supplier data.
 
 After an authorized npm release, install the package with:
 
