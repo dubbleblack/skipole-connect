@@ -1,15 +1,13 @@
 # Hosted cash purchases for developers and agents
 
-**Release status:** website pay-as-you-go purchasing is live, and the hosted
-developer API implementation is published and mock-tested. Production verification
-also passed an ordinary customer's scoped REST quote and authenticated signed
-approval review at 40 records × $0.05 = $2.00, without creating a Checkout session
-or paying during that check. A prior non-founder website check reached genuine
-Stripe Live Checkout without paying. The current developer test account had no
-delivered order, so Production developer CSV retrieval and a full paid developer
-round trip remain unverified.
-Do not advertise paid SDK or paid MCP commerce as operational until the deployed
-customer approval and authenticated retrieval paths are verified.
+**Paid REST commerce is Production verified.** One explicitly authorized internal
+verification purchase completed the scoped REST quote, signed customer approval,
+customer-paid Stripe Live Checkout ($2.00 for 40 Marketing records), automated
+encrypted fulfillment, and authenticated REST CSV retrieval (HTTP 200). All 40
+licensed records passed CSV validation. Payment reconciled once; no refund was due.
+This verifies the REST path, not outside-customer acquisition or future coverage.
+**Paid SDK and MCP purchases remain independently unverified.** Their source and
+mocked contract tests are not native-client paid verification.
 
 [Purchase on the live website](https://skipoledata.com/marketplace#marketing-professionals)
 or use the customer-approved flow below. Package registries and optional
@@ -117,10 +115,8 @@ Honor the workspace API rate limit and `Retry-After`; do not spin in tight loops
 
 ### Configurable audiences and repeat purchases
 
-The upcoming website release adds optional `criteria` to the existing signed
-quote request. **Publish that release before sending this parameter to
-Production.** Omitting it continues to select the live Marketing Professionals
-configuration.
+The published API accepts optional `criteria` in the existing signed quote
+request. Omitting it selects the live Marketing Professionals configuration.
 
 ```js
 const quote = await skipole.quoteHostedPurchase({
@@ -149,7 +145,7 @@ the contact list in the model's context. Use My Orders with the owning browser
 session or the CSV API with an `orders:read` API key. This is prepared behavior,
 not evidence of an independently verified paid Production MCP round trip.
 
-The prepared server adds:
+The published server exposes these tools; paid MCP client execution is not yet verified:
 
 | Tool | Required scope | Effect |
 | --- | --- | --- |
