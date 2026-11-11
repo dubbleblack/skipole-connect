@@ -5,14 +5,63 @@ on:
       release_sdk:
         description: Publish tested SDK archives as a GitHub prerelease
         type: boolean
-        default: true
+        default: false
       publish_mcp:
         description: Publish the remote MCP metadata using verified GitHub ownership
+        type: boolean
+        default: false
+      publish_pypi:
+        description: Publish skipole-data after its owner configures the PyPI trusted publisher
+        type: boolean
+        default: false
+      publish_npm:
+        description: Publish after the npm owner bootstraps @skipole/sdk and configures trust
         type: boolean
         default: false
 permissions:
   contents: read
 jobs:
+  pypi:
+    if: inputs.publish_pypi && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test and build the existing Python package
+        working-directory: python
+        run: |
+          python scripts/prepare-release.py
+          PYTHONPATH=src python -m unittest discover -s tests
+          python -m pip install build
+          python -m build --outdir ../pypi-dist
+      - name: Publish through the owner's PyPI trusted publisher
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086
+        with:
+          packages-dir: pypi-dist/
+  npm:
+    if: inputs.publish_npm && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+      - name: Test and publish through the owner's npm trusted publisher
+        working-directory: javascript
+        run: |
+          npm install --global npm@11
+          npm run build
+          npm test
+          npm publish --access public --tag alpha
   sdk:
     if: inputs.release_sdk
     runs-on: ubuntu-latest
