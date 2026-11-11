@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "com.skipoledata/skipole-connect",
+  "name": "io.github.dubbleblack/skipole-connect",
   "title": "Skipole Connect",
-  "description": "Skipole catalog and usage over remote MCP. Licensed purchases use signed-in website Checkout; provider tools have separate authorization and policy gates.",
+  "description": "Licensed B2B audiences: catalog, signed purchase links and scoped orders. Paid MCP unverified.",
   "version": "0.1.0-alpha.1",
   "remotes": [
     {
