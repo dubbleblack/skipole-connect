@@ -20,7 +20,7 @@ Skipole Connect is the public developer distribution package for Skipole's REST 
 - A quote does not contact a supplier or charge a customer. The hosted cash flow requires explicit customer payment in Checkout, not prepaid credits. Legacy credit-funded provider requests require a signed quote, `data:write`, sufficient credits and an active policy; these are not the public cash-purchase path.
 - Licensed-data website Checkout and encrypted CSV delivery have completed a real paid order. Public Marketing Professionals purchasing is active. A non-founder reached genuine Stripe Live Checkout at 40 × $0.05 = $2.00 without paying during verification. The historical experimental $5 order is unchanged.
 - The remote MCP endpoint is `https://skipole-data-platform.replit.app/mcp`. Claude's OAuth connection and catalog/usage calls have been verified. Cash-quote and scoped-order tools are implemented and published. The complete paid REST path and authenticated CSV retrieval are Production verified. Paid MCP and SDK round trips remain independently unverified. Other native client connections are not claimed as tested.
-- The JavaScript and Python SDKs are versioned pre-release packages. Their builds and package contents are verified, but they have not been published to npm or PyPI.
+- The JavaScript and Python SDKs are versioned pre-release packages. The Python SDK is [published on PyPI as `skipole-data`](https://pypi.org/project/skipole-data/). npm publication remains pending.
 - Tested installable SDK archives are [published as a GitHub prerelease](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1).
 - The official MCP Registry reports [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect) version `0.1.0-alpha.1` as active. Registry publication is not paid MCP verification or official client approval.
 
@@ -65,17 +65,17 @@ tools do not charge a card; a paid MCP round trip remains unverified. Legacy SDK
 provider methods use a separate gated, credit-funded contract. Use the hosted
 purchase methods for signed approval links and retrieval of existing paid deliveries.
 
-### Install the published SDK archives
+### Install the published SDK packages
 
 Use the tested [GitHub prerelease](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1);
-npm and PyPI publication remain pending:
+npm publication remains pending. Python is available directly from PyPI:
 
 ```sh
 npm install "https://github.com/dubbleblack/skipole-connect/releases/download/sdk-v0.1.0-alpha.1/skipole-sdk-0.1.0-alpha.1.tgz"
 ```
 
 ```sh
-python -m pip install "https://github.com/dubbleblack/skipole-connect/releases/download/sdk-v0.1.0-alpha.1/skipole_data-0.1.0a1-py3-none-any.whl"
+python -m pip install skipole-data
 ```
 
 ### Alternatively, install reviewed SDK source
@@ -110,7 +110,7 @@ See [Claude](claude/README.md), [Cursor](cursor/README.md),
 ## Distribution contents
 
 - `javascript/`: versioned `@skipole/sdk` npm package source.
-- `python/`: proposed `skipole-data` distribution, imported as `skipole`; not the unrelated PyPI project.
+- `python/`: published `skipole-data` distribution, imported as `skipole`; not the unrelated PyPI project.
 - `openapi.yaml`: customer-safe public and authenticated REST routes, including gated provider commerce.
 - `cursor/`: proposed Cursor plugin package. It is not submitted or listed.
 - `lovable/`: REST and chat-context MCP setup guidance. It does not imply an official connector.
