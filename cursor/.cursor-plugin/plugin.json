@@ -9,7 +9,7 @@
   },
   "homepage": "https://skipoledata.com/developers/integrations",
   "repository": "https://github.com/dubbleblack/skipole-connect",
-  "logo": "assets/skipole-mark.svg",
+  "logo": "assets/skipole-icon-512.png",
   "keywords": [
     "data",
     "rest-api",
