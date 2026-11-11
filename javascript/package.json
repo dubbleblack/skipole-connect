@@ -1,6 +1,6 @@
 {
   "name": "@skipole/sdk",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "Local JavaScript and TypeScript client for the public Skipole REST API",
   "type": "module",
   "license": "Apache-2.0",
