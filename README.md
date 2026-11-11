@@ -1,5 +1,7 @@
 # Skipole Connect
 
+<img src="cursor/assets/skipole-icon-512.png" width="80" height="80" alt="Skipole official icon">
+
 **Paid REST purchasing is Production verified:** one customer-approved internal
 test collected $2.00, automatically delivered 40 licensed Marketing records and
 retrieved the CSV with authenticated REST access (HTTP 200). This is not a claim
