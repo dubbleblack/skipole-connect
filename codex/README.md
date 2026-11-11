@@ -2,8 +2,8 @@
 
 [Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
 Marketing Professionals at $0.05 per delivered record, $2 minimum Checkout.
-The next website release supports up to 1,000,000 per build, subject to supplier
-allowance and delivery capacity. No plan upgrade is required for larger orders.
+The live quote enforces current supplier allowance and reliable delivery
+capacity. No plan upgrade or sales call is required for supported quantities.
 See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quote
 links and authenticated retrieval. Paid MCP/SDK round trips remain unverified;
 the connection instructions below are not evidence of paid-flow verification.
