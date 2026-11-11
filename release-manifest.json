@@ -2,7 +2,7 @@
   "name": "skipole-connect",
   "version": "0.1.0-alpha.1",
   "license": "Apache-2.0",
-  "status": "github-source-published-registries-unpublished",
+  "status": "github-sdk-archives-and-mcp-registry-published-npm-pypi-unpublished",
   "authorization": {
     "publishRepository": true,
     "publishNpm": false,
@@ -59,11 +59,15 @@
     "github": {
       "status": "published",
       "publicRepository": true,
-      "url": "https://github.com/dubbleblack/skipole-connect"
+      "url": "https://github.com/dubbleblack/skipole-connect",
+      "sdkReleaseUrl": "https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1"
     },
     "mcpRegistry": {
-      "status": "metadata-prepared",
-      "submitted": false
+      "status": "published-active",
+      "submitted": true,
+      "name": "io.github.dubbleblack/skipole-connect",
+      "version": "0.1.0-alpha.1",
+      "registryUrl": "https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect"
     },
     "claude": {
       "status": "verified-custom-connector",
