@@ -1,5 +1,11 @@
 # Skipole Connect
 
+**Paid REST purchasing is Production verified:** one customer-approved internal
+test collected $2.00, automatically delivered 40 licensed Marketing records and
+retrieved the CSV with authenticated REST access (HTTP 200). This is not a claim
+of outside customers, paid SDK/MCP verification, or official platform approval.
+Start with the [purchase quickstart](START-HERE.md).
+
 Skipole Connect is the public developer distribution package for Skipole's REST API, remote MCP server, and SDKs. It uses the existing Skipole customer identity, scoped authorization, hosted Checkout, orders, and usage limits.
 
 **Website purchasing is live:** [buy business-contact audiences](https://skipoledata.com/marketplace#marketing-professionals) at $0.05 per delivered record with a $2 minimum Checkout. The current conservative single-file delivery maximum is 3,965 records for the four licensed fields, or less if supplier allowance is lower. This is an operational delivery constraint, not a commercial package or enterprise-sales threshold. All plans share the same capacity checks; membership changes the unit price, not permitted volume. Shortfalls are refunded automatically. No subscription or prepaid credits are required.
@@ -13,7 +19,7 @@ Skipole Connect is the public developer distribution package for Skipole's REST 
 - The REST contract includes customer-approved hosted purchase quotes, owned-order lookup and authenticated CSV retrieval. Existing legacy credit-funded request, job-status and export routes remain separately gated by their capability, purpose, credit and budget policies.
 - A quote does not contact a supplier or charge a customer. The hosted cash flow requires explicit customer payment in Checkout, not prepaid credits. Legacy credit-funded provider requests require a signed quote, `data:write`, sufficient credits and an active policy; these are not the public cash-purchase path.
 - Licensed-data website Checkout and encrypted CSV delivery have completed a real paid order. Public Marketing Professionals purchasing is active. A non-founder reached genuine Stripe Live Checkout at 40 × $0.05 = $2.00 without paying during verification. The historical experimental $5 order is unchanged.
-- The remote MCP endpoint is `https://skipole-data-platform.replit.app/mcp`. Claude's OAuth connection and catalog/usage calls have been verified. Cash-quote and scoped-order tools are implemented and published. An ordinary Production customer's scoped REST quote and signed approval review passed at 40 × $0.05 = $2.00, without Checkout or payment; developer CSV retrieval and a paid MCP or SDK round trip remain independently unverified. Other native client connections are not claimed as tested.
+- The remote MCP endpoint is `https://skipole-data-platform.replit.app/mcp`. Claude's OAuth connection and catalog/usage calls have been verified. Cash-quote and scoped-order tools are implemented and published. The complete paid REST path and authenticated CSV retrieval are Production verified. Paid MCP and SDK round trips remain independently unverified. Other native client connections are not claimed as tested.
 - The JavaScript and Python SDKs are versioned pre-release packages. Their builds and package contents are verified, but they have not been published to npm or PyPI.
 
 Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's billing and operating entity. This package contains no Stripe implementation, provider credentials, private provider schemas, or customer data.
@@ -23,19 +29,19 @@ Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's
 ## Quickstart: find, buy and return
 
 The audience engine supports department/domain criteria and saved configurations.
-The prepared marketplace update adds named Marketing, Sales, Engineering,
+The live marketplace includes named Marketing, Sales, Engineering,
 Finance, Human Resources and Operations search configurations. They are presets
 of one licensed product, not six independently proven datasets. It does not
 activate consumer, enrichment or intent datasets.
 See [configured and repeat purchases](./HOSTED-PURCHASES.md#configurable-audiences-and-repeat-purchases)
 for the additive SDK/MCP input and its publication boundary. Paid developer
-fulfillment remains unverified until a real customer-approved purchase completes.
+REST fulfillment has completed the authorized internal paid verification.
 
 **Customer-approved developer cash flow:** see [Hosted purchases](./HOSTED-PURCHASES.md)
 for the new SDK methods, signed customer approval links and scoped retrieval
 of existing licensed deliveries. No prepaid credits are required. This source
-implementation is not yet a verified Production paid developer round trip;
-the historical catalog/usage verification below does not prove the new tools.
+implementation has completed a paid Production REST round trip; SDK and MCP
+paid round trips are not independently verified by that REST result.
 
 Start with the [platform setup and purchase guide](./START-HERE.md) for Claude,
 Cursor, Replit, Codex, Lovable and Vercel. The guides distinguish implemented
@@ -86,7 +92,7 @@ See [Claude](claude/README.md), [Cursor](cursor/README.md),
 ## Distribution contents
 
 - `javascript/`: versioned `@skipole/sdk` npm package source.
-- `python/`: versioned `skipole` Python package source.
+- `python/`: proposed `skipole-data` distribution, imported as `skipole`; not the unrelated PyPI project.
 - `openapi.yaml`: customer-safe public and authenticated REST routes, including gated provider commerce.
 - `cursor/`: proposed Cursor plugin package. It is not submitted or listed.
 - `lovable/`: REST and chat-context MCP setup guidance. It does not imply an official connector.
