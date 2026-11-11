@@ -72,22 +72,22 @@ Install JavaScript from npm and Python from PyPI. The tested
 remains available as an alternative:
 
 ```sh
-npm install @skipole/sdk@alpha
+npm install @skipole/sdk
 ```
 
 ```sh
 python -m pip install skipole-data
 ```
 
-The verified JavaScript release is `0.1.0-alpha.1`; pin it with
-`npm install @skipole/sdk@0.1.0-alpha.1`. Do not omit the tag/version:
-`latest` still points to npm's staging placeholder.
+The verified JavaScript release is `0.1.0-alpha.2`; pin it with
+`npm install @skipole/sdk@0.1.0-alpha.2`. The default `latest` tag selects the
+real SDK, not npm's staging placeholder. This remains prerelease software.
 
 ### Alternatively, install reviewed SDK source
 
 The public source is [dubbleblack/skipole-connect](https://github.com/dubbleblack/skipole-connect).
 The Python distribution is `skipole-data`, not the unrelated PyPI project
-`skipole`. For JavaScript, use the explicit `alpha` tag or verified version above.
+`skipole`. For JavaScript, use the default npm installation or verified version above.
 
 ```sh
 git clone https://github.com/dubbleblack/skipole-connect.git
