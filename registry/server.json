@@ -4,6 +4,13 @@
   "title": "Skipole Connect",
   "description": "Licensed B2B audiences: catalog, signed purchase links and scoped orders. Paid MCP unverified.",
   "version": "0.1.0-alpha.1",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/dubbleblack/skipole-connect/main/cursor/assets/skipole-icon-512.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
+    }
+  ],
   "remotes": [
     {
       "type": "streamable-http",
