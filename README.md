@@ -87,8 +87,8 @@ npm install @skipole/sdk
 python -m pip install skipole-data
 ```
 
-The verified JavaScript release is `0.1.0-alpha.2`; pin it with
-`npm install @skipole/sdk@0.1.0-alpha.2`. The default `latest` tag selects the
+The verified JavaScript release is `0.1.0-alpha.3`; pin it with
+`npm install @skipole/sdk@0.1.0-alpha.3`. The default `latest` tag selects the
 real SDK, not npm's staging placeholder. This remains prerelease software.
 
 ### Alternatively, install reviewed SDK source

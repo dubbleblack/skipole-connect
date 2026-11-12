@@ -16,7 +16,7 @@ npm install @skipole/sdk
 ```
 
 To pin this documentation-only release, use
-`npm install @skipole/sdk@0.1.0-alpha.2`. This remains prerelease software even
+`npm install @skipole/sdk@0.1.0-alpha.3`. This remains prerelease software even
 when selected by the `latest` distribution tag.
 
 ## Alternative: published GitHub archive
@@ -40,7 +40,7 @@ cd skipole-connect/javascript
 npm run build
 npm pack --pack-destination ../..
 cd ../..
-npm install ./skipole-sdk-0.1.0-alpha.2.tgz
+npm install ./skipole-sdk-0.1.0-alpha.3.tgz
 ```
 
 Multi-product quoting requires SDK `0.1.0-alpha.3` or later and the corresponding
