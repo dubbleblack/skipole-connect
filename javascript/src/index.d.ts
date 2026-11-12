@@ -74,9 +74,19 @@ export type ProviderEnrichmentRequest = {
       };
 };
 
+export type CashAudienceInput = {
+  limit: number;
+  filters: NonNullable<ProviderAudienceRequest["request"]["filters"]>;
+};
 export type CashProductRequest =
-  | (Omit<ProviderAudienceRequest, "capabilityId"> & { capabilityId:
-      "audience-advanced-search" | "audience-consumer-search" | "audience-b2b-intent" | "audience-b2c-intent" })
+  | ({ kind: "audience"; purpose: string } & (
+      { capabilityId: "audience-advanced-search" | "audience-consumer-search";
+        request: CashAudienceInput & { type: "advanced_search" } }
+      | { capabilityId: "audience-b2b-intent";
+          request: CashAudienceInput & { type: "b2b"; topic_ids: Array<string | number> } }
+      | { capabilityId: "audience-b2c-intent";
+          request: CashAudienceInput & { type: "b2c"; topic_ids: Array<string | number> } }
+    ))
   | { kind: "enrichment"; capabilityId: "enrichment-email"; purpose: "business_research";
       request: { method: "email"; email: string } };
 
