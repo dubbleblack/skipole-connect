@@ -44,6 +44,12 @@ python -m pip install "git+https://github.com/dubbleblack/skipole-connect.git#su
 Python 3.10+ and Git are required. This uses the existing package build, not an
 unrelated registry project. Keep the key server-side and follow the
 [customer-approved purchase example](https://github.com/dubbleblack/skipole-connect/blob/main/HOSTED-PURCHASES.md#python).
+Multi-product quoting requires SDK `0.1.0a3` or later and the corresponding server
+release. Supply `product_request` to `quote_hosted_purchase` with the discovered
+product kind, capability ID, permitted purpose and product-specific request.
+All four audience profiles and email enrichment share this method and the
+existing owned-order CSV retrieval. Legacy B2B criteria remain compatible.
+
 The paid REST path is Production verified; an independently paid Python SDK
 round trip is not.
 
@@ -53,7 +59,7 @@ credit-funded provider operations remain controlled by capability and budget pol
 
 The public catalog and pricing routes need no API key. Customer catalog, synthetic demo, and usage routes require a customer API key with the relevant scope. Keep that key in server-side secrets and never place it in a browser app.
 
-The client also exposes quote, credit-funded provider request, job status, and CSV export methods. A quote does not call the supplier. These separately gated methods require a valid signed quote, `data:write`, sufficient credits, and an active policy; they are not the one-time customer Checkout flow. The client does not automatically retry paid operations or create Stripe Checkout sessions. Customers buy licensed Marketing Professionals orders and download their CSV through the signed-in website when purchasing is enabled, without a subscription or prepaid credits. Catalog/usage success does not prove paid API availability.
+The client also exposes legacy credit-funded provider request, job status, and export methods. Those separately gated methods require `data:write`, sufficient credits and an active policy; they are not cash Checkout. For cash purchasing, `quote_hosted_purchase` returns a signed customer approval link without a payment or supplier call. After the customer approves hosted payment and fulfillment completes, the existing owned-order CSV methods retrieve audience or email-enrichment deliveries. Cash purchasing requires neither membership nor prepaid credits. The SDK does not automatically retry purchases or create Stripe Checkout sessions. Catalog success does not prove independently paid SDK fulfillment.
 
 It is licensed under Apache-2.0; the license file is copied from the integration package root before building. Further releases require owner authorization.
 

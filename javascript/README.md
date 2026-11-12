@@ -43,6 +43,14 @@ cd ../..
 npm install ./skipole-sdk-0.1.0-alpha.2.tgz
 ```
 
+Multi-product quoting requires SDK `0.1.0-alpha.3` or later and the corresponding
+server release. Pass `productRequest` using the product's discovered `kind`,
+`capabilityId`, permitted `purpose` and exact request filters/input. All four
+audience capabilities and `enrichment-email` use the same `quoteHostedPurchase`
+method; legacy B2B `criteria` remain compatible. `downloadOrderCsv` retrieves
+only an existing owned delivery, including enrichment. These interface changes
+are not evidence of independently verified paid SDK fulfillment.
+
 For the customer-approved purchase, use `quoteHostedPurchase`, present
 `approvalUrl` to the customer, and use `getPurchase` / `downloadOrderCsv` after
 payment. Copy the complete [hosted purchase example](../HOSTED-PURCHASES.md#javascript).

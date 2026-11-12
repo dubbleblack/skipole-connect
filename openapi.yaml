@@ -511,73 +511,14 @@ components:
         Customer key. Create, rotate, and revoke keys from the authenticated Skipole dashboard.
         Send it only from a trusted server over HTTPS.
   schemas:
-    HostedPurchaseOrder:
-      type: object
-      required: [orderId, status, quantity, amountMinor, currency, returnedRecords, refundAmountMinor, refundPending, netAmountMinor, paidAt, csvAvailable]
-      properties:
-        orderId:
-          type: string
-        status:
-          type: string
-        quantity:
-          type: integer
-        amountMinor:
-          type: string
-        currency:
-          type: string
-        returnedRecords:
-          type: [integer, "null"]
-        refundAmountMinor:
-          type: string
-        refundPending:
-          type: boolean
-        netAmountMinor:
-          type: string
-        paidAt:
-          type: [string, "null"]
-          format: date-time
-        csvAvailable:
-          type: boolean
-    HostedPurchaseQuote:
-      type: object
-      required: [quoteToken, idempotencyKey, amountMinor, priceMinorPerRecord, currency, quantity, expiresAt, approvalUrl, requiresCustomerPaymentApproval]
-      properties:
-        quoteToken:
-          type: string
-        idempotencyKey:
-          type: string
-        amountMinor:
-          type: string
-        priceMinorPerRecord:
-          type: integer
-        currency:
-          type: string
-        quantity:
-          type: integer
-        expiresAt:
-          type: string
-          format: date-time
-        approvalUrl:
-          type: string
-          format: uri
-        requiresCustomerPaymentApproval:
-          type: boolean
-    HostedPurchaseInput:
-      type: object
-      additionalProperties: false
-      required: [quantity, idempotencyKey]
-      properties:
-        quantity:
-          type: integer
-          minimum: 40
-          maximum: 100
-        idempotencyKey:
-          type: string
-          format: uuid
     CatalogProduct:
       type: object
-      required: [slug, name, category, description, status, attributes, useCases]
+      required: [slug, name, category, description, status, attributes, useCases, pricingModel, unitPriceMinor, currency, presets, includedDeliveryMethods]
       properties:
+        cashPurchase:
+          type: object
+          additionalProperties: true
+          description: Shared cash purchase discovery including kind, licensed request schema, field-specific filters, permitted purposes, prices, approval requirements and supported retrieval.
         slug:
           type: string
         name:
@@ -588,7 +529,7 @@ components:
           type: string
         status:
           type: string
-          enum: [planned, preview, active]
+          enum: [active]
         attributes:
           type: array
           items:
@@ -598,49 +539,49 @@ components:
           items:
             type: string
         billingUnit:
-          type: [string, "null"]
+          type: ["string", "null"]
         creditCost:
-          type: [integer, "null"]
+          type: ["integer", "null"]
         refreshFrequency:
-          type: [string, "null"]
-    PricingPlan:
-      type: object
-      required: [name, monthlyPrice, monthlyCredits, status]
-      properties:
-        name:
+          type: ["string", "null"]
+        pricingModel:
           type: string
-        monthlyPrice:
-          type: [integer, "null"]
-          description: Monthly price in USD. Null means custom pricing.
-        monthlyCredits:
-          type: [integer, "null"]
-        status:
+          enum: [cash_payg]
+          description: Direct cash checkout pricing. Legacy credit-based API tools are separate.
+        unitPriceMinor:
+          type: integer
+          minimum: 1
+          description: Price per delivered record in the currency's minor units.
+        currency:
           type: string
-          const: active
-    SyntheticDemo:
-      type: object
-      required: [synthetic, operation, request, response]
-      properties:
-        synthetic:
-          type: boolean
-          const: true
-        operation:
-          type: string
-        request:
-          type: object
-          additionalProperties: true
-        response:
-          type: object
-          additionalProperties: true
+          enum: [usd]
+        presets:
+          type: array
+          description: Customer-facing configurations of this capability, not separate supplier products.
+          items:
+            $ref: "#/components/schemas/CatalogProductPreset"
+        includedDeliveryMethods:
+          type: array
+          description: Delivery methods included with this product purchase.
+          items:
+            type: string
     ProviderCommerceRequest:
       oneOf:
         - type: object
           additionalProperties: false
           required: [kind, capabilityId, purpose, request]
           properties:
-            kind: { type: string, const: enrichment }
-            capabilityId: { type: string, minLength: 1, maxLength: 80 }
-            purpose: { type: string, minLength: 2, maxLength: 80 }
+            kind:
+              type: string
+              const: enrichment
+            capabilityId:
+              type: string
+              minLength: 1
+              maxLength: 80
+            purpose:
+              type: string
+              minLength: 2
+              maxLength: 80
             request:
               oneOf:
                 - type: object
@@ -701,25 +642,45 @@ components:
           additionalProperties: false
           required: [kind, capabilityId, purpose, request]
           properties:
-            kind: { type: string, const: audience }
-            capabilityId: { type: string, minLength: 1, maxLength: 80 }
-            purpose: { type: string, minLength: 2, maxLength: 80 }
+            kind:
+              type: string
+              const: audience
+            capabilityId:
+              type: string
+              minLength: 1
+              maxLength: 80
+            purpose:
+              type: string
+              minLength: 2
+              maxLength: 80
             request:
               type: object
               additionalProperties: false
               required: [type, limit]
               properties:
-                type: { type: string, enum: [advanced_search, b2b, b2c] }
-                limit: { type: integer, minimum: 1, maximum: 100 }
-                name: { type: [string, "null"], maxLength: 200 }
-                website_id: { type: [integer, "null"], minimum: 1 }
+                type:
+                  type: string
+                  enum: [advanced_search, b2b, b2c]
+                limit:
+                  type: integer
+                  minimum: 1
+                  maximum: 1000000
+                name:
+                  type: [string, "null"]
+                  maxLength: 200
+                website_id:
+                  type: [integer, "null"]
+                  minimum: 1
                 topic_ids:
                   type: array
                   maxItems: 5
                   items:
                     oneOf:
-                      - { type: string, minLength: 1, maxLength: 100 }
-                      - { type: integer, minimum: 1 }
+                      - type: string
+                        minLength: 1
+                        maxLength: 100
+                      - type: integer
+                        minimum: 1
                 filters:
                   type: array
                   maxItems: 20
@@ -734,10 +695,111 @@ components:
                         enum: ["=", "!=", "<", ">", "<=", ">=", between, in, not_in, contains, has_value, has_no_value]
                       value:
                         oneOf:
-                          - { type: string, maxLength: 500 }
-                          - { type: array, maxItems: 50, items: { type: string, maxLength: 100 } }
-                          - { type: "null" }
-                      value_to: { type: string, format: date }
+                          - type: string
+                            maxLength: 500
+                          - type: array
+                            maxItems: 50
+                            items: { type: string, maxLength: 100 }
+                          - type: "null"
+                      value_to:
+                        type: string
+                        format: date
+    HostedPurchaseOrder:
+      type: object
+      required: [orderId, status, quantity, amountMinor, currency, returnedRecords, refundAmountMinor, refundPending, netAmountMinor, paidAt, csvAvailable]
+      properties:
+        orderId:
+          type: string
+        status:
+          type: string
+        quantity:
+          type: integer
+        amountMinor:
+          type: string
+        currency:
+          type: string
+        returnedRecords:
+          type: [integer, "null"]
+        refundAmountMinor:
+          type: string
+        refundPending:
+          type: boolean
+        netAmountMinor:
+          type: string
+        paidAt:
+          type: [string, "null"]
+          format: date-time
+        csvAvailable:
+          type: boolean
+    HostedPurchaseQuote:
+      type: object
+      required: [quoteToken, idempotencyKey, amountMinor, priceMinorPerRecord, currency, quantity, expiresAt, approvalUrl, requiresCustomerPaymentApproval]
+      properties:
+        quoteToken:
+          type: string
+        idempotencyKey:
+          type: string
+        amountMinor:
+          type: string
+        priceMinorPerRecord:
+          type: integer
+        currency:
+          type: string
+        quantity:
+          type: integer
+        expiresAt:
+          type: string
+          format: date-time
+        approvalUrl:
+          type: string
+          format: uri
+        requiresCustomerPaymentApproval:
+          type: boolean
+    HostedPurchaseInput:
+      type: object
+      additionalProperties: false
+      required: [quantity, idempotencyKey]
+      properties:
+        productRequest:
+          $ref: "#/components/schemas/ProviderCommerceRequest"
+        criteria:
+          $ref: "#/components/schemas/AudienceCriteria"
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+        idempotencyKey:
+          type: string
+          format: uuid
+    PricingPlan:
+      type: object
+      required: [name, monthlyPrice, monthlyCredits, status]
+      properties:
+        name:
+          type: string
+        monthlyPrice:
+          type: [integer, "null"]
+          description: Monthly price in USD. Null means custom pricing.
+        monthlyCredits:
+          type: [integer, "null"]
+        status:
+          type: string
+          const: active
+    SyntheticDemo:
+      type: object
+      required: [synthetic, operation, request, response]
+      properties:
+        synthetic:
+          type: boolean
+          const: true
+        operation:
+          type: string
+        request:
+          type: object
+          additionalProperties: true
+        response:
+          type: object
+          additionalProperties: true
     ProviderCommerceQuoteInput:
       type: object
       additionalProperties: false

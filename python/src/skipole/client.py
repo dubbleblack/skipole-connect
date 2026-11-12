@@ -176,11 +176,13 @@ class SkipoleClient:
         )
 
     def quote_hosted_purchase(self, *, quantity: int, idempotency_key: str,
-                             criteria: dict[str, Any] | None = None) -> dict[str, Any]:
+                             criteria: dict[str, Any] | None = None,
+                             product_request: dict[str, Any] | None = None) -> dict[str, Any]:
         """Get a cash quote and customer approval link. Never charges or calls a supplier."""
         return self._post("/api/v1/customer/purchase-quotes",
                           {"quantity": quantity, "idempotencyKey": idempotency_key,
-                           **({"criteria": criteria} if criteria is not None else {})})
+                           **({"criteria": criteria} if criteria is not None else {}),
+                           **({"productRequest": product_request} if product_request is not None else {})})
 
     def get_order(self, order_id: str) -> dict[str, Any]:
         """Read a workspace-owned order, without supplier polling."""

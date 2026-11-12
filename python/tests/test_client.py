@@ -41,6 +41,25 @@ class SkipoleClientTests(unittest.TestCase):
         )
 
     @patch("skipole.client.urlopen")
+    def test_all_cash_product_requests_are_preserved(self, urlopen_mock):
+        urlopen_mock.side_effect = [FakeResponse({"requiresCustomerPaymentApproval": True}) for _ in range(5)]
+        client = SkipoleClient(api_key="non-secret-fixture")
+        for capability in ["audience-advanced-search", "audience-consumer-search",
+                           "audience-b2b-intent", "audience-b2c-intent", "enrichment-email"]:
+            enrichment = capability == "enrichment-email"
+            request = {"kind": "enrichment" if enrichment else "audience", "capabilityId": capability,
+                       "purpose": "audience_marketing" if "consumer" in capability or "b2c" in capability else "business_research",
+                       "request": {"method": "email", "email": "fixture@example.invalid"} if enrichment else
+                       {"type": "b2b" if "b2b" in capability else "b2c" if "b2c" in capability else "advanced_search",
+                        "limit": 40, "filters": [{"field": "personal_emails" if "consumer" in capability or "b2c" in capability else "business_email",
+                                                  "operator": "has_value", "value": None}],
+                        **({"topic_ids": [1]} if "intent" in capability else {})}}
+            client.quote_hosted_purchase(quantity=1 if enrichment else 40, idempotency_key="fixture-intent",
+                                         product_request=request)
+            self.assertEqual(json.loads(urlopen_mock.call_args.args[0].data)["productRequest"], request)
+        self.assertEqual(urlopen_mock.call_count, 5)
+
+    @patch("skipole.client.urlopen")
     def test_hosted_cash_quote_status_and_existing_csv(self, urlopen_mock):
         urlopen_mock.side_effect = [
             FakeResponse({"requiresCustomerPaymentApproval": True}),

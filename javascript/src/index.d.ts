@@ -22,6 +22,14 @@ export type CatalogProduct = {
   billingUnit?: string | null;
   creditCost?: number | null;
   refreshFrequency?: string | null;
+  cashPurchase?: {
+    kind: "audience" | "enrichment"; allowedPurposes: string[];
+    requestSchema: Record<string, unknown>;
+    filterDefinitions: Array<Record<string, unknown>>;
+    requiredIdentityFilter: { field: string; operator: "has_value"; value: null } | null;
+    requiresCustomerPaymentApproval: true;
+    [key: string]: unknown;
+  };
 };
 
 export type PricingPlan = {
@@ -65,6 +73,12 @@ export type ProviderEnrichmentRequest = {
         website?: string;
       };
 };
+
+export type CashProductRequest =
+  | (Omit<ProviderAudienceRequest, "capabilityId"> & { capabilityId:
+      "audience-advanced-search" | "audience-consumer-search" | "audience-b2b-intent" | "audience-b2c-intent" })
+  | { kind: "enrichment"; capabilityId: "enrichment-email"; purpose: "business_research";
+      request: { method: "email"; email: string } };
 
 export type ProviderAudienceRequest = {
   kind: "audience";
@@ -137,7 +151,8 @@ export declare class SkipoleApiError extends Error {
 
 export declare class SkipoleClient {
   /** Staged cash-commerce API: customer must explicitly approve hosted payment. No automatic charge. */
-  quoteHostedPurchase(input: { quantity: number; idempotencyKey: string; criteria?: { departments: string[]; emailDomain?: string } }): Promise<{
+  quoteHostedPurchase(input: { quantity: number; idempotencyKey: string; criteria?: { departments: string[]; emailDomain?: string };
+    productRequest?: CashProductRequest }): Promise<{
     quoteToken: string; idempotencyKey: string; quantity: number; amountMinor: string;
     priceMinorPerRecord: number; currency: string; expiresAt: string; approvalUrl: string;
     requiresCustomerPaymentApproval: true;

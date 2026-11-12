@@ -38,7 +38,7 @@ jobs:
         working-directory: ${{ runner.temp }}
         run: |
           python -m pip --isolated install --no-cache-dir --index-url https://pypi.org/simple skipole-data
-          python -I -c "from importlib.metadata import version; from skipole import SkipoleClient; assert version('skipole-data') == '0.1.0a2'; print('Public PyPI install and SkipoleClient import verified: ' + version('skipole-data'))"
+          python -I -c "from importlib.metadata import version; from skipole import SkipoleClient; assert version('skipole-data') == '0.1.0a3'; print('Public PyPI install and SkipoleClient import verified: ' + version('skipole-data'))"
   pypi:
     if: inputs.publish_pypi && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -65,7 +65,7 @@ jobs:
         working-directory: ${{ runner.temp }}
         run: |
           python -m pip --isolated install --no-cache-dir --index-url https://pypi.org/simple skipole-data
-          python -I -c "from importlib.metadata import version; from skipole import SkipoleClient; assert version('skipole-data') == '0.1.0a2'; print('Public PyPI install and SkipoleClient import verified: ' + version('skipole-data'))"
+          python -I -c "from importlib.metadata import version; from skipole import SkipoleClient; assert version('skipole-data') == '0.1.0a3'; print('Public PyPI install and SkipoleClient import verified: ' + version('skipole-data'))"
   npm:
     if: inputs.publish_npm && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest

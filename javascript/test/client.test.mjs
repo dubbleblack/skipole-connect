@@ -32,6 +32,29 @@ test("configured audience criteria are forwarded with a fresh explicit purchase 
   assert.deepEqual(sent, { quantity: 100, idempotencyKey: "new-configured-intent", criteria });
 });
 
+test("all five cash product requests reach the existing quote endpoint without client coercion", async () => {
+  const sent = [];
+  const client = new SkipoleClient({ apiKey: "non-secret-fixture", fetchImpl: async (url, options) => {
+    sent.push({ url: String(url), body: JSON.parse(options.body) });
+    return Response.json({ requiresCustomerPaymentApproval: true });
+  } });
+  for (const capabilityId of ["audience-advanced-search", "audience-consumer-search",
+    "audience-b2b-intent", "audience-b2c-intent", "enrichment-email"]) {
+    const enrichment = capabilityId === "enrichment-email";
+    const productRequest = { kind: enrichment ? "enrichment" : "audience", capabilityId,
+      purpose: capabilityId.includes("consumer") || capabilityId.includes("b2c") ? "audience_marketing" : "business_research",
+      request: enrichment ? { method: "email", email: "fixture@example.invalid" } :
+        { type: capabilityId.includes("intent") ? capabilityId.includes("b2b") ? "b2b" : "b2c" : "advanced_search",
+          limit: 40, filters: [{ field: capabilityId.includes("consumer") || capabilityId.includes("b2c") ? "personal_emails" : "business_email",
+            operator: "has_value", value: null }], ...(capabilityId.includes("intent") ? { topic_ids: [1] } : {}) } };
+    const input = { quantity: enrichment ? 1 : 40, idempotencyKey: "fixture-intent", productRequest };
+    await client.quoteHostedPurchase(input);
+    assert.deepEqual(sent.at(-1).body, input);
+    assert.match(sent.at(-1).url, /customer\/purchase-quotes$/);
+  }
+  assert.equal(sent.length, 5, "No automatic purchase, approval or retry requests");
+});
+
 test("large hosted quantities use the same method without a client-side plan cap", async () => {
   const quantities = [];
   const client = new SkipoleClient({ apiKey: "non-secret-fixture", fetchImpl: async (_url, options) => {

@@ -51,6 +51,13 @@ Do not claim marketplace discovery until Cursor returns an actual approved listi
 
 ## Claude Connectors Directory
 
+Multi-category application update: the new server release connects all four
+audience capabilities and email enrichment to signed purchase quotes and owned
+CSV retrieval. Confirm that this server release is published before presenting
+those capabilities to reviewers. Mocked REST/MCP, SDK and approval-screen checks
+do not establish independently paid Production fulfillment. Do not check an
+all-tools-tested attestation or claim a paid Claude session without its evidence.
+
 Official developer portal: https://claude.ai/directory/manage
 Choose **MCP connector**, not a local extension or a skill-only plugin.
 
