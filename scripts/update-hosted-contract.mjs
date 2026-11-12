@@ -19,7 +19,8 @@ for (const path of ["/v1/customer/purchase-quotes", "/v1/customer/purchases/{ide
     "$1      security:\n        - skipoleApiKey: []\n");
   target = target.replace("paths:\n", `paths:\n${item}`);
 }
-for (const schema of ["HostedPurchaseInput", "HostedPurchaseQuote", "HostedPurchaseOrder", "ProviderCommerceRequest", "CatalogProduct"]) {
+for (const schema of ["HostedPurchaseInput", "HostedPurchaseQuote", "HostedPurchaseOrder", "ProviderCommerceRequest",
+  "AudienceCriteria", "CatalogProduct", "CatalogProductPreset"]) {
   if (target.includes(`    ${schema}:\n`)) target = target.replace(block(target, schema, 4), "");
   target = target.replace("  schemas:\n", `  schemas:\n${block(source, schema, 4)}`);
 }
