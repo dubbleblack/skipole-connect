@@ -10,7 +10,7 @@ The distribution name is `skipole-data`; its Python import remains `skipole`.
 Python 3.10+ is required:
 
 ```sh
-python -m pip install skipole-data
+python -m pip install "skipole-data==0.1.0a3"
 ```
 
 ```python

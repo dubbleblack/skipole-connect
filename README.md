@@ -84,7 +84,7 @@ npm install @skipole/sdk
 ```
 
 ```sh
-python -m pip install skipole-data
+python -m pip install "skipole-data==0.1.0a3"
 ```
 
 The verified JavaScript release is `0.1.0-alpha.3`; pin it with
