@@ -34,11 +34,13 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Verify public installation and isolated import without any API calls
+      - name: Verify exact public wheel installation and isolated import without any API calls
         working-directory: ${{ runner.temp }}
         run: |
-          python -m pip --isolated install --no-cache-dir --index-url https://pypi.org/simple skipole-data
-          python -I -c "from importlib.metadata import version; from skipole import SkipoleClient; assert version('skipole-data') == '0.1.0a3'; print('Public PyPI install and SkipoleClient import verified: ' + version('skipole-data'))"
+          # Pin the official release and hash to avoid a stale regional Simple index.
+          # This proves the exact release, not unqualified latest-version selection.
+          python -m pip --isolated install --no-cache-dir 'skipole-data @ https://files.pythonhosted.org/packages/b9/c0/361b3387497128880fda52b9b25cc8f011c107e8de8b16574e7f3947c5aa/skipole_data-0.1.0a3-py3-none-any.whl#sha256=42f26954c9f776baaba26e601c588f65adf966c7c8e0273b9def94fed8f007cc'
+          python -I -c "import inspect; from importlib.metadata import version; from skipole import SkipoleClient; assert version('skipole-data') == '0.1.0a3'; assert 'product_request' in inspect.signature(SkipoleClient.quote_hosted_purchase).parameters; print('Exact public PyPI wheel installation and multi-product SDK import verified: ' + version('skipole-data'))"
   pypi:
     if: inputs.publish_pypi && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
