@@ -3,15 +3,16 @@
 Skipole is a self-service GTM data marketplace for developers and AI agents.
 **Your tools. Our data.**
 
-This is the application copy and handoff for official native directories, not
-proof of submission, acceptance, partnership or paid native verification.
+This is the application copy and handoff for official native directories. It
+records owner-submitted applications separately from listings and approvals;
+paid native purchasing is not claimed as verified.
 
 ## Shared listing fields
 
 - **Name:** Skipole
 - **Category:** GTM Data / Sales & Marketing Data
 - **One-liner:** Self-service licensed data for businesses, marketers, developers and AI agents.
-- **Description:** Discover currently available licensed data products and their permitted fields, request itemized pricing, approve a purchase in hosted Checkout and securely retrieve licensed records. Pay as you go without a mandatory subscription or sales call; optional memberships discount eligible audience usage. A human customer must approve every payment. The live catalog determines available products, output fields and billing units; do not substitute one B2B field profile for every product or promise unlisted fields. Paid REST commerce is Production verified; paid native MCP/SDK purchases are not independently verified.
+- **Description:** Discover four active audience capabilities—Consumer Data, Consumer Intent, Business Data and B2B Intent—then review the live product-specific filters and allowed purpose. PAYG is $0.05 per delivered record, with a $2.00 minimum order before applicable taxes. A customer reviews a signed quote, approves each payment through hosted Checkout and retrieves the owned delivery through authenticated CSV or REST. The live catalog and order-specific license control output fields, limits and permitted use. Paid REST commerce is Production verified; paid native MCP/SDK purchases are not independently verified.
 - **Company:** DubbleBlack LLC
 - **Website:** https://skipoledata.com
 - **Purchase:** https://skipoledata.com/marketplace
@@ -44,22 +45,27 @@ References checked:
 - https://cursor.com/marketplace/clay
 - https://cursor.com/marketplace/zoominfo
 
-Local package tests are not a Cursor application installation or OAuth session.
-The owner must install through Cursor's supported repository/plugin interface,
-complete OAuth and call `skipole_list_products` without making a purchase.
-Do not claim marketplace discovery until Cursor returns an actual approved listing.
+The owner reports submitting the existing repository through the publisher
+portal. Cursor completed Production OAuth and called `skipole_list_products`
+without a purchase. This verifies read-only connectivity, not Marketplace
+approval or paid purchase fulfillment. Do not resubmit; check the existing
+publisher application for its current review result.
 
 ## Claude Connectors Directory
 
-Multi-category application update: the new server release connects all four
-audience capabilities and email enrichment to signed purchase quotes and owned
-CSV retrieval. Confirm that this server release is published before presenting
-those capabilities to reviewers. Mocked REST/MCP, SDK and approval-screen checks
-do not establish independently paid Production fulfillment. Do not check an
+The live catalog exposes four audience capabilities—B2B, consumer, B2B intent
+and B2C intent—for cash purchasing, with signed quotes and authenticated owned
+order retrieval. Email enrichment remains unavailable and must not be advertised
+as purchasable. Confirm the current server release before presenting these
+capabilities to reviewers. Mocked REST/MCP, SDK and approval-screen checks do
+not establish independently paid Production fulfillment. Do not check an
 all-tools-tested attestation or claim a paid Claude session without its evidence.
 
 Official developer portal: https://claude.ai/directory/manage
 Choose **MCP connector**, not a local extension or a skill-only plugin.
+No Claude directory submission receipt is available; the owner must submit from
+the official portal after completing its tool-testing, reviewer-access and policy
+confirmations. Do not attest untested tools.
 
 Use the shared fields above and a single universal server URL. Select required
 OAuth sign-in and DCR where offered. Do not supply a made-up client ID or secret.
@@ -127,11 +133,17 @@ The public form requires the owner's contact name and business city.
 Its application is an intake for native integration review, not automatic listing.
 Do not substitute the Solutions Partners consulting program.
 
+The owner has submitted the Integration Partner application. It is awaiting
+review; do not submit it again. No native listing or approval is claimed.
+
 The included `replit/.agents/skills/skipole-connect/SKILL.md` is a reusable
 project skill supporting the existing service, not global Replit discovery.
 
 ## Evidence boundaries
 
-No native listing, submitted application, paid SDK or paid MCP session is claimed
-without its own receipt or observed result. Never run a payment, supplier build,
-export, refresh or refund to complete an application or prove a capability.
+The Cursor and Replit applications are owner-reported as submitted. The official
+MCP Registry entry is active, but that is a discovery listing, not client approval.
+No paid SDK or paid MCP session is claimed without its own observed result. Never
+run a payment, supplier build, export, refresh or refund to complete an application
+or prove a capability. See `DISTRIBUTION-LISTING-PACKS.md` for current channel
+requirements and truthful submission copy.

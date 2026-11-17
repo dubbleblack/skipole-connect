@@ -1,6 +1,7 @@
 # Replit Integration Partners application
 
-**Status:** Prepared. No submitted application or approval is claimed by this file.
+**Status:** The owner submitted this Integration Partner application. It is
+awaiting review. Do not resubmit; no listing or approval is claimed.
 Use the original form at <https://replit.com/partners>, **Integration Partners**.
 The contact name and business city must come from the authorized owner; never
 invent them or infer them from a timezone. Do not publish private contact details.
@@ -11,8 +12,8 @@ invent them or infer them from a timezone. Do not publish private contact detail
 - Website: https://skipoledata.com
 - Business support email: support@skipoledata.com
 - Partnership type: Integration Partners (`integration`).
-- Contact name: supplied by the owner in the application.
-- Business city: supplied by the owner in the application.
+- Contact name and business city: supplied by the owner in the submitted application.
+  Do not copy private contact details into this public repository.
 
 ## Proposal — ready to submit
 

@@ -25,7 +25,9 @@ Optional non-secret settings:
 - The server advertises `S256` PKCE and Streamable HTTP MCP resource metadata.
 - Dynamic clients are restricted to public authorization-code clients. Client secrets, implicit grants, and client-credentials grants are rejected.
 - Access tokens are short lived, audience-restricted JWTs. Refresh tokens are supported.
-- Only `catalog:read` and `usage:read` can be granted.
+- Only the read scopes `catalog:read`, `usage:read`, and `orders:read` can be
+  granted. `orders:read` is required to read an owned cash order or its existing
+  delivery.
 - Consent requires a signed-in Clerk identity and a Skipole workspace membership.
 - The connection record binds the grant to the Clerk user, OAuth client, workspace, and granted scopes.
 - The account dashboard lists the user's connected applications. Revocation deletes the grant's stored tokens and is checked against storage on every MCP request.
@@ -35,10 +37,26 @@ Authorization-server endpoints use the issuer's OAuth discovery document at `/.w
 
 ## Data and billing boundary
 
-The MCP server shares Skipole authentication, workspace authorization, rate limits, and usage accounting. It does not expose upstream provider credentials. Data enrichment, search, and export remain disabled until products, licensing, provider credentials, verified pricing, and spending controls are approved. No upstream data request is made and no paid data access is enabled by this integration.
+The MCP server shares Skipole authentication, workspace authorization, rate
+limits, and usage accounting. It does not expose upstream provider credentials.
+`skipole_quote_purchase` requires `catalog:read` and returns a signed quote and
+human approval URL; it does not create a Stripe Checkout session, charge a card,
+or contact a supplier. A customer must separately approve payment in hosted
+Checkout. `skipole_get_order` and `skipole_download_order` require `orders:read`
+and only read an order already owned by the authenticated workspace. They do not
+poll, rebuild, export from a supplier, retry, refund, or charge.
 
-The server registers catalog, schema, estimate, usage, enrichment, search, and export tools. Disabled tools explicitly return an unavailable error and do not call an upstream provider or debit credits.
+Legacy provider tools remain separately gated by their capabilities and scopes.
+The four active audience offers and their product-specific purpose, fields and
+filters are discoverable through the live catalog. Email enrichment is not an
+active offer. The public MCP/REST catalog and read tools do not grant permission
+to reuse data outside the order's license.
 
 ## Verification status
 
-Automated tests and development-preview HTTP checks do not establish marketplace compatibility or production readiness. Cursor or another real MCP client must be tested after production secrets are configured and the app is deployed. Do not submit or publish marketplace packages without explicit approval.
+Cursor completed Production OAuth and called `skipole_list_products` without a
+purchase. The separate customer-approved paid REST flow and authenticated CSV
+retrieval are Production verified; that does not verify paid MCP or SDK
+purchasing. The official MCP Registry lists `io.github.dubbleblack/skipole-connect`
+as active. Registry publication is discovery only, not an official client
+approval or a paid MCP test.

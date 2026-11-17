@@ -14,10 +14,12 @@ See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quot
 links and authenticated retrieval. Paid MCP/SDK round trips remain unverified;
 the connection instructions below are not evidence of paid-flow verification.
 
-This is a Cursor plugin package in the public Skipole repository. It has not been
-submitted to or approved by the official Cursor Marketplace. The existing service
-is `https://skipole-data-platform.replit.app/mcp`. An actual Cursor installation,
-OAuth connection and read-only tool call remain unverified.
+This is a Cursor plugin package in the public Skipole repository. The owner reports
+submitting the repository to the official publisher portal; no public listing or
+approval is confirmed. The existing service is
+`https://skipole-data-platform.replit.app/mcp`. A read-only Cursor OAuth session
+and `skipole_list_products` call have been Production verified; paid Cursor/MCP
+purchasing remains unverified.
 
 ## Package contents
 
@@ -51,7 +53,7 @@ These local/team installations do not establish public marketplace discovery.
 
 ## Current connection status
 
-The deployed Skipole API service contains a Streamable HTTP MCP endpoint with OAuth sign-in, authorization code with PKCE, resource metadata, scoped read access, and connected-app revocation. The Claude OAuth connection and read-only tools have been verified; a Cursor-specific session has not. Connecting Cursor does not require creating server signing secrets.
+The deployed Skipole API service contains a Streamable HTTP MCP endpoint with OAuth sign-in, authorization code with PKCE, resource metadata, scoped read access, and connected-app revocation. Cursor OAuth and the read-only product-list tool have been verified. Connecting Cursor does not require creating server signing secrets.
 
 ## Configure Cursor
 
@@ -71,11 +73,11 @@ REST remains available separately. Use API keys only from trusted server-side co
 
 ## Marketplace release blockers
 
-1. The owner completes a genuine Cursor installation, OAuth connection and
-   `skipole_list_products` read-only check. No purchase or supplier call is needed.
-2. Sign in to the official publisher application and submit the repository.
-3. Record the actual application/review result; public submission authorization
-   has been given, but the agent has no Cursor owner session or approval receipt.
+1. Check the existing owner-submitted publisher application for its review result.
+   Do not create a second application or claim approval before a public listing
+   appears.
+2. Once approved, verify the public marketplace listing and install link. No
+   purchase or supplier call is needed for that check.
 
 Package checks run with `node --test cursor/test/plugin.test.mjs` from the
 repository root. These validate packaging, not an authenticated Cursor session.
