@@ -65,7 +65,9 @@ Official developer portal: https://claude.ai/directory/manage
 Choose **MCP connector**, not a local extension or a skill-only plugin.
 No Claude directory submission receipt is available; the owner must submit from
 the official portal after completing its tool-testing, reviewer-access and policy
-confirmations. Do not attest untested tools.
+confirmations. Do not attest untested tools. The owner-ready listing fields,
+current tool inventory, test matrix and outstanding attestations are in
+[`claude/SUBMISSION.md`](./claude/SUBMISSION.md).
 
 Use the shared fields above and a single universal server URL. Select required
 OAuth sign-in and DCR where offered. Do not supply a made-up client ID or secret.

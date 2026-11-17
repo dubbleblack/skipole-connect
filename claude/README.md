@@ -43,11 +43,12 @@ The native directory route is <https://claude.ai/directory/manage>, choosing
 not Claude directory acceptance. Use the prepared listing fields, sample prompts
 and honest remaining requirements in
 [Native directory submissions](../NATIVE-DIRECTORY-SUBMISSIONS.md).
-The narrow server update adds the tool titles and safety annotations required
-for review; it must be published before testing that deployed metadata.
-The owner must provide suitable reviewer access through the secure portal and
-complete its truthful tool-test and policy acknowledgments. No submission receipt
-or approved directory URL is claimed here.
+The owner-ready application fields, current tool inventory, test matrix and
+uncompleted attestations are also collected in [SUBMISSION.md](./SUBMISSION.md).
+The owner must verify that Claude syncs the current deployed tool titles and
+safety annotations. Suitable reviewer access and truthful tool-test and policy
+acknowledgments are still required through the secure portal. No submission
+receipt or approved directory URL is claimed here.
 
 ## Claude Desktop
 

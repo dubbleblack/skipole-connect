@@ -13,3 +13,8 @@ Publication was independently checked against the public Registry API after the
 publishing job succeeded. Paid MCP purchases remain independently unverified.
 
 The website's canonical domain is `https://skipoledata.com`. The MCP endpoint remains on the existing Replit host until a custom-domain endpoint is separately verified.
+
+The prepared `0.1.0-alpha.2` manifest describes the four currently active offers:
+Consumer Data, Consumer Intent, Business Data and B2B Intent. This version is
+not public until the existing `publish_mcp=true` workflow succeeds and the
+Registry API confirms it.

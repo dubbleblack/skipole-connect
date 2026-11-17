@@ -164,9 +164,11 @@ Checkout. Store the customer's Skipole API key in a private Postman
 environment; never publish it with the public collection.
 
 **Owner action:** Create/verify a public publisher workspace, import the current
-OpenAPI, add examples with synthetic values only, review authentication and
-privacy, then publish through the
+OpenAPI or the prepared
+[Postman collection](./postman/skipole-licensed-data.postman_collection.json),
+review its synthetic examples and authentication, then publish through the
 [Postman API Network](https://learning.postman.com/docs/postman-api-network/showcase/publish/overview).
+Follow the [private environment and publication steps](./postman/README.md).
 Postman is discovery and documentation, not a per-record payment rail.
 
 ### ChatGPT / Codex directory
@@ -195,11 +197,15 @@ Customers approve any purchase outside the agent in hosted Checkout. Paid MCP
 is not independently verified.
 
 **Owner action:** The official MCP Registry entry is already active; do not
-resubmit the same version. Its current description says B2B only, so it
-underrepresents the four current catalog offers. Use the copy above for the next
-authorized metadata version and deliberately dispatch the existing workflow with
-`publish_mcp=true`. A Glama listing was not found during the current audit. The
-owner may add the existing public metadata through [Glama's server directory](https://glama.ai/mcp/servers).
+resubmit the same version. The published version says B2B only and
+underrepresents the four current catalog offers. A prepared `0.1.0-alpha.2`
+manifest corrects this with the existing workflow; verify its Registry result
+before claiming publication. The existing [Glama listing](https://glama.ai/mcp/connectors/io.github.dubbleblack/skipole-connect)
+also currently says B2B only. Its public page exposes a **Claim connector**
+sign-in action, and its description matches the Registry text; this does not
+prove automatic syncing. Publish the Registry metadata first, then re-check
+Glama. If it remains stale, the owner should claim and edit this existing Glama
+listing rather than create a duplicate.
 Directory presence is discovery, not paid verification.
 
 ### Make and Zapier

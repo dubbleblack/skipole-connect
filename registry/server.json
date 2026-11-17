@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.dubbleblack/skipole-connect",
   "title": "Skipole Connect",
-  "description": "Licensed B2B audiences: catalog, signed purchase links and scoped orders. Paid MCP unverified.",
-  "version": "0.1.0-alpha.1",
+  "description": "Four active licensed audience offers: Consumer Data, Consumer Intent, Business Data and B2B Intent. Customers approve signed quotes in hosted Checkout; owned deliveries require scoped access. Paid MCP purchasing is unverified.",
+  "version": "0.1.0-alpha.2",
   "icons": [
     {
       "src": "https://raw.githubusercontent.com/dubbleblack/skipole-connect/main/cursor/assets/skipole-icon-512.png",

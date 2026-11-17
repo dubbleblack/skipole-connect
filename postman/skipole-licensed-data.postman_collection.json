@@ -1,0 +1,297 @@
+{
+  "info": {
+    "name": "Skipole Licensed Data REST API",
+    "description": "Public catalog and customer-approved REST purchase flow for Skipole's four active audience offers. The collection contains synthetic request values only. PAYG is currently $0.05 per delivered record; membership pricing can differ, and the live signed quote is authoritative. A quote does not create Checkout, charge a customer, or submit a supplier build. A human must approve hosted Checkout. Paid native MCP and SDK purchases are not independently verified.\n\nAuthentication: public catalog and pricing reads need no key. Customer catalog, topic search and quote requests require a Skipole API key with catalog:read. Existing order, CSV and order-record reads require orders:read and return only the authenticated workspace's own delivery. Store the key in a private Postman environment; never publish it with this collection.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{skipole_api_key}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://skipole-data-platform.replit.app/api",
+      "type": "string"
+    },
+    {
+      "key": "skipole_api_key",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "orderId",
+      "value": "00000000-0000-4000-8000-000000000001",
+      "type": "string"
+    },
+    {
+      "key": "purchaseIntentId",
+      "value": "00000000-0000-4000-8000-000000000002",
+      "type": "string"
+    },
+    {
+      "key": "topicId",
+      "value": "REPLACE_WITH_VALID_TOPIC_ID",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Public discovery",
+      "item": [
+        {
+          "name": "List active catalog",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/v1/catalog",
+            "description": "Public product metadata only. No licensed records are returned."
+          }
+        },
+        {
+          "name": "List active pricing",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/v1/pricing",
+            "description": "Public active pricing metadata. Draft plans are not returned."
+          }
+        },
+        {
+          "name": "Get product by slug",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/v1/catalog/audience-advanced-search",
+            "description": "Replace the path slug with one of audience-consumer-search, audience-b2c-intent, audience-advanced-search, or audience-b2b-intent. The live catalog defines supported filters, purposes, fields and limits."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Customer discovery",
+      "item": [
+        {
+          "name": "Read customer catalog (catalog:read)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/v1/customer/catalog",
+            "description": "Requires the authenticated workspace's catalog:read scope. Returns metadata, not licensed contact records."
+          }
+        },
+        {
+          "name": "Search intent topics (catalog:read)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/v1/customer/topics?market=b2b&keywords=marketing&mode=keyword",
+            "description": "Requires catalog:read. Returns topic taxonomy metadata only, not licensed audience records. It does not start an audience build or consume credits. Use a supported topic ID returned by this endpoint in an intent quote."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Signed purchase quotes (catalog:read)",
+      "description": "Each request creates a short-lived signed quote only. It does not create a Stripe Checkout session, payment, order, supplier request or fulfillment. Review the returned amount and expiry; only the customer may open the approval URL and approve hosted Checkout.",
+      "item": [
+        {
+          "name": "Quote Consumer Data (synthetic example)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 40,\n  \"idempotencyKey\": \"{{$guid}}\",\n  \"productRequest\": {\n    \"kind\": \"audience\",\n    \"capabilityId\": \"audience-consumer-search\",\n    \"purpose\": \"audience_marketing\",\n    \"request\": {\n      \"type\": \"advanced_search\",\n      \"limit\": 40,\n      \"filters\": [\n        { \"field\": \"personal_emails\", \"operator\": \"has_value\", \"value\": null },\n        { \"field\": \"personal_state\", \"operator\": \"in\", \"value\": [\"co\"] }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/v1/customer/purchase-quotes",
+            "description": "Synthetic criteria: Colorado consumer audience, minimum 40. Requires catalog:read. The API may reject a request if current eligibility, capacity or product policy differs; the signed quote is authoritative."
+          }
+        },
+        {
+          "name": "Quote Consumer Intent (replace topic ID)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 40,\n  \"idempotencyKey\": \"{{$guid}}\",\n  \"productRequest\": {\n    \"kind\": \"audience\",\n    \"capabilityId\": \"audience-b2c-intent\",\n    \"purpose\": \"audience_marketing\",\n    \"request\": {\n      \"type\": \"b2c\",\n      \"limit\": 40,\n      \"topic_ids\": [\"{{topicId}}\"],\n      \"filters\": [\n        { \"field\": \"personal_emails\", \"operator\": \"has_value\", \"value\": null }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/v1/customer/purchase-quotes",
+            "description": "Synthetic criteria; replace the topicId collection variable with a supported ID from the authenticated topic search before sending. Requires catalog:read."
+          }
+        },
+        {
+          "name": "Quote Business Data (synthetic example)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 40,\n  \"idempotencyKey\": \"{{$guid}}\",\n  \"productRequest\": {\n    \"kind\": \"audience\",\n    \"capabilityId\": \"audience-advanced-search\",\n    \"purpose\": \"business_research\",\n    \"request\": {\n      \"type\": \"advanced_search\",\n      \"limit\": 40,\n      \"filters\": [\n        { \"field\": \"business_email\", \"operator\": \"has_value\", \"value\": null },\n        { \"field\": \"department\", \"operator\": \"in\", \"value\": [\"marketing\"] }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/v1/customer/purchase-quotes",
+            "description": "Synthetic criteria: marketing department, minimum 40. Business Data presets configure the same audience capability; they are not separate supplier products. Requires catalog:read."
+          }
+        },
+        {
+          "name": "Quote B2B Intent (replace topic ID)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"quantity\": 40,\n  \"idempotencyKey\": \"{{$guid}}\",\n  \"productRequest\": {\n    \"kind\": \"audience\",\n    \"capabilityId\": \"audience-b2b-intent\",\n    \"purpose\": \"business_research\",\n    \"request\": {\n      \"type\": \"b2b\",\n      \"limit\": 40,\n      \"topic_ids\": [\"{{topicId}}\"],\n      \"filters\": [\n        { \"field\": \"business_email\", \"operator\": \"has_value\", \"value\": null },\n        { \"field\": \"department\", \"operator\": \"in\", \"value\": [\"marketing\"] }\n      ]\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/v1/customer/purchase-quotes",
+            "description": "Synthetic criteria; replace topicId with a supported ID from the authenticated topic search. Requires catalog:read."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Retrieve your existing order (orders:read)",
+      "description": "These requests only read the authenticated workspace's own existing order. They do not poll, rebuild, export from a supplier, retry, refund or charge.",
+      "item": [
+        {
+          "name": "Read order status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/v1/customer/orders/{{orderId}}",
+            "description": "Requires orders:read and an order belonging to the API key's workspace."
+          }
+        },
+        {
+          "name": "Download owned order CSV",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "url": "{{baseUrl}}/v1/customer/orders/{{orderId}}/csv",
+            "description": "Requires orders:read. Downloads only an existing delivered order belonging to the API key's workspace."
+          }
+        },
+        {
+          "name": "Read delivered B2B records page",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{baseUrl}}/v1/customer/order-records?orderId={{orderId}}&offset=0&limit=100",
+            "description": "Requires orders:read. Read-only paginated JSON for an already paid and delivered B2B audience order. The returned fields are limited to that order's licensed delivery."
+          }
+        }
+      ]
+    }
+  ]
+}
