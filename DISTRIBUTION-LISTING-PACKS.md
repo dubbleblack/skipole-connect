@@ -196,16 +196,28 @@ submission. No ChatGPT/Codex client or paid flow is verified.
 Customers approve any purchase outside the agent in hosted Checkout. Paid MCP
 is not independently verified.
 
-**Owner action:** The official MCP Registry entry is already active; do not
-resubmit the same version. The published version says B2B only and
-underrepresents the four current catalog offers. A prepared `0.1.0-alpha.2`
-manifest corrects this with the existing workflow; verify its Registry result
-before claiming publication. The existing [Glama listing](https://glama.ai/mcp/connectors/io.github.dubbleblack/skipole-connect)
-also currently says B2B only. Its public page exposes a **Claim connector**
-sign-in action, and its description matches the Registry text; this does not
-prove automatic syncing. Publish the Registry metadata first, then re-check
-Glama. If it remains stale, the owner should claim and edit this existing Glama
-listing rather than create a duplicate.
+**Registry status:** Version `0.1.0-alpha.2` is active and latest. The
+[exact-version Registry API](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.dubbleblack%2Fskipole-connect/versions/0.1.0-alpha.2)
+returns the corrected description naming Consumer Data, Consumer Intent,
+Business Data and B2B Intent. Paid MCP purchasing remains unverified.
+
+**Glama status:** The [existing Glama listing](https://glama.ai/mcp/connectors/io.github.dubbleblack/skipole-connect)
+still displays the old B2B-only description after Registry publication. Glama's
+official guidance says a maintainer claims the existing listing through its
+**Claim connector** flow; this repository belongs to the personal GitHub account
+`dubbleblack`, so the owner can sign in with GitHub and claim it. Once claimed,
+edit the description on that existing Glama listing; do not create a duplicate.
+For organization-owned repositories Glama instead requires a root `glama.json`,
+but that is not needed for this personal repository. The owner must perform the
+claim and edit; no Glama login, third-party submission or terms acceptance was
+performed here.
+
+Suggested Glama description: “Licensed audience data with four active offers:
+Consumer Data, Consumer Intent, Business Data and B2B Intent. Review live
+product-specific filters and permitted purposes, request a signed quote, approve
+each payment in hosted Checkout, and retrieve only your workspace's existing
+delivery through scoped access. Paid MCP purchasing is unverified; email
+enrichment is paused.”
 Directory presence is discovery, not paid verification.
 
 ### Make and Zapier

@@ -4,10 +4,14 @@
 the [tested GitHub SDK prerelease](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1).
 Its JavaScript archive, Python wheel/source archive and SHA256SUMS are public.
 The official MCP Registry independently reports
-[`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect)
-version `0.1.0-alpha.1` as **active**.
+[`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.dubbleblack%2Fskipole-connect/versions/latest)
+version `0.1.0-alpha.2` as **active and latest**. Its four-product metadata
+update was published by the existing `publish_mcp=true` GitHub Actions workflow
+and verified through the exact-version Registry API.
 [Python is published on PyPI as `skipole-data`](https://pypi.org/project/skipole-data/).
-[`@skipole/sdk@0.1.0-alpha.2` is published on npm](https://www.npmjs.com/package/@skipole/sdk/v/0.1.0-alpha.2).
+[`@skipole/sdk@0.1.0-alpha.3` is published on npm](https://www.npmjs.com/package/@skipole/sdk/v/0.1.0-alpha.3).
+The current PyPI release is [`skipole-data 0.1.0a3`](https://pypi.org/project/skipole-data/0.1.0a3/);
+the distribution workflow independently verified the published wheel.
 Default public installation, the client import and TypeScript declarations are
 verified. The compiled SDK code is unchanged from the original tested archive.
 
