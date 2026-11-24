@@ -198,9 +198,10 @@ quotes and retrieve only your workspace's delivered records. Every purchase
 requires customer approval in hosted Checkout. Paid MCP purchasing is not
 independently verified.
 
-**Registry status:** Version `0.1.0-alpha.3` updates the listing description to
-the approved AI-native data broker positioning and retains all four active
-audience products. Paid MCP purchasing remains unverified.
+**Registry status:** The Registry limits `description` to 100 characters. The
+prepared version `0.1.0-alpha.3` uses: “AI-native data broker: Consumer Data,
+Consumer Intent, Business Data, B2B Intent.” Verify the exact-version Registry
+API after publication. Paid MCP purchasing remains unverified.
 
 **Glama status:** The [existing Glama listing](https://glama.ai/mcp/connectors/io.github.dubbleblack/skipole-connect)
 already shows all four active products; do not create a duplicate. Glama marks
