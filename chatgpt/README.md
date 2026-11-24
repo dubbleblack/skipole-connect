@@ -5,8 +5,9 @@ and use. This guide does not claim a ChatGPT listing or paid MCP purchasing.
 
 This repository does not contain a submitted or approved ChatGPT Directory app.
 The existing remote MCP server is `https://skipole-data-platform.replit.app/mcp`.
-Its OAuth connection and `skipole_list_products` tool were verified in Cursor,
-not in ChatGPT. Paid MCP purchasing has not been independently verified.
+An authenticated Cursor Production session verified its OAuth-protected
+eight-tool inventory, the four audience schemas, and workspace usage. This does
+not verify ChatGPT client compatibility or paid MCP purchasing.
 The current workspace tool list and side-effect boundaries are documented in
 [MCP-TOOL-INVENTORY.md](../MCP-TOOL-INVENTORY.md); verify the live list after the
 API Server is published.
@@ -36,7 +37,19 @@ without requesting a quote, placing an order, or contacting a supplier.
 
 The direct Skipole marketplace remains a separate human-approved purchase path.
 This file does not claim ChatGPT authentication, tool use, a listing, or paid
-commerce as verified.
+MCP commerce as verified.
+
+## Correct cash quote selection
+
+For one of the four active audience offers, use the MCP tools in this order:
+`skipole_list_products`, `skipole_get_schema`, then
+`skipole_quote_purchase`. Do not use `skipole_estimate_cost` for cash-priced
+audiences; it is for legacy credit estimates and does not return the hosted
+customer approval link. The signed quote reports the authenticated workspace's
+verified pricing tier, per-record rate, amount, and expiry. Quote preparation
+records a quote event and reads price/capacity state, but does not create
+Checkout, charge a payment, or request supplier records. The customer must
+review and approve the separate hosted Checkout.
 
 ## Synthetic, read-only discovery example
 

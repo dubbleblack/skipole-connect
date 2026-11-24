@@ -57,6 +57,16 @@ through the live catalog. Email enrichment is not an active offer. The public
 MCP/REST catalog and read tools do not grant permission to reuse data outside
 the order's license.
 
+For current cash-priced audience offers, use
+`skipole_list_products` → `skipole_get_schema` →
+`skipole_quote_purchase`. The quote returns the authenticated workspace's
+verified `pricingTier`, `priceMinorPerRecord`, amount, and expiration.
+`skipole_estimate_cost` is only for the separate legacy credit estimate/provider
+quote path; it is not a cash quote tool and does not return the hosted customer
+approval link. Quote preparation is not fully read-only: it records a quote
+event and checks current price/capacity state, but creates no Checkout session,
+charge, order, or supplier-record request.
+
 See [the public MCP tool inventory](./MCP-TOOL-INVENTORY.md) for each tool's
 scope, side effects, response, evidence, and remaining post-publication checks.
 

@@ -166,6 +166,46 @@ and current evidence are in the
 [MCP tool inventory](./MCP-TOOL-INVENTORY.md). Paid MCP client execution is not
 independently verified.
 
+For the four active cash-priced audience offers, use
+`skipole_list_products` → `skipole_get_schema` →
+`skipole_quote_purchase`; the customer then reviews and approves Checkout.
+`skipole_estimate_cost` is for legacy credit estimation only, not a cash quote.
+The signed quote reports the authenticated workspace's actual `pricingTier`,
+per-record rate and total. Quote preparation records a quote event but creates
+no Checkout, charges nothing, and makes no supplier-record request.
+
+To inspect a 1,000-record quote without proceeding to Checkout, an authorized
+ordinary test account can make this MCP call through an already connected
+Skipole MCP client granted `catalog:read`, after verifying the product schema:
+
+```js
+await client.callTool({
+  name: "skipole_quote_purchase",
+  arguments: {
+    quantity: 1000,
+    idempotencyKey: crypto.randomUUID(),
+    productRequest: {
+      kind: "audience",
+      capabilityId: "audience-advanced-search",
+      purpose: "business_research",
+      request: {
+        type: "advanced_search",
+        limit: 1000,
+        filters: [{ field: "business_email", operator: "has_value", value: null }],
+      },
+    },
+  },
+});
+```
+
+This creates a quote event, not a purchase. Read the response's
+`pricingTier`, `priceMinorPerRecord`, `amountMinor`, `currency`, and `expiresAt`;
+at current listed rates, 1,000 records are $50 PAYG, $40 Builder, or $30 Scale,
+before tax and any separate membership fee. A capacity check may reject 1,000.
+Do not open the returned approval link or approve Checkout during a quote-only
+check. Do not execute this Production check without separate authorization for
+quote creation.
+
 | Tool | Required scope | Effect |
 | --- | --- | --- |
 | `skipole_list_products` | `catalog:read` | Read the active product catalog |

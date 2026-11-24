@@ -46,6 +46,9 @@ submission rules. Do not claim a paid ChatGPT transaction.
   status/retrieval, usage reads, legacy credit estimates, and topic taxonomy
   search. It does not expose enrichment execution, audience builds, provider
   exports, or supplier-job refreshes.
+- An authenticated Cursor Production session verified the current eight-tool
+  inventory, all four active audience schemas, and workspace usage. This does
+  not establish ChatGPT compatibility or paid MCP fulfillment.
 
 ## Owner actions before submission
 
@@ -57,10 +60,12 @@ submission rules. Do not claim a paid ChatGPT transaction.
    with a dedicated ordinary test account. Do not use founder access or another
    customer's delivered records.
 4. Complete only the privacy, security, data-rights and testing attestations
-   supported by actual evidence. The legacy supplier-facing tools are no longer
-   publicly discoverable, but quote creation and topic search still have
-   Production checks that require separate authorization. Do not claim they
-   were live-tested based on mocked tests.
+   supported by actual evidence. Cursor's authenticated Production verification
+   establishes tool/schema/usage discovery, not a paid MCP purchase. Do not use
+   `skipole_estimate_cost` for current cash offers; use
+   `skipole_quote_purchase` for an account-specific signed quote. Production
+   quote creation remains a separate stateful action and has not been run as
+   part of this documentation update.
 5. Submit only after the owner approves the exact package and required terms.
    Preserve the resulting receipt and review status; do not claim approval early.
 

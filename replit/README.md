@@ -14,6 +14,15 @@ deployed list after API publication. No paid Replit/MCP transaction is claimed.
 [Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=replit#marketing-professionals).
 Paid REST commerce is Production verified; a native paid Replit/SDK session is not independently verified.
 
+For an active cash-priced audience, guide the agent through
+`skipole_list_products` → `skipole_get_schema` →
+`skipole_quote_purchase`. Do not use `skipole_estimate_cost` for cash pricing;
+it is the legacy credit estimator. Quote responses report the authenticated
+workspace's verified tier, unit rate, amount and expiry. Quote preparation
+records a quote event and reads price/capacity state, but does not start
+Checkout or make a supplier-record request. A customer must separately approve
+the hosted Checkout.
+
 [Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
 four active offers are $0.05 per delivered record on Pay As You Go, with a
 $2.00 minimum Checkout before applicable taxes. Business Data's Marketing

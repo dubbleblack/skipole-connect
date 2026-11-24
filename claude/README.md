@@ -22,9 +22,10 @@ Skipole's current remote MCP endpoint is:
 
 `https://skipole-data-platform.replit.app/mcp`
 
-Production OAuth and read-only catalog access are verified in Cursor.
-That does not independently verify a Claude client or imply an official Claude
-directory listing or partnership.
+An authenticated Cursor Production session independently verified the current
+eight-tool inventory, all four active product schemas, and workspace usage.
+This confirms the server contract, not Claude client compatibility, paid MCP
+fulfillment, or an official Claude directory listing or partnership.
 
 ## Connect
 
@@ -82,9 +83,17 @@ test, directory listing or partnership.
 
 ## Purchase licensed records
 
-Use `skipole_quote_purchase` with a quantity and a new purchase-intent UUID,
-then open its signed approval link in your browser. Review the criteria and
-amount and explicitly approve hosted payment. After delivery,
+For Consumer Data, Consumer Intent, Business Data or B2B Intent, first call
+`skipole_list_products`, then `skipole_get_schema`, and prepare the cash quote
+with `skipole_quote_purchase`. Do not use `skipole_estimate_cost`; it handles
+legacy credit estimates and does not return the cash approval link. The quote
+reports the account's actual verified pricing tier and amount. Quote
+preparation records a quote event but does not start Checkout, charge, or
+request supplier records.
+
+Use a fresh purchase-intent UUID. The customer must open the signed approval
+link, review the criteria and account-specific amount, and explicitly approve
+hosted payment. After delivery,
 `skipole_get_order` and `skipole_download_order` retrieve your owned order with
 `orders:read` consent. MCP cannot approve a charge on your behalf.
 See [the purchase guide](../START-HERE.md) and [full contract](../HOSTED-PURCHASES.md).

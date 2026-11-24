@@ -47,8 +47,10 @@ unrelated registry project. Keep the key server-side and follow the
 Multi-product quoting requires SDK `0.1.0a3` or later and the corresponding server
 release. Supply `product_request` to `quote_hosted_purchase` with the discovered
 product kind, capability ID, permitted purpose and product-specific request.
-All four audience profiles and email enrichment share this method and the
-existing owned-order CSV retrieval. Legacy B2B criteria remain compatible.
+The four active audience profiles use this method; legacy Business Data criteria
+remain compatible. The SDK has a generic enrichment request type, but email
+enrichment is not currently an active cash offer and cannot be purchased.
+Owned-order CSV retrieval is limited to the authenticated workspace.
 
 The paid REST path is Production verified; an independently paid Python SDK
 round trip is not.
@@ -59,7 +61,7 @@ credit-funded provider operations remain controlled by capability and budget pol
 
 The public catalog and pricing routes need no API key. Customer catalog, synthetic demo, and usage routes require a customer API key with the relevant scope. Keep that key in server-side secrets and never place it in a browser app.
 
-The client also exposes legacy credit-funded provider request, job status, and export methods. Those separately gated methods require `data:write`, sufficient credits and an active policy; they are not cash Checkout. For cash purchasing, `quote_hosted_purchase` returns a signed customer approval link without a payment or supplier call. After the customer approves hosted payment and fulfillment completes, the existing owned-order CSV methods retrieve audience or email-enrichment deliveries. Cash purchasing requires neither membership nor prepaid credits. The SDK does not automatically retry purchases or create Stripe Checkout sessions. Catalog success does not prove independently paid SDK fulfillment.
+The client also exposes legacy credit-funded provider request, job status, and export methods. Those separately gated methods require `data:write`, sufficient credits and an active policy; they are not cash Checkout. For the four active audience offers, `quote_hosted_purchase` returns a signed customer approval link without a payment or supplier-record request. Its response includes the actual account pricing tier, unit rate and amount; active, verified Builder or Scale memberships receive their respective record rate, and other accounts receive PAYG. Email enrichment remains unavailable for new purchases. After the customer approves hosted payment and fulfillment completes, existing owned-order CSV methods retrieve the workspace's delivered audience records. Cash purchasing requires neither membership nor prepaid credits. The SDK does not automatically retry purchases or create Stripe Checkout sessions. Catalog success does not prove independently paid SDK fulfillment.
 
 It is licensed under Apache-2.0; the license file is copied from the integration package root before building. Further releases require owner authorization.
 

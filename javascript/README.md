@@ -45,11 +45,21 @@ npm install ./skipole-sdk-0.1.0-alpha.3.tgz
 
 Multi-product quoting requires SDK `0.1.0-alpha.3` or later and the corresponding
 server release. Pass `productRequest` using the product's discovered `kind`,
-`capabilityId`, permitted `purpose` and exact request filters/input. All four
-audience capabilities and `enrichment-email` use the same `quoteHostedPurchase`
-method; legacy B2B `criteria` remain compatible. `downloadOrderCsv` retrieves
-only an existing owned delivery, including enrichment. These interface changes
-are not evidence of independently verified paid SDK fulfillment.
+`capabilityId`, permitted `purpose` and exact request filters/input. The four
+active audience capabilities use `quoteHostedPurchase`; legacy Business Data
+`criteria` remain compatible. Although the SDK has a generic enrichment request
+shape, email enrichment is not an active cash offer and cannot currently be
+purchased. `downloadOrderCsv` retrieves only an existing delivery owned by the
+authenticated workspace. These interface details are not evidence of
+independently verified paid SDK fulfillment.
+
+The API quote response carries `pricingTier`, `priceMinorPerRecord`,
+`amountMinor`, `maximumChargeMinor`, `currency`, and `expiresAt`. These fields
+are returned by the API after the matching server release is published. The
+currently published npm package remains `0.1.0-alpha.3`; its immutable TypeScript
+declaration does not yet include the newer quote fields. The repository source
+declaration is updated for a future authorized SDK release. No new npm version
+is being claimed here.
 
 For the customer-approved purchase, use `quoteHostedPurchase`, present
 `approvalUrl` to the customer, and use `getPurchase` / `downloadOrderCsv` after
@@ -68,7 +78,9 @@ const usage = await client.getUsage();
 
 Keep customer API keys in server-side secrets. Do not expose them in browser code.
 
-The client also supports the existing provider quote and request endpoints, job polling, and CSV download:
+The client also exposes separate legacy credit-funded provider quote/request
+endpoints, job polling, and CSV download. These are not the cash-priced audience
+checkout path. Email-enrichment purchasing remains paused:
 
 ```js
 const idempotencyKey = crypto.randomUUID();
@@ -84,7 +96,8 @@ const quote = await client.quoteProviderRequest({
   idempotencyKey,
 });
 
-// Execute only after reviewing the quote and receiving any required approval.
+// This legacy provider operation remains separately gated and is not an active
+// cash offer. Do not call it to buy email enrichment.
 // The endpoint currently returns a policy-unavailable response until enabled.
 const result = await client.createProviderRequest({
   request,
@@ -93,7 +106,15 @@ const result = await client.createProviderRequest({
 });
 ```
 
-The quote call does not contact the supplier. These provider request/export methods belong to the separately gated credit-funded API, not the one-time customer Checkout flow. Keep the original idempotency key for any uncertain outcome; the SDK never retries automatically. The SDK does not create Stripe Checkout sessions. Customers buy licensed Marketing Professionals orders and download their CSV through the signed-in website when purchasing is enabled, without a subscription or prepaid credits. A successful catalog or usage call does not prove that paid API operations are available.
+The legacy quote call does not contact the supplier. These provider request/export
+methods belong to the separately gated credit-funded API, not the one-time
+customer Checkout flow. Keep the original idempotency key for any uncertain
+outcome; the SDK never retries automatically. The SDK does not create Stripe
+Checkout sessions. Customers can buy active catalog products through the
+website or request a signed quote through the REST client, then retrieve only
+their own delivered CSV. Business Data is for business research, not sales
+outreach. A successful catalog or quote call does not prove that paid SDK
+fulfillment has been independently verified.
 
 ## Build and test
 

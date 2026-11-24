@@ -71,8 +71,9 @@ preparation, owned-order status/retrieval, usage reads, legacy credit estimates,
 and public intent-topic lookup. See the
 [MCP tool inventory](../MCP-TOOL-INVENTORY.md) for scopes and side effects. The
 three legacy enrichment/build/export/job-refresh tools are not registered for
-public MCP discovery. Confirm the deployed list after the API Server is
-published.
+public MCP discovery. An authenticated Cursor Production session verified
+exactly eight tools, the four active audience schemas, and workspace usage.
+The quote-selection guidance update still requires API publication.
 
 ## Configure Cursor
 
@@ -83,8 +84,15 @@ Only read-only product catalog discovery is currently verified. Usage and paid
 tool calls still need separate verification. Do not put private keys or OAuth
 secrets in this file.
 
-The implemented `skipole_quote_purchase` tool prepares a signed approval link
-for customer-approved hosted Checkout. `skipole_get_order` and
+For current cash-priced audiences, use `skipole_list_products` →
+`skipole_get_schema` → `skipole_quote_purchase`. Do not use
+`skipole_estimate_cost` for these products; it handles only legacy credit
+estimates and does not return their signed cash approval link.
+`skipole_quote_purchase` returns the authenticated workspace's current verified
+pricing tier, per-record rate, total, and signed customer approval link.
+Preparing it records a quote event and reads price/capacity state, but creates
+no Checkout session, charge, order, or supplier-record request.
+`skipole_get_order` and
 `skipole_download_order` read the customer's existing licensed delivery with
 `orders:read` consent; no tool approves payment. This paid Cursor journey has
 not been independently verified. See [the purchase guide](../START-HERE.md).

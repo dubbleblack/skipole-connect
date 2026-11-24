@@ -73,9 +73,16 @@ the website or the source SDKs. Never put an API key in client-side code or chat
 5. Deliberate repeat purchase: create a new intent UUID. Checking an existing
    purchase must keep its original UUID. Repeat purchases may overlap in data.
 
-MCP tools for this flow are `skipole_quote_purchase`,
-`skipole_get_order` and `skipole_download_order`.
-They cannot approve payment or charge the customer. See
+For the four active cash-priced audience offers, use the MCP sequence
+`skipole_list_products` → `skipole_get_schema` →
+`skipole_quote_purchase`; then the customer reviews and approves Checkout.
+`skipole_estimate_cost` is for legacy credit estimation only and is not the
+cash quote tool. The signed quote reports the authenticated workspace's actual
+`pricingTier`, unit rate, amount and expiry. Quote preparation records a quote
+event, but creates no Checkout, charge or supplier-record request.
+After delivery, use `skipole_get_order` / `skipole_download_order` with the
+required `orders:read` consent. These MCP tools cannot approve payment or charge
+the customer. See
 [the full contract and SDK examples](HOSTED-PURCHASES.md) and the
 [complete MCP tool inventory](MCP-TOOL-INVENTORY.md).
 

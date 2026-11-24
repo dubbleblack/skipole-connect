@@ -164,7 +164,9 @@ export declare class SkipoleClient {
   quoteHostedPurchase(input: { quantity: number; idempotencyKey: string; criteria?: { departments: string[]; emailDomain?: string };
     productRequest?: CashProductRequest }): Promise<{
     quoteToken: string; idempotencyKey: string; quantity: number; amountMinor: string;
-    priceMinorPerRecord: number; currency: string; expiresAt: string; approvalUrl: string;
+    maximumChargeMinor: string; priceMinorPerRecord: number; pricingTier: "payg" | "builder" | "scale";
+    customerBillingBasis: "validated_delivered_record" | "successfully_matched_input";
+    currency: string; expiresAt: string; approvalUrl: string;
     requiresCustomerPaymentApproval: true;
   }>;
   getOrder(orderId: string): Promise<{
