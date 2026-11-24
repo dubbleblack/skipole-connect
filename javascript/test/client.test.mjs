@@ -9,7 +9,9 @@ test("hosted purchase SDK only quotes, reads status and downloads an existing CS
     return options.headers.Accept === "text/csv" ? new Response("business_email\r\nfixture@example.invalid")
       : Response.json({ approvalUrl: "https://skipoledata.com/marketplace#marketing-professionals", requiresCustomerPaymentApproval: true });
   } });
-  assert.equal((await client.quoteHostedPurchase({ quantity: 40, idempotencyKey: "fixture-id" })).requiresCustomerPaymentApproval, true);
+  const quote = await client.quoteHostedPurchase({ quantity: 40, idempotencyKey: "fixture-id" });
+  assert.equal(quote.requiresCustomerPaymentApproval, true);
+  assert.equal(quote.pricingTier, undefined, "Older API quote responses remain compatible");
   await client.getOrder("fixture-id");
   assert.match(await client.downloadOrderCsv("fixture-id"), /fixture@example.invalid/);
   assert.equal(requests.length, 3);
@@ -19,6 +21,45 @@ test("hosted purchase SDK only quotes, reads status and downloads an existing CS
   assert.equal(requests[2].options.method, "GET");
   assert.match(requests[2].url, /customer\/orders\/fixture-id\/csv$/);
   assert.equal(requests[2].options.headers.Authorization, "Bearer non-secret-fixture");
+});
+
+test("hosted purchase quote exposes account-specific pricing fields without changing request behavior", async () => {
+  let request;
+  const responseBody = {
+    quoteToken: "signed-fixture",
+    idempotencyKey: "quote-fields",
+    quantity: 40,
+    amountMinor: "1600",
+    maximumChargeMinor: "1600",
+    priceMinorPerRecord: 4,
+    pricingTier: "builder",
+    customerBillingBasis: "validated_delivered_record",
+    currency: "USD",
+    expiresAt: "2030-01-01T00:00:00.000Z",
+    approvalUrl: "https://skipoledata.com/checkout/approved-fixture",
+    requiresCustomerPaymentApproval: true,
+  };
+  const client = new SkipoleClient({
+    apiKey: "non-secret-fixture",
+    fetchImpl: async (_url, options) => {
+      request = JSON.parse(options.body);
+      return Response.json(responseBody);
+    },
+  });
+
+  const quote = await client.quoteHostedPurchase({
+    quantity: 40,
+    idempotencyKey: "quote-fields",
+  });
+
+  assert.equal(quote.pricingTier, "builder");
+  assert.equal(quote.priceMinorPerRecord, 4);
+  assert.equal(quote.amountMinor, "1600");
+  assert.equal(quote.maximumChargeMinor, "1600");
+  assert.equal(quote.customerBillingBasis, "validated_delivered_record");
+  assert.equal(quote.currency, "USD");
+  assert.equal(quote.expiresAt, "2030-01-01T00:00:00.000Z");
+  assert.deepEqual(request, { quantity: 40, idempotencyKey: "quote-fields" });
 });
 
 test("configured audience criteria are forwarded with a fresh explicit purchase intent", async () => {

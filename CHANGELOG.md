@@ -1,11 +1,21 @@
 # Changelog
 
+Current platform verification and distribution status are recorded in the
+[2026-11-24 evidence refresh](../../.agents/outputs/skipole-distribution-refresh-2026-11-24.md).
+Older entries below are historical and do not establish current client testing.
+
 ## JavaScript 0.1.0-alpha.2 — documentation-only default-install correction
 
 - Corrected the README included on npm without changing SDK API behavior.
 - Published with the existing GitHub distribution workflow using trusted OIDC authentication and signed provenance, without an npm token.
 - Set `latest` to the real SDK so `npm install @skipole/sdk` selects it rather than the staging placeholder.
 - Paid SDK/MCP purchases remain independently unverified.
+
+## JavaScript 0.1.0-alpha.4 — quote response declaration patch
+
+- Add TypeScript declarations for the account-specific quote tier, unit price, total, maximum charge, billing basis, currency, and expiry.
+- Keep the JavaScript request and response handling unchanged; test compatibility with both older quote responses and the expanded response.
+- Paid SDK fulfillment remains independently unverified.
 
 ## JavaScript 0.1.0-alpha.1 — npm publication
 

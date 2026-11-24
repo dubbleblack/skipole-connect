@@ -3,9 +3,9 @@
 Pre-release JavaScript client for Skipole's documented REST API.
 
 [`@skipole/sdk` is the official npm package](https://www.npmjs.com/package/@skipole/sdk).
-This documentation-only alpha update corrects installation guidance without
-changing SDK API behavior. TypeScript declarations are bundled. The paid REST
-commerce path is Production verified; an independently paid SDK round trip is not.
+This alpha patch adds TypeScript quote-response declarations without changing
+JavaScript runtime behavior. TypeScript declarations are bundled. Paid REST
+commerce is Production verified; an independently paid SDK round trip is not.
 
 ## Install from npm
 
@@ -15,8 +15,8 @@ Node 20+ is required:
 npm install @skipole/sdk
 ```
 
-To pin this documentation-only release, use
-`npm install @skipole/sdk@0.1.0-alpha.3`. This remains prerelease software even
+To pin this release, use
+`npm install @skipole/sdk@0.1.0-alpha.4`. This remains prerelease software even
 when selected by the `latest` distribution tag.
 
 ## Alternative: published GitHub archive
@@ -40,10 +40,10 @@ cd skipole-connect/javascript
 npm run build
 npm pack --pack-destination ../..
 cd ../..
-npm install ./skipole-sdk-0.1.0-alpha.3.tgz
+npm install ./skipole-sdk-0.1.0-alpha.4.tgz
 ```
 
-Multi-product quoting requires SDK `0.1.0-alpha.3` or later and the corresponding
+Multi-product quoting requires SDK `0.1.0-alpha.4` or later and the corresponding
 server release. Pass `productRequest` using the product's discovered `kind`,
 `capabilityId`, permitted `purpose` and exact request filters/input. The four
 active audience capabilities use `quoteHostedPurchase`; legacy Business Data
@@ -54,12 +54,9 @@ authenticated workspace. These interface details are not evidence of
 independently verified paid SDK fulfillment.
 
 The API quote response carries `pricingTier`, `priceMinorPerRecord`,
-`amountMinor`, `maximumChargeMinor`, `currency`, and `expiresAt`. These fields
-are returned by the API after the matching server release is published. The
-currently published npm package remains `0.1.0-alpha.3`; its immutable TypeScript
-declaration does not yet include the newer quote fields. The repository source
-declaration is updated for a future authorized SDK release. No new npm version
-is being claimed here.
+`amountMinor`, `maximumChargeMinor`, `customerBillingBasis`, `currency`, and
+`expiresAt`. The expanded TypeScript declaration is included in this version.
+Paid SDK fulfillment remains independently unverified.
 
 For the customer-approved purchase, use `quoteHostedPurchase`, present
 `approvalUrl` to the customer, and use `getPurchase` / `downloadOrderCsv` after
