@@ -1,5 +1,9 @@
 # Skipole setup for Lovable
 
+Skipole is an AI-native data broker. We source good data and make it easy to buy
+and use. This guide covers server-side REST and chat-context MCP setup, not an
+official Lovable listing or independently verified paid native purchases.
+
 [Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=lovable#marketing-professionals).
 Paid REST commerce is Production verified; a native paid Lovable integration is not independently verified.
 

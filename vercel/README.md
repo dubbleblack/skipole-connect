@@ -1,5 +1,9 @@
 # Use Skipole from a Vercel-hosted app
 
+Skipole is an AI-native data broker. We source good data and make it easy to buy
+and use. This is a server-side integration guide, not a Vercel marketplace
+listing or an independently verified paid deployment.
+
 [Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=vercel#marketing-professionals).
 Paid REST commerce is Production verified; a Vercel-hosted paid deployment is not independently verified.
 

@@ -1,5 +1,9 @@
 # Connect Codex to Skipole
 
+Skipole is an AI-native data broker. We source good data and make it easy to buy
+and use. The remote MCP setup below is not a verified Codex listing or paid
+purchase flow.
+
 [Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=codex#marketing-professionals).
 Paid REST commerce is Production verified; paid Codex/MCP purchases remain independently unverified.
 

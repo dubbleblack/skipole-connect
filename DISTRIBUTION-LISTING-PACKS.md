@@ -192,32 +192,40 @@ submission. No ChatGPT/Codex client or paid flow is verified.
 **Server:** `https://skipole-data-platform.replit.app/mcp`  
 **Transport:** HTTPS Streamable HTTP  
 **Authentication:** OAuth authorization code + PKCE; discover metadata from the server.  
-**Description:** Licensed audience catalog and safe, scoped order access.
-Customers approve any purchase outside the agent in hosted Checkout. Paid MCP
-is not independently verified.
+**Description:** Skipole is an AI-native data broker for licensed Consumer Data,
+Consumer Intent, Business Data and B2B Intent. Discover products, request signed
+quotes and retrieve only your workspace's delivered records. Every purchase
+requires customer approval in hosted Checkout. Paid MCP purchasing is not
+independently verified.
 
-**Registry status:** Version `0.1.0-alpha.2` is active and latest. The
-[exact-version Registry API](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.dubbleblack%2Fskipole-connect/versions/0.1.0-alpha.2)
-returns the corrected description naming Consumer Data, Consumer Intent,
-Business Data and B2B Intent. Paid MCP purchasing remains unverified.
+**Registry status:** Version `0.1.0-alpha.3` updates the listing description to
+the approved AI-native data broker positioning and retains all four active
+audience products. Paid MCP purchasing remains unverified.
 
 **Glama status:** The [existing Glama listing](https://glama.ai/mcp/connectors/io.github.dubbleblack/skipole-connect)
-still displays the old B2B-only description after Registry publication. Glama's
-official guidance says a maintainer claims the existing listing through its
-**Claim connector** flow; this repository belongs to the personal GitHub account
-`dubbleblack`, so the owner can sign in with GitHub and claim it. Once claimed,
-edit the description on that existing Glama listing; do not create a duplicate.
-For organization-owned repositories Glama instead requires a root `glama.json`,
-but that is not needed for this personal repository. The owner must perform the
-claim and edit; no Glama login, third-party submission or terms acceptance was
-performed here.
+already shows all four active products; do not create a duplicate. Glama marks
+the connector unhealthy after two failed health checks. Glama's documented
+health check initializes an MCP session and lists metadata without calling
+tools. A safe unauthenticated `initialize` against Skipole returns HTTP 401
+(`Missing Authorization header`), as required by the protected OAuth endpoint.
+This confirms that an unauthenticated health probe is rejected; public status
+cannot show whether the private Glama test profile is absent or expired.
 
-Suggested Glama description: “Licensed audience data with four active offers:
-Consumer Data, Consumer Intent, Business Data and B2B Intent. Review live
-product-specific filters and permitted purposes, request a signed quote, approve
-each payment in hosted Checkout, and retrieve only your workspace's existing
-delivery through scoped access. Paid MCP purchasing is unverified; email
-enrichment is paused.”
+**Owner action:** Sign in to the existing listing, use **Claim connector**, then
+set or refresh **Admin → Test Profile** using a dedicated ordinary Skipole
+account authorized only for `catalog:read`. Glama's check only needs to
+initialize and list tools; do not grant `orders:read`, `data:write`, founder
+access, or access to customer orders. Re-run Glama's health check after saving.
+Do not weaken Skipole authentication or create another listing. No code change
+is indicated by the observed 401.
+
+Suggested Glama description: “Skipole is an AI-native data broker. We source
+good data and make it easy to buy and use. Discover licensed Consumer Data,
+Consumer Intent, Business Data and B2B Intent; review product-specific filters
+and permitted purposes; request a signed quote; approve payment in hosted
+Checkout; and retrieve only your workspace's delivered records through scoped
+access. Paid MCP purchasing is not independently verified. Email enrichment is
+paused.”
 Directory presence is discovery, not paid verification.
 
 ### Make and Zapier

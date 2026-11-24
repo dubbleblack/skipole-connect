@@ -1,7 +1,7 @@
 {
   "name": "skipole-connect",
   "version": "0.1.0-alpha.1",
-  "description": "Self-service licensed B2B audience data for GTM teams, developers and AI agents. Discover audiences, request pricing, approve purchases and securely retrieve licensed records.",
+  "description": "AI-native data broker for licensed Consumer Data, Consumer Intent, Business Data and B2B Intent. Discover products, request signed quotes, approve purchases through hosted Checkout, and retrieve your own delivered records. Paid MCP purchasing is not independently verified.",
   "license": "Apache-2.0",
   "author": {
     "name": "DubbleBlack LLC",

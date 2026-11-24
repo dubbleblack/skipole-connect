@@ -17,19 +17,20 @@ invent them or infer them from a timezone. Do not publish private contact detail
 
 ## Proposal — ready to submit
 
-Skipole is a self-service GTM data marketplace for developers and AI agents.
-Your tools. Our data.
+Skipole is an AI-native data broker. We source good data and make it easy to buy
+and use. Your tools. Our data.
 
 We request a first-class Skipole listing in Replit's native Integrations / Tools
 directory, in GTM Data / Sales & Marketing Data, comparable in discoverability
 and connection experience to Apollo. This is an integration-partner application,
 not a Solutions Partner consulting application or a request to list a skill alone.
 
-Skipole offers self-service licensed B2B audience data for GTM teams, developers
-and AI agents. Users discover supported audiences, obtain an itemized signed
-quote, review an approval link, personally complete hosted Stripe Checkout,
-and retrieve licensed records through authenticated CSV and REST. PAYG needs no
-subscription or sales call; optional Builder and Scale memberships discount usage.
+Skipole offers licensed Consumer Data, Consumer Intent, Business Data and B2B
+Intent to teams, developers and AI agents. Users discover active products,
+obtain an itemized signed quote, review an approval link, personally complete
+hosted Stripe Checkout, and retrieve licensed records through authenticated
+CSV and REST. PAYG needs no subscription or sales call; optional Builder and
+Scale memberships discount usage.
 
 Reuse our existing HTTPS Streamable HTTP MCP server and scoped OAuth with PKCE:
 https://skipole-data-platform.replit.app/mcp

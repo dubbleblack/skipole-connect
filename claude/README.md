@@ -1,5 +1,9 @@
 # Connect Claude to Skipole
 
+Skipole is an AI-native data broker. We source good data and make it easy to buy
+and use. The remote connector supports catalog discovery and scoped access; paid
+MCP purchases remain independently unverified.
+
 [Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=claude#marketing-professionals).
 Paid REST commerce is Production verified; paid Claude/MCP purchases remain independently unverified.
 

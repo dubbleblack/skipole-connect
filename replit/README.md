@@ -1,5 +1,9 @@
 # Skipole integration starter for Replit
 
+Skipole is an AI-native data broker. We source good data and make it easy to buy
+and use. This is a server-side integration guide, not an approved Replit
+Marketplace listing or independently verified native paid flow.
+
 [Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=replit#marketing-professionals).
 Paid REST commerce is Production verified; a native paid Replit/SDK session is not independently verified.
 

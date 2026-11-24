@@ -1,5 +1,9 @@
 # Import an existing Skipole audience into Clay
 
+Skipole is an AI-native data broker. This guide covers read-only import of an
+already purchased, delivered and authorized order; it does not claim a native
+Clay purchase flow.
+
 Use Clay's **HTTP API as Source** to read records from a Skipole B2B audience
 order that is already paid, fulfilled, and available in My Orders. This is a
 read-only import: it does not create a quote, Checkout session, payment, supplier

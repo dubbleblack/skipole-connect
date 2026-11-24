@@ -1,12 +1,15 @@
 ---
 name: skipole
-description: Discover licensed Skipole B2B audiences, request signed prices, present human-approved Checkout links and retrieve existing licensed orders. Use when a developer requests GTM data or a Skipole integration.
+description: Discover Skipole's licensed audience products, request signed quotes, present customer-approved Checkout links and retrieve owned delivered orders. Use when a developer requests GTM data or a Skipole integration; paid MCP purchases are not independently verified.
 ---
 
 # Skipole
 
-Skipole is a self-service GTM data marketplace for developers and AI agents.
-Your tools. Our data. PAYG requires no subscription or sales call.
+Skipole is an AI-native data broker. We source good data and make it easy to buy
+and use. Active products are Consumer Data, Consumer Intent, Business Data and
+B2B Intent; product-specific fields, filters, and permitted purposes apply.
+PAYG requires no subscription or sales call. Paid MCP purchasing is not
+independently verified.
 
 ## Connect securely
 

@@ -1,5 +1,8 @@
 # Skipole for ChatGPT
 
+Skipole is an AI-native data broker. We source good data and make it easy to buy
+and use. This guide does not claim a ChatGPT listing or paid MCP purchasing.
+
 This repository does not contain a submitted or approved ChatGPT Directory app.
 The existing remote MCP server is `https://skipole-data-platform.replit.app/mcp`.
 Its OAuth connection and `skipole_list_products` tool were verified in Cursor,

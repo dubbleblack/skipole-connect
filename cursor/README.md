@@ -1,7 +1,8 @@
 # Skipole Connect for Cursor
 
-Skipole is a self-service GTM data marketplace for developers and AI agents.
-**Your tools. Our data.** PAYG requires no mandatory subscription or sales call.
+Skipole is an AI-native data broker. We source good data and make it easy to buy
+and use. The marketplace serves developers and AI agents; PAYG requires no
+mandatory subscription or sales call.
 
 [Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=cursor#marketing-professionals).
 Paid REST commerce is Production verified; paid Cursor/MCP purchases remain independently unverified.

@@ -1,7 +1,7 @@
 # Native platform submissions
 
-Skipole is a self-service GTM data marketplace for developers and AI agents.
-**Your tools. Our data.**
+Skipole is an AI-native data broker. We source good data and make it easy to buy
+and use. **Your tools. Our data.**
 
 This is the application copy and handoff for official native directories. It
 records owner-submitted applications separately from listings and approvals;
@@ -11,7 +11,7 @@ paid native purchasing is not claimed as verified.
 
 - **Name:** Skipole
 - **Category:** GTM Data / Sales & Marketing Data
-- **One-liner:** Self-service licensed data for businesses, marketers, developers and AI agents.
+- **One-liner:** AI-native access to licensed data for businesses, marketers, developers and AI agents.
 - **Description:** Discover four active audience capabilities—Consumer Data, Consumer Intent, Business Data and B2B Intent—then review the live product-specific filters and allowed purpose. PAYG is $0.05 per delivered record, with a $2.00 minimum order before applicable taxes. A customer reviews a signed quote, approves each payment through hosted Checkout and retrieves the owned delivery through authenticated CSV or REST. The live catalog and order-specific license control output fields, limits and permitted use. Paid REST commerce is Production verified; paid native MCP/SDK purchases are not independently verified.
 - **Company:** DubbleBlack LLC
 - **Website:** https://skipoledata.com

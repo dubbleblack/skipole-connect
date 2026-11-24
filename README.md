@@ -8,7 +8,7 @@ retrieved the CSV with authenticated REST access (HTTP 200). This is not a claim
 of outside customers, paid SDK/MCP verification, or official platform approval.
 Start with the [purchase quickstart](START-HERE.md).
 
-Skipole Connect is the public developer distribution package for Skipole's REST API, remote MCP server, and SDKs. It uses the existing Skipole customer identity, scoped authorization, hosted Checkout, orders, and usage limits.
+Skipole is an AI-native data broker. We source good data and make it easy to buy and use. Skipole Connect is the public developer distribution package for Skipole's REST API, remote MCP server, and SDKs. It uses the existing Skipole customer identity, scoped authorization, hosted Checkout, orders, and usage limits.
 
 **Website purchasing is live:** [browse the marketplace](https://skipoledata.com/marketplace) for four active audience capabilities: Consumer Data, Consumer Intent, Business Data, and B2B Intent. The live catalog currently lists PAYG at $0.05 per delivered record; a 40-record order is $2.00 before applicable taxes. Each product's quote enforces its current quantity and supplier-capacity limits. Customer-approved hosted Checkout and authenticated delivery are required. No subscription or prepaid credits are required.
 
