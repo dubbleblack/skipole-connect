@@ -2,7 +2,8 @@
 
 **Paid REST commerce is Production verified.** One explicitly authorized internal
 verification purchase completed the scoped REST quote, signed customer approval,
-customer-paid Stripe Live Checkout ($2.00 for 40 Marketing records), automated
+customer-paid Stripe Live Checkout ($2.00 for 40 Business Data records selected
+with a Marketing department preset for business research), automated
 encrypted fulfillment, and authenticated REST CSV retrieval (HTTP 200). All 40
 licensed records passed CSV validation. Payment reconciled once; no refund was due.
 This verifies the REST path, not outside-customer acquisition or future coverage.
@@ -16,8 +17,9 @@ subscriptions are not prerequisites for website purchasing or using this SDK sou
 This flow reuses Skipole's existing orders, hosted Stripe Checkout, payment
 verification, once-only audience build, supplier budget, shortfall refunds and
 encrypted My Orders delivery. No monthly plan or prepaid credits are required.
-Licensed B2B contact audiences use the existing advanced-search product;
-Marketing Professionals is the default configuration. The supplier documents
+Business Data uses the existing advanced-search product. Its department presets
+are filters on that single business-research product, not separate products or
+permission to market or conduct sales outreach. The supplier documents
 up to 1,000,000 records per build, but the current reliable single-file delivery
 bound is 3,965 records for these four fields, or less if allowance is lower.
 Use the maximum returned by the quote/approval flow; a supplier ceiling is not
@@ -64,7 +66,7 @@ signed purchase silently. Do not put approval URLs in logs or public repositorie
 ## JavaScript
 
 Install the published client with `npm install @skipole/sdk`. See the
-[practical prospecting and retrieval example](CUSTOMER-EXAMPLES.md).
+[practical business-research and retrieval example](CUSTOMER-EXAMPLES.md).
 
 ```js
 import { randomUUID } from "node:crypto";
@@ -78,6 +80,7 @@ const intentKey = randomUUID(); // persist for this intentional purchase
 const quote = await skipole.quoteHostedPurchase({
   quantity: 40,
   idempotencyKey: intentKey,
+  criteria: { departments: ["engineering"] }, // legacy Business Data filters; business research only
 });
 // Display quote.approvalUrl to the human customer. Do not automatically pay.
 // After the customer proceeds, find the order by the intent you already saved.
@@ -100,7 +103,11 @@ from skipole import SkipoleClient
 
 skipole = SkipoleClient(api_key=os.environ["SKIPOLE_API_KEY"])
 intent_key = str(uuid4())  # persist for this intentional purchase
-quote = skipole.quote_hosted_purchase(quantity=40, idempotency_key=intent_key)
+quote = skipole.quote_hosted_purchase(
+    quantity=40,
+    idempotency_key=intent_key,
+    criteria={"departments": ["engineering"]},  # Business Data research only
+)
 # Present quote["approvalUrl"] to the human. Never automatically pay.
 # Before Checkout creates an order, this returns 404; it never creates one.
 order = skipole.get_purchase(intent_key)
@@ -118,23 +125,27 @@ Honor the workspace API rate limit and `Retry-After`; do not spin in tight loops
 
 ### Configurable audiences and repeat purchases
 
-The published API accepts optional `criteria` in the existing signed quote
-request. Omitting it selects the live Marketing Professionals configuration.
+The published API accepts optional legacy `criteria` for the Business Data
+product only. Omit `criteria` only when you intentionally want its default
+department filter; the filter does not change the `business_research` purpose.
+For other active products, construct `productRequest` from that product's live
+`cashPurchase.requestSchema`. Do not combine the two inputs.
 
 ```js
 const quote = await skipole.quoteHostedPurchase({
   quantity: 40,
   idempotencyKey: crypto.randomUUID(), // persist this NEW intentional purchase
-  criteria: { departments: ["marketing", "sales"], emailDomain: "example.com" },
+  criteria: { departments: ["engineering"], emailDomain: "example.com" },
 });
 // Present approvalUrl to the customer. Never approve or pay on their behalf.
 ```
 
 Python accepts the same object as `criteria=...`; MCP's `skipole_quote_purchase`
-accepts optional `criteria`. Department values are supplied search criteria, not
-guaranteed coverage. No consumer or intent fields are enabled by this parameter.
-The four licensed output columns remain `first_name`, `last_name`,
-`business_email`, `linkedin_url`. Fulfillment and refunds use actual delivery.
+accepts optional legacy Business Data `criteria`. Department values are search
+filters, not guaranteed coverage or permission for outreach. The Business Data
+output fields are `first_name`, `last_name`, `business_email`, and `linkedin_url`;
+other active products have their own live schemas. Fulfillment and refunds use
+actual delivery.
 
 Customers can save configurations in the website and reuse them with a new
 quote and explicitly approved purchase. Saved criteria are not automatic supplier
@@ -150,18 +161,28 @@ the contact list in the model's context. Use My Orders with the owning browser
 session or the CSV API with an `orders:read` API key. This is prepared behavior,
 not evidence of an independently verified paid Production MCP round trip.
 
-The published server exposes these tools; paid MCP client execution is not yet verified:
+The public MCP server exposes eight customer-facing tools. Their exact effects
+and current evidence are in the
+[MCP tool inventory](./MCP-TOOL-INVENTORY.md). Paid MCP client execution is not
+independently verified.
 
 | Tool | Required scope | Effect |
 | --- | --- | --- |
-| `skipole_quote_purchase` | `catalog:read` | Signed cash quote and human approval URL only |
-| `skipole_get_order` | `orders:read` | Read this workspace's existing order status |
-| `skipole_download_order` | `orders:read` | Read this workspace's existing licensed CSV |
+| `skipole_list_products` | `catalog:read` | Read the active product catalog |
+| `skipole_get_schema` | `catalog:read` | Read the current product-specific filters, fields, purpose, and price metadata |
+| `skipole_quote_purchase` | `catalog:read` | Record and return a signed quote plus the customer approval link; no Checkout, payment, order, or supplier request |
+| `skipole_search` | `catalog:read` | Search the public intent-topic taxonomy; upstream lookup only, no audience records or build |
+| `skipole_estimate_cost` | `catalog:read` | Legacy credit estimate; active cash audience offers reject the legacy quote path; no submission or hosted customer approval link |
+| `skipole_get_usage` | `usage:read` | Read this workspace's usage and legacy credit summary |
+| `skipole_get_order` | `orders:read` | Read this workspace's existing order status and delivery summary |
+| `skipole_download_order` | `orders:read` | Retrieve this workspace's existing licensed CSV or authenticated bulk download instructions |
 
 Existing catalog/usage-only connections do **not** gain licensed-record access.
 The user must explicitly approve `orders:read` in a new OAuth consent.
-Revoking that connected application revokes access. There is no MCP card-charge,
-audience rebuild, supplier refresh or supplier export tool in this cash workflow.
+Revoking that connected application revokes access. Public MCP discovery no
+longer includes the legacy `skipole_enrich`, `skipole_create_export`, or
+`skipole_get_job_status` tools. There is no MCP card-charge tool in this cash
+workflow; the customer separately approves hosted Checkout.
 
 ## Supported environments
 

@@ -8,7 +8,9 @@ MCP purchases remain independently unverified.
 Paid REST commerce is Production verified; paid Claude/MCP purchases remain independently unverified.
 
 [Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
-Marketing Professionals at $0.05 per delivered record, $2 minimum Checkout.
+four active offers are $0.05 per delivered record on Pay As You Go, with a
+$2.00 minimum Checkout before applicable taxes. Each has its own purpose and
+fields; Business Data is for business research, not sales outreach.
 The live quote checks reserved supplier spend and reliable delivery
 capacity. The included supplier allowance is not an inventory ceiling.
 No plan upgrade or sales call is required for supported quantities.
@@ -37,8 +39,11 @@ If Claude asks how to identify its OAuth client, use Claude's published identity
 The confirmed native-client evidence is Cursor's read-only catalog check.
 The implemented hosted purchase tools
 prepare a signed customer approval link and retrieve existing owned orders.
-A paid Production MCP round trip remains unverified. Legacy credit-funded
-enrichment/build tools remain separately gated; they are not this cash flow.
+A paid Production MCP round trip remains unverified. The public MCP tool list,
+scope, side-effect, and evidence details are in the
+[MCP tool inventory](../MCP-TOOL-INVENTORY.md). Legacy enrichment execution,
+audience build/export, and job-refresh tools are not registered for public MCP
+discovery; their underlying services/routes were not changed.
 
 ## Official Connectors Directory submission
 

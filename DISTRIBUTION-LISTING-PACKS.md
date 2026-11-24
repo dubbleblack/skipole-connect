@@ -9,6 +9,8 @@ customer records, credentials, API keys, or a real order as a demo.
 
 - **Website:** <https://skipoledata.com>
 - **Marketplace:** <https://skipoledata.com/marketplace>
+- **AI-readable guide:** <https://skipoledata.com/llms.txt>
+- **OpenAPI:** <https://skipoledata.com/openapi.yaml>
 - **Public catalog:** `GET https://skipole-data-platform.replit.app/api/v1/catalog`
 - **REST base:** `https://skipole-data-platform.replit.app/api`
 - **MCP server:** `https://skipole-data-platform.replit.app/mcp`
@@ -16,6 +18,7 @@ customer records, credentials, API keys, or a real order as a demo.
 - **REST quickstart:** <https://github.com/dubbleblack/skipole-connect/blob/main/START-HERE.md>
 - **OpenAPI:** <https://github.com/dubbleblack/skipole-connect/blob/main/openapi.yaml>
 - **Purchase flow:** <https://github.com/dubbleblack/skipole-connect/blob/main/HOSTED-PURCHASES.md>
+- **MCP tool inventory:** <https://github.com/dubbleblack/skipole-connect/blob/main/MCP-TOOL-INVENTORY.md>
 - **Privacy:** <https://skipoledata.com/privacy>
 - **Support:** <mailto:support@skipoledata.com>
 
@@ -31,13 +34,12 @@ filter fields into an output-field promise.
 ## Product copy
 
 **Business Data — Advanced audience search**  
-Configure a B2B audience with supported department, title, seniority, company
-and industry filters. The allowed use is `business_research`. Marketing
-Professionals, Sales, Engineering, Finance, Human Resources and Operations are
-presets of this capability, not separate supplier products. The live order
-policy controls licensed output fields; the known Marketing Professionals
-profile includes first name, last name, business email and LinkedIn URL when
-those fields are enabled for that order.
+Configure a B2B audience using only the filters returned by the active catalog
+schema. The allowed use is `business_research`, not sales or marketing outreach.
+Marketing, Sales, Engineering, Finance, Human Resources and Operations are
+department presets of this product, not separate supplier products or
+permissions. The currently listed output fields are first name, last name,
+business email and LinkedIn URL.
 
 **B2B Intent**  
 Configure a B2B audience with the supported company/person criteria and
@@ -135,7 +137,9 @@ sample amount/expiry. The REST quote schema is also in
   `catalog:read`. Existing order and delivery reads require `orders:read`.
 - MCP uses OAuth authorization code with PKCE and dynamic client registration.
   Read-only product discovery uses `catalog:read`; existing owned-order reads
-  use explicit `orders:read` consent. No MCP tool approves hosted Checkout.
+  use explicit `orders:read` consent. Quotes produce customer approval links;
+  no MCP tool approves hosted Checkout. Public MCP discovery no longer includes
+  legacy enrichment, audience build/export, or supplier-job refresh tools.
 - Do not share a founder key, supplier credential, Stripe credential, or key
   with more access than the specific read/purchase flow needs.
 
@@ -209,25 +213,30 @@ submission. No ChatGPT/Codex client or paid flow is verified.
 **Description:** Skipole is an AI-native data broker for licensed Consumer Data,
 Consumer Intent, Business Data and B2B Intent. Discover products, request signed
 quotes and retrieve only your workspace's delivered records. Every purchase
-requires customer approval in hosted Checkout. Paid MCP purchasing is not
-independently verified.
+requires customer approval in hosted Checkout. Paid MCP purchasing
+is not independently verified.
 
 **Registry status:** Version `0.1.0-alpha.3` is active and latest. Its
 100-character description is “AI-native data broker: Consumer Data, Consumer
-Intent, Business Data, B2B Intent.” The exact-version Registry API confirms the
-published metadata. Paid MCP purchasing remains unverified.
+Intent, Business Data, B2B Intent.” The Registry API confirms the published
+metadata. Paid MCP purchasing remains unverified.
 
 **Glama status:** The [existing Glama listing](https://glama.ai/mcp/connectors/io.github.dubbleblack/skipole-connect)
-already shows all four active products; do not create a duplicate. Glama marks
-the connector unhealthy after two failed health checks. Glama's documented
-health check initializes an MCP session and lists metadata without calling
-tools. A safe unauthenticated `initialize` against Skipole returns HTTP 401
-(`Missing Authorization header`), as required by the protected OAuth endpoint.
-This confirms that an unauthenticated health probe is rejected; public status
-cannot show whether the private Glama test profile is absent or expired.
-After the Registry's alpha.3 publication, the Glama page still showed its prior
-description; a Registry update does not currently update Glama's listing text.
-Use the existing claimed Glama listing editor for the description.
+currently displays the four active offer names and states that paid MCP is
+unverified. The public page returned HTTP 200 on 2026-11-24. Glama's
+official guidance says a maintainer claims the existing listing through its
+**Claim connector** flow; this repository belongs to the personal GitHub account
+`dubbleblack`, so the owner can sign in with GitHub and claim it. Once claimed,
+edit the description on that existing Glama listing; do not create a duplicate.
+For organization-owned repositories Glama instead requires a root `glama.json`,
+but that is not needed for this personal repository. The owner must perform the
+claim and edit; no Glama login, third-party submission or terms acceptance was
+performed here.
+The listing is currently marked unhealthy after its two latest health checks
+failed. The public page asks its author to claim the listing and configure a test
+profile; it does not disclose whether the profile is missing or expired. The
+health check needs a saved profile to initialize an MCP session and list tools.
+Do not weaken Skipole authentication or grant customer-order access.
 
 **Owner action:** Sign in to the existing listing, use **Claim connector**, then
 set or refresh **Admin → Test Profile** using a dedicated ordinary Skipole
@@ -237,13 +246,21 @@ access, or access to customer orders. Re-run Glama's health check after saving.
 Do not weaken Skipole authentication or create another listing. No code change
 is indicated by the observed 401.
 
-Suggested Glama description: “Skipole is an AI-native data broker. We source
-good data and make it easy to buy and use. Discover licensed Consumer Data,
-Consumer Intent, Business Data and B2B Intent; review product-specific filters
-and permitted purposes; request a signed quote; approve payment in hosted
-Checkout; and retrieve only your workspace's delivered records through scoped
-access. Paid MCP purchasing is not independently verified. Email enrichment is
-paused.”
+Suggested description to paste into the existing Glama listing editor:
+
+> Skipole is a licensed-data marketplace with four active audience products:
+> Consumer Data, Consumer Intent, Business Data and B2B Intent. Discover
+> product-specific filters and permitted uses, request a signed quote, approve
+> each payment in Skipole's hosted Checkout, and retrieve only your workspace's
+> delivered records through scoped REST access. The current workspace source
+> defines scoped catalog, usage, and owned-order tools. Verify the deployed
+> Production tool list after API Server publication. Paid MCP purchasing is not
+> independently verified. Email enrichment is paused.
+
+**Owner action:** Claim the existing Glama listing, apply or keep the description
+above, then configure a dedicated ordinary account with only `catalog:read` in
+Admin → Test Profile and rerun Glama's health check. Do not grant
+`orders:read`, `data:write`, founder access, or access to customer orders.
 Directory presence is discovery, not paid verification.
 
 ### Make and Zapier

@@ -4,11 +4,20 @@ Skipole is an AI-native data broker. We source good data and make it easy to buy
 and use. This is a server-side integration guide, not an approved Replit
 Marketplace listing or independently verified native paid flow.
 
+The current Skipole MCP source exposes catalog/schema discovery, quote
+preparation, owned-order status/retrieval, usage reads, legacy credit estimates,
+and public intent-topic lookup. Legacy enrichment execution, audience
+build/export, and provider-job refresh tools are not registered for public MCP
+discovery. See the [tool inventory](../MCP-TOOL-INVENTORY.md); confirm the
+deployed list after API publication. No paid Replit/MCP transaction is claimed.
+
 [Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=replit#marketing-professionals).
 Paid REST commerce is Production verified; a native paid Replit/SDK session is not independently verified.
 
 [Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
-Marketing Professionals at $0.05 per delivered record, $2 minimum Checkout.
+four active offers are $0.05 per delivered record on Pay As You Go, with a
+$2.00 minimum Checkout before applicable taxes. Business Data's Marketing
+department preset is for the product's business-research purpose, not outreach.
 The live quote enforces current supplier allowance and reliable delivery
 capacity. No plan upgrade or sales call is required for supported quantities.
 See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quote
@@ -22,7 +31,7 @@ This is a code starter and agent-readable setup guide, not an official Replit in
 1. Add the customer's API key as a Replit Secret named `SKIPOLE_API_KEY`. Do not paste it into source files or chat.
 2. Install the published `@skipole/sdk` from npm, or `skipole-data` from PyPI for Python.
 3. Call Skipole from backend routes. Keep authenticated responses behind the application's own user authorization.
-4. Start with the public catalog. It returns metadata only and may contain planned products.
+4. Start with the public catalog. It returns metadata only for products currently available for purchase; it does not return licensed records.
 5. Use `catalog:read` for catalog and signed cash quotes, `orders:read` for owned
    licensed deliveries, and `usage:read` only when needed. Do not request
    `data:write` for customer-approved hosted purchasing.

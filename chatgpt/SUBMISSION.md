@@ -40,6 +40,12 @@ submission rules. Do not claim a paid ChatGPT transaction.
 - Minimum scope for discovery/quotes: `catalog:read`.
 - Owned-order status or retrieval requires separate customer consent to
   `orders:read`. Never include a key, token, or customer record in the listing.
+- Current MCP tool scope and evidence: see the
+  [public MCP tool inventory](../MCP-TOOL-INVENTORY.md). The current source
+  exposes catalog/schema discovery, signed quote preparation, owned-order
+  status/retrieval, usage reads, legacy credit estimates, and topic taxonomy
+  search. It does not expose enrichment execution, audience builds, provider
+  exports, or supplier-job refreshes.
 
 ## Owner actions before submission
 
@@ -51,9 +57,10 @@ submission rules. Do not claim a paid ChatGPT transaction.
    with a dedicated ordinary test account. Do not use founder access or another
    customer's delivered records.
 4. Complete only the privacy, security, data-rights and testing attestations
-   supported by actual evidence. The directory may require all exposed tools
-   to be tested; untested supplier-facing legacy tools remain a blocker to any
-   such blanket attestation.
+   supported by actual evidence. The legacy supplier-facing tools are no longer
+   publicly discoverable, but quote creation and topic search still have
+   Production checks that require separate authorization. Do not claim they
+   were live-tested based on mocked tests.
 5. Submit only after the owner approves the exact package and required terms.
    Preserve the resulting receipt and review status; do not claim approval early.
 

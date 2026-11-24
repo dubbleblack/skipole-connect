@@ -37,8 +37,11 @@ partner unless the owner intends to join that specific program.
 - Marketplace: <https://skipoledata.com/marketplace>
 - Integration guide: <https://github.com/dubbleblack/skipole-connect/blob/main/lovable/README.md>
 - Hosted REST flow: <https://github.com/dubbleblack/skipole-connect/blob/main/HOSTED-PURCHASES.md>
+- MCP tool scopes and side effects: <https://github.com/dubbleblack/skipole-connect/blob/main/MCP-TOOL-INVENTORY.md>
 - Privacy: <https://skipoledata.com/privacy>
 - Security/support: <https://github.com/dubbleblack/skipole-connect/blob/main/SECURITY.md>
 
 Do not include API keys, customer records, or an unapproved live purchase in a
 submission. Do not claim a listing, partnership, or approval without a receipt.
+The current workspace tool inventory is not proof that Lovable has connected
+to, tested, or approved the remote MCP server.

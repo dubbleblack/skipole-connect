@@ -3,8 +3,9 @@
 <img src="cursor/assets/skipole-icon-512.png" width="80" height="80" alt="Skipole official icon">
 
 **Paid REST purchasing is Production verified:** one customer-approved internal
-test collected $2.00, automatically delivered 40 licensed Marketing records and
-retrieved the CSV with authenticated REST access (HTTP 200). This is not a claim
+test collected $2.00, automatically delivered 40 Business Data records selected
+with a Marketing department preset for the permitted business-research purpose,
+and retrieved the CSV with authenticated REST access (HTTP 200). This is not a claim
 of outside customers, paid SDK/MCP verification, or official platform approval.
 Start with the [purchase quickstart](START-HERE.md).
 
@@ -14,17 +15,17 @@ Skipole is an AI-native data broker. We source good data and make it easy to buy
 
 ## Current service boundary
 
-- The public catalog and public pricing routes expose metadata only.
+- The public catalog and public pricing routes expose metadata only. The current catalog returns products available for purchase, not planned capabilities.
 - Customer API-key routes require a Skipole API key with the matching scope.
 - The customer usage route requires `usage:read`.
 - The synthetic demo route returns fabricated examples and never calls a data provider.
 - The REST contract includes customer-approved hosted purchase quotes, owned-order lookup and authenticated CSV retrieval. Existing legacy credit-funded request, job-status and export routes remain separately gated by their capability, purpose, credit and budget policies.
 - A quote does not contact a supplier or charge a customer. The hosted cash flow requires explicit customer payment in Checkout, not prepaid credits. Legacy credit-funded provider requests require a signed quote, `data:write`, sufficient credits and an active policy; these are not the public cash-purchase path.
 - Licensed-data website Checkout and encrypted CSV delivery have completed an internal paid order. The owner reports successful direct Consumer Data and Consumer Intent purchases; this repository does not verify that those orders came from outside customers. A non-founder previously reached genuine Stripe Live Checkout at 40 × $0.05 = $2.00 without paying during verification.
-- The remote MCP endpoint is `https://skipole-data-platform.replit.app/mcp`. Cursor completed Production OAuth and called `skipole_list_products` without purchasing. Cash-quote and scoped-order tools are implemented and published, but paid MCP and SDK round trips remain independently unverified. Cursor and Replit directory applications were submitted by the owner; neither is represented as approved or listed.
+- The remote MCP endpoint is `https://skipole-data-platform.replit.app/mcp`. Cursor completed Production OAuth and called `skipole_list_products` without purchasing. The current workspace source also defines cash-quote and scoped-order tools; verify the deployed Production tool list after API Server publication. Paid MCP and SDK round trips remain independently unverified. The owner reported Cursor and Replit submissions; current review outcomes, approvals, and public native listings are not independently confirmed.
 - The JavaScript and Python SDKs are published pre-release packages: [`@skipole/sdk` on npm](https://www.npmjs.com/package/@skipole/sdk) and [`skipole-data` on PyPI](https://pypi.org/project/skipole-data/). Public JavaScript installation and import are verified; this is not independent paid SDK purchase verification.
 - Tested installable SDK archives are [published as a GitHub prerelease](https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1).
-- The official MCP Registry reports [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect) version `0.1.0-alpha.3` as active. Its concise description names all four active audience offers. Registry publication is not paid MCP verification or official client approval.
+- The official MCP Registry currently reports [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.dubbleblack%2Fskipole-connect) version `0.1.0-alpha.3` as active and latest. Its description is limited to 100 characters. Registry publication is discovery only, not paid MCP verification or official client approval.
 
 Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's billing and operating entity. This package contains no Stripe implementation, provider credentials, private provider schemas, or customer data.
 
@@ -33,7 +34,7 @@ Skipole owns the customer-facing identity. DubbleBlack LLC remains the product's
 ## Quickstart: find, buy and return
 
 **Build your first workflow:** [practical customer examples](./CUSTOMER-EXAMPLES.md)
-cover prospecting apps, targeted audiences, AI agents, Replit/Vercel REST and
+cover business-research apps, licensed audiences, AI agents, Replit/Vercel REST and
 JavaScript/Python purchase-to-CSV retrieval using the published packages. The
 [Clay guide](./clay/README.md) imports an existing delivered B2B order without
 starting another purchase or supplier operation.
@@ -41,8 +42,10 @@ starting another purchase or supplier operation.
 GitHub publication from community posts that still require an authorized owner.
 
 The live marketplace has four audience capabilities. Business Data also offers
-Marketing, Sales, Engineering, Finance, Human Resources and Operations presets;
-these are configurations of one capability, not separate supplier products.
+Marketing, Sales, Engineering, Finance, Human Resources and Operations department
+filters; these are configurations of one product, not separate supplier products
+or permitted purposes. The Marketing department filter does not grant marketing
+or sales-outreach rights.
 Consumer Data and Consumer Intent use `audience_marketing`; Business Data and
 B2B Intent use `business_research`. The live catalog remains authoritative for
 per-product filters, output fields, quantity limits and current availability.
@@ -73,10 +76,17 @@ without granting an agent permission to pay, retry a supplier or expose records.
    previously purchased; cross-order uniqueness is not promised.
 
 No subscription or prepaid credits are required for hosted cash purchases.
-Verified MCP coverage is **catalog and usage**. The new quote and scoped retrieval
-tools do not charge a card; a paid MCP round trip remains unverified. Legacy SDK
-provider methods use a separate gated, credit-funded contract. Use the hosted
-purchase methods for signed approval links and retrieval of existing paid deliveries.
+Production-verified Cursor MCP coverage is **read-only product catalog
+discovery**. Earlier read checks are not proof that the current workspace's new
+tools are available in Production. The workspace tool list includes catalog and
+schema reads, quote preparation, owned-order status and retrieval, usage reads,
+legacy credit estimates, and topic-taxonomy search; see the
+[public MCP tool inventory](./MCP-TOOL-INVENTORY.md) for scopes, effects, and
+evidence. A quote does not charge or request supplier data, and order tools read
+only an existing order belonging to the authorized workspace. Verify the deployed
+tool list after API Server publication. A paid MCP round trip remains unverified.
+Legacy SDK provider methods use a separate gated, credit-funded contract.
+Use hosted-purchase methods for signed approval links and existing paid deliveries.
 
 ### Install the published SDK packages
 

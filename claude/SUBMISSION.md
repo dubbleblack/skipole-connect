@@ -20,26 +20,30 @@ submission, approval or paid MCP purchase.
 - **Remote server:** <https://skipole-data-platform.replit.app/mcp>
 - **Transport:** HTTPS Streamable HTTP
 - **Authentication:** OAuth 2.1 authorization code with PKCE and dynamic client registration. Use server discovery; do not invent client IDs or secrets.
-- **Scopes:** Start with `catalog:read`. Grant `orders:read` only when the reviewer needs to read that account's own existing order. No paid cash purchase requires `data:write`; legacy tools still request their existing scopes.
+- **Scopes:** Start with `catalog:read`. Grant `usage:read` only if workspace usage is part of the review. Grant `orders:read` only when a dedicated reviewer account has its own existing delivery to inspect. The public MCP server does not request `data:write`.
 
 ## Current server tools and boundaries
 
 The deployed server synchronizes its real tool list; do not upload a mock tool
-list. The source currently registers these tools:
+list. The current workspace source registers these eight tools. Confirm that the
+same list is live after the API Server is published; see the detailed
+[tool-by-tool inventory](../MCP-TOOL-INVENTORY.md).
 
 | Tool | Purpose and permission | Safe boundary |
 | --- | --- | --- |
 | `skipole_list_products` | Discover currently active products; `catalog:read` | Metadata only; no contact records or supplier build. |
 | `skipole_get_schema` | Read one active product's filters, output fields, price and purchase rules; `catalog:read` | Metadata only; no quote, payment or supplier operation. |
-| `skipole_quote_purchase` | Prepare a signed cash quote and customer approval link; `catalog:read` | A quote is not payment, Checkout or supplier fulfillment. It does not reserve supplier records or call the supplier. |
+| `skipole_quote_purchase` | Prepare a signed cash quote and customer approval link; `catalog:read` | Records a quote event and checks current price/capacity state. No order, Checkout, charge, or supplier request. Customer approval remains outside MCP. |
 | `skipole_get_order` | Read existing order status; `orders:read` | Only the authenticated workspace's own order; no supplier poll or retry. |
 | `skipole_download_order` | Retrieve an existing licensed CSV; `orders:read` | Only the authenticated workspace's own delivered order. Use a dedicated reviewer account, never JMG or another customer's data. |
-| `skipole_estimate_cost` | Estimate legacy credit costs; `catalog:read` | Does not submit a data request; legacy credit pricing is separate from the cash quote. |
-| `skipole_get_usage` | Read the workspace's usage and credit summary; `usage:read` | Only the authenticated workspace. Do not expose another customer's billing information. |
-| `skipole_search` | Search public topic taxonomy; `catalog:read` | Topic metadata only; no paid audience build. Do not claim that this is a purchased intent-data result. |
-| `skipole_enrich` | Legacy enrichment operation; `data:write` | Licensed enrichment is paused. Do not enable it or submit live identifiers for directory testing. |
-| `skipole_create_export` | Legacy audience build or job export; `data:write` | Can start supplier work or export data. Do not test without separate owner authorization. |
-| `skipole_get_job_status` | Read/refresh a legacy job status; `usage:read` | Do not test with an unknown job; a refresh could contact the provider. |
+| `skipole_estimate_cost` | Estimate legacy cost or prepare a legacy quote; `catalog:read` | Active cash audience offers reject the legacy quote path; no request is submitted and no hosted customer-approval link is returned. |
+| `skipole_get_usage` | Read the workspace's usage and legacy credit summary; `usage:read` | Only the authenticated workspace. Do not expose another customer's billing information. |
+| `skipole_search` | Search the public B2B/B2C topic taxonomy; `catalog:read` | Non-billable upstream topic lookup only. It does not return licensed audience records or start a build. |
+
+The MCP server no longer registers `skipole_enrich`, `skipole_create_export`,
+or `skipole_get_job_status`. Their underlying legacy services/routes were not
+changed. This removes supplier execution and provider-refresh operations from
+public tool discovery; it does not change REST commerce or fulfilment.
 
 The current MCP catalog tool describes all four active audience offers and
 states that paid native MCP fulfillment remains independently unverified.
@@ -49,40 +53,36 @@ not active for new purchases.
 
 ## Test evidence and remaining owner tests
 
-No Claude owner session, reviewer account or Claude Directory submission receipt
-is available to this preparation. The owner must not attest that all tools have
-been tested until this checklist is complete:
+No Claude Directory submission receipt or dedicated reviewer-owned delivery is
+available to this preparation. The owner must not attest to tests beyond the
+evidence actually collected:
 
-1. In Claude, connect to the exact remote endpoint above through OAuth and
-   inspect the actual synchronized tool list and safety annotations.
-2. With a dedicated ordinary test account, test `skipole_list_products` and
-   `skipole_get_schema` for each of the four active offers. These are metadata
-   reads.
-3. Test `skipole_estimate_cost` with a non-mutating metadata-only input if the
-   portal requires it. Do not confuse the legacy credit estimate with the cash
-   quote.
-4. Test `skipole_search` only if its public-topic lookup is acceptable to the
-   owner and the required scope is available. Do not run a paid audience build.
-5. Only if the owner explicitly authorizes it, test `skipole_quote_purchase` with
-   synthetic criteria and a dedicated test workspace. It creates an expiring
-   quote but does not hold supplier capacity; do not pay it or follow it with a
-   supplier operation.
-6. Test `skipole_get_order` and `skipole_download_order` only against an existing
-   already-delivered order owned by the dedicated reviewer workspace. Never
-   disclose JMG or other customer records. If no reviewer-owned order exists,
-   mark these tests unavailable instead of using customer data.
-7. Do not call `skipole_enrich`, `skipole_create_export` or
-   `skipole_get_job_status` for review until the owner separately authorizes the
-   specific live operation and supplies a safe reviewer-owned resource. Do not
-   make enrichment active for this submission.
-8. Complete only truthful directory attestations for privacy, security, data
-   rights, tool testing and policy compliance. The owner must authorize reviewer
-   access through Claude's secure portal; never put credentials or customer
-   records in this repository or chat.
+1. After API publication, connect through OAuth and verify the exact tool list
+   and annotations in Claude.
+2. With an ordinary account, test `skipole_list_products` and
+   `skipole_get_schema` for each active offer. These return catalog metadata.
+3. `skipole_get_usage` requires `usage:read`; test only against that account's
+   own workspace.
+4. `skipole_estimate_cost` is a legacy credit estimate, not the customer cash
+   quote; active public cash offers reject its legacy quote path. Do not
+   represent its result as a customer approval link.
+5. Do not run `skipole_search` in Production without separate owner approval:
+   it contacts the upstream topic-taxonomy endpoint, although it does not buy
+   audience records or start a build.
+6. `skipole_quote_purchase` creates a quote event and reads live price/capacity
+   state, but does not start Checkout or a supplier request. Do not test it in
+   Production without the owner's approval for that read/write quote action.
+7. Test `skipole_get_order` or `skipole_download_order` only against an
+   already-delivered order owned by a dedicated reviewer workspace. Never use
+   JMG or another customer's order. If no reviewer-owned delivery exists, mark
+   these tests unavailable.
+8. Complete only truthful privacy, security, data-rights, and testing
+   attestations through Claude's secure portal. Never put credentials or
+   customer records in this repository or chat.
 
-Claude may require an attestation that every exposed tool was tested. That
-attestation is currently **not supportable**: supplier-facing legacy tools are
-exposed and have not been tested, and live supplier/customer-data tests are not
-authorized here. Stop at that confirmation rather than claiming completion.
-No payment, supplier request or customer data access was performed while
-preparing this package.
+Claude may require every exposed tool to be tested. Such an attestation remains
+**not supportable** until the owner completes the post-publication tests above
+or Claude permits the unverified actions to be marked unavailable. The three
+legacy supplier-facing tools are no longer publicly discoverable. No payment,
+supplier operation, customer-data access, directory submission, or legal
+acceptance was performed while preparing this package.

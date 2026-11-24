@@ -3,12 +3,20 @@
 Skipole is an AI-native data broker. We source good data and make it easy to buy
 and use. The marketplace serves developers and AI agents; PAYG requires no
 mandatory subscription or sales call.
+Skipole is a self-service licensed audience-data marketplace for developers and AI agents.
+**Your tools. Our data.** PAYG requires no mandatory subscription or sales call.
+Consumer Data and Consumer Intent are for audience marketing; Business Data and
+B2B Intent are for business research, not sales outreach. Review each product's
+fields and permitted purpose in the live catalog.
 
 [Browse and buy licensed audiences](https://skipoledata.com/marketplace?utm_source=cursor#marketing-professionals).
 Paid REST commerce is Production verified; paid Cursor/MCP purchases remain independently unverified.
 
 [Website purchasing is live](https://skipoledata.com/marketplace#marketing-professionals):
-Marketing Professionals at $0.05 per delivered record, $2 minimum Checkout.
+four active offers are $0.05 per delivered record on Pay As You Go, with a
+$2.00 minimum Checkout before applicable taxes. The Marketing department preset
+is a filter on Business Data for business research, not permission to market or
+conduct sales outreach.
 The live quote enforces current supplier allowance and reliable delivery
 capacity. No plan upgrade or sales call is required for supported quantities.
 See [customer-approved hosted purchases](../HOSTED-PURCHASES.md) for signed quote
@@ -36,7 +44,9 @@ purchasing remains unverified.
 The owner must sign in at <https://cursor.com/marketplace/publish> and apply as
 a publisher, then submit <https://github.com/dubbleblack/skipole-connect>.
 The repository contains a multi-plugin-layout manifest with exactly one plugin,
-`skipole-connect`. Choose Sales / GTM Data where the form offers those categories.
+`skipole-connect`. Choose a category that accurately describes licensed business
+research and developer integration; do not describe the product as sales
+prospecting or claim marketing permissions for Business Data.
 See [the prepared application details](../NATIVE-DIRECTORY-SUBMISSIONS.md).
 
 Do not claim that a GitHub package, a manually configured MCP connection or an
@@ -56,13 +66,22 @@ These local/team installations do not establish public marketplace discovery.
 
 The deployed Skipole API service contains a Streamable HTTP MCP endpoint with OAuth sign-in, authorization code with PKCE, resource metadata, scoped read access, and connected-app revocation. Cursor OAuth and the read-only product-list tool have been verified. Connecting Cursor does not require creating server signing secrets.
 
+The current workspace source exposes catalog and schema discovery, quote
+preparation, owned-order status/retrieval, usage reads, legacy credit estimates,
+and public intent-topic lookup. See the
+[MCP tool inventory](../MCP-TOOL-INVENTORY.md) for scopes and side effects. The
+three legacy enrichment/build/export/job-refresh tools are not registered for
+public MCP discovery. Confirm the deployed list after the API Server is
+published.
+
 ## Configure Cursor
 
 For an independent custom-connection check, copy the `mcpServers` entry from `mcp.json` into your project's `.cursor/mcp.json`
 or your global Cursor MCP settings. Enable the server and complete Skipole OAuth
 in the browser when prompted. Review the requested catalog and usage scopes.
-Test listing catalog metadata and reading your own usage before calling this
-client connection verified. Do not put private keys or OAuth secrets in this file.
+Only read-only product catalog discovery is currently verified. Usage and paid
+tool calls still need separate verification. Do not put private keys or OAuth
+secrets in this file.
 
 The implemented `skipole_quote_purchase` tool prepares a signed approval link
 for customer-approved hosted Checkout. `skipole_get_order` and
@@ -70,7 +89,11 @@ for customer-approved hosted Checkout. `skipole_get_order` and
 `orders:read` consent; no tool approves payment. This paid Cursor journey has
 not been independently verified. See [the purchase guide](../START-HERE.md).
 
-REST remains available separately. Use API keys only from trusted server-side code. The public catalog does not return licensed records. Paid enrichment, search, and export tools are disabled.
+REST remains available separately. Use API keys only from trusted server-side
+code. The public catalog does not return licensed records. The public
+`skipole_search` MCP tool searches intent-topic taxonomy only; it does not
+retrieve purchased audience data. Legacy enrichment, audience build/export,
+and job-refresh tools are not exposed through MCP.
 
 ## Marketplace release blockers
 
