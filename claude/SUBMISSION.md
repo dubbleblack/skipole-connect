@@ -8,7 +8,7 @@ submission, approval or paid MCP purchase.
 
 - **Name:** Skipole Connect
 - **Category:** Data / Sales and Marketing
-- **One-liner:** Licensed audience data for businesses, marketers, developers and AI agents.
+- **One-liner:** AI-native data broker for four licensed audience products: Consumer Data, Consumer Intent, Business Data and B2B Intent.
 - **Description:** Discover four active audience offers—Consumer Data, Consumer Intent, Business Data and B2B Intent—then review the live product-specific filters and allowed purpose. A customer may request a signed quote and must approve each payment in Skipole's hosted Checkout. Retrieve only the authenticated workspace's existing delivered order through scoped access. Product-specific filters, licensed fields and permitted use are controlled by the live catalog and order license. Paid REST commerce is Production verified; paid Claude/MCP purchasing is not independently verified. Email enrichment is not available for new purchases.
 - **Website:** <https://skipoledata.com>
 - **Purchase:** <https://skipoledata.com/marketplace>
@@ -31,7 +31,7 @@ list. The source currently registers these tools:
 | --- | --- | --- |
 | `skipole_list_products` | Discover currently active products; `catalog:read` | Metadata only; no contact records or supplier build. |
 | `skipole_get_schema` | Read one active product's filters, output fields, price and purchase rules; `catalog:read` | Metadata only; no quote, payment or supplier operation. |
-| `skipole_quote_purchase` | Prepare a signed cash quote and customer approval link; `catalog:read` | A quote is not payment, Checkout or supplier fulfillment. It may reserve quote/capacity state; test only with explicit owner approval. |
+| `skipole_quote_purchase` | Prepare a signed cash quote and customer approval link; `catalog:read` | A quote is not payment, Checkout or supplier fulfillment. It does not reserve supplier records or call the supplier. |
 | `skipole_get_order` | Read existing order status; `orders:read` | Only the authenticated workspace's own order; no supplier poll or retry. |
 | `skipole_download_order` | Retrieve an existing licensed CSV; `orders:read` | Only the authenticated workspace's own delivered order. Use a dedicated reviewer account, never JMG or another customer's data. |
 | `skipole_estimate_cost` | Estimate legacy credit costs; `catalog:read` | Does not submit a data request; legacy credit pricing is separate from the cash quote. |
@@ -65,7 +65,7 @@ been tested until this checklist is complete:
    owner and the required scope is available. Do not run a paid audience build.
 5. Only if the owner explicitly authorizes it, test `skipole_quote_purchase` with
    synthetic criteria and a dedicated test workspace. It creates an expiring
-   quote and may reserve capacity, but it must not be paid or followed by a
+   quote but does not hold supplier capacity; do not pay it or follow it with a
    supplier operation.
 6. Test `skipole_get_order` and `skipole_download_order` only against an existing
    already-delivered order owned by the dedicated reviewer workspace. Never

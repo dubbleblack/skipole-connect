@@ -171,12 +171,26 @@ review its synthetic examples and authentication, then publish through the
 Follow the [private environment and publication steps](./postman/README.md).
 Postman is discovery and documentation, not a per-record payment rail.
 
+### Lovable integration partnership
+
+**Status:** The public [Lovable partner page](https://lovable.dev/partners/integration)
+currently routes to the general partner program, which lists Experts and
+Solution partners; no separate integration-directory submission form or
+listing receipt is confirmed. Do not apply under the wrong partner track or
+claim an official Lovable integration.
+
+**Owner-ready copy:** Use the copy in [`lovable/SUBMISSION.md`](./lovable/SUBMISSION.md)
+to ask Lovable which owner-controlled route is appropriate for a data/API
+integration. The copy describes the verified REST path and explicitly states
+that a native Lovable integration is not verified. No application was submitted.
+
 ### ChatGPT / Codex directory
 
 **Listing name:** Skipole  
-**Description:** Discover licensed audience products, review supported
-filters, and prepare a human-approved purchase quote. Retrieve only the
-authenticated user's existing delivered order.
+**Description:** Skipole is an AI-native data broker. Discover its licensed
+Consumer Data, Consumer Intent, Business Data and B2B Intent products, review
+supported filters, and prepare a human-approved purchase quote. Retrieve only
+the authenticated user's existing delivered order.
 
 **Owner action:** Use OpenAI's
 [current submission guide](https://developers.openai.com/plugins/deploy/submission).
@@ -211,6 +225,9 @@ tools. A safe unauthenticated `initialize` against Skipole returns HTTP 401
 (`Missing Authorization header`), as required by the protected OAuth endpoint.
 This confirms that an unauthenticated health probe is rejected; public status
 cannot show whether the private Glama test profile is absent or expired.
+After the Registry's alpha.3 publication, the Glama page still showed its prior
+description; a Registry update does not currently update Glama's listing text.
+Use the existing claimed Glama listing editor for the description.
 
 **Owner action:** Sign in to the existing listing, use **Claim connector**, then
 set or refresh **Admin → Test Profile** using a dedicated ordinary Skipole
