@@ -5,8 +5,8 @@ the [tested GitHub SDK prerelease](https://github.com/dubbleblack/skipole-connec
 Its JavaScript archive, Python wheel/source archive and SHA256SUMS are public.
 The official MCP Registry independently reports
 [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.dubbleblack%2Fskipole-connect/versions/latest)
-version `0.1.0-alpha.2` as **active and latest**. Its four-product metadata
-update was published by the existing `publish_mcp=true` GitHub Actions workflow
+version `0.1.0-alpha.3` as **active and latest**. Its AI-native, four-product
+metadata update was published by the existing `publish_mcp=true` GitHub Actions workflow
 and verified through the exact-version Registry API.
 [Python is published on PyPI as `skipole-data`](https://pypi.org/project/skipole-data/).
 [`@skipole/sdk@0.1.0-alpha.3` is published on npm](https://www.npmjs.com/package/@skipole/sdk/v/0.1.0-alpha.3).

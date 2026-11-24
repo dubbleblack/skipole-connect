@@ -4,7 +4,7 @@
 
 The official Registry reports
 [`io.github.dubbleblack/skipole-connect`](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.dubbleblack%2Fskipole-connect/versions/latest)
-version `0.1.0-alpha.2` as **active and latest**, backed by verified GitHub
+version `0.1.0-alpha.3` as **active and latest**, backed by verified GitHub
 ownership. Its description names the four active licensed audience offers:
 Consumer Data, Consumer Intent, Business Data and B2B Intent.
 

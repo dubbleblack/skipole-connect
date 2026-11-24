@@ -41,9 +41,9 @@ your app for the correct customer before forwarding that customer's key in the
 `Authorization: Bearer ...` header. Configure keys as server-only host secrets,
 never `NEXT_PUBLIC_*` values or browser code. Never log the key or contact data.
 
-The SDK source can be used locally from `../javascript`; do not assume the npm
-package exists until the approved release is published. Follow the JavaScript
-SDK README for build and package checks.
+Install the published JavaScript package with `npm install @skipole/sdk`; see
+the [SDK guide](../javascript/README.md). Package installation does not verify
+your deployed Vercel application's authentication or paid purchase path.
 
 This route neither charges customers nor calls a data supplier. Licensed website
 orders use Skipole's signed-in one-time Checkout and My Orders. Separate provider
