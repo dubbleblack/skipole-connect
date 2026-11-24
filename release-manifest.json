@@ -14,7 +14,7 @@
   "packages": [
     {
       "name": "@skipole/sdk",
-      "version": "0.1.0-alpha.2",
+      "version": "0.1.0-alpha.4",
       "directory": "javascript",
       "build": "npm run build",
       "test": "npm test",
@@ -22,7 +22,7 @@
     },
     {
       "name": "skipole-data",
-      "version": "0.1.0a2",
+      "version": "0.1.0a3",
       "directory": "python",
       "prepare": "python scripts/prepare-release.py",
       "build": "uv build --wheel --no-build-isolation --out-dir dist",
@@ -38,10 +38,9 @@
   "productionMcpEndpoint": {
     "url": "https://skipole-data-platform.replit.app/mcp",
     "verifiedLive": true,
-    "verifiedClient": "Claude",
+    "verifiedClient": "Cursor",
     "verifiedReadOnlyTools": [
-      "skipole_list_products",
-      "skipole_get_usage"
+      "skipole_list_products"
     ]
   },
   "hostedPurchaseVerification": {
@@ -59,7 +58,7 @@
     "npm": {
       "status": "published",
       "url": "https://www.npmjs.com/package/@skipole/sdk",
-      "version": "0.1.0-alpha.2",
+      "version": "0.1.0-alpha.4",
       "installTag": "latest",
       "latestTagIsStagingPlaceholder": false,
       "installVerified": true,
@@ -67,23 +66,30 @@
       "clientImportVerified": true,
       "typeDeclarationsVerified": true,
       "compiledSdkUnchanged": true,
-      "archiveSha1": "83ef1271ae217f2e1242d2d25444be391effc8a3",
+      "archiveSha1": "7083f7ad8be40a6767ccd4a999643b3d936bbfdc",
       "trustedPublisherStatus": "verified-oidc",
-      "verificationRunUrl": "https://github.com/dubbleblack/skipole-connect/actions/runs/43061641083",
-      "provenanceUrl": "https://registry.npmjs.org/-/npm/v1/attestations/@skipole%2fsdk@0.1.0-alpha.2"
+      "verificationRunUrl": "https://github.com/dubbleblack/skipole-connect/actions/runs/45471095115",
+      "provenanceUrl": "https://registry.npmjs.org/-/npm/v1/attestations/@skipole%2fsdk@0.1.0-alpha.4"
     },
     "pypi": {
       "status": "published",
       "url": "https://pypi.org/project/skipole-data/",
-      "version": "0.1.0a2",
+      "version": "0.1.0a3",
       "installVerified": true,
-      "verificationRunUrl": "https://github.com/dubbleblack/skipole-connect/actions/runs/43053179257"
+      "verificationRunUrl": "https://github.com/dubbleblack/skipole-connect/actions/runs/43147700815"
     },
     "github": {
       "status": "published",
       "publicRepository": true,
       "url": "https://github.com/dubbleblack/skipole-connect",
       "sdkReleaseUrl": "https://github.com/dubbleblack/skipole-connect/releases/tag/sdk-v0.1.0-alpha.1"
+    },
+    "clay": {
+      "status": "prepared-api-publication-pending",
+      "endpoint": "https://skipole-data-platform.replit.app/api/v1/customer/order-records",
+      "authentication": "customer-owned orders:read API key",
+      "paidImportVerified": false,
+      "officialListing": false
     },
     "mcpRegistry": {
       "status": "published-active",

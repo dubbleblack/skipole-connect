@@ -102,8 +102,8 @@ npm install @skipole/sdk
 python -m pip install "skipole-data==0.1.0a3"
 ```
 
-The verified JavaScript release is `0.1.0-alpha.3`; pin it with
-`npm install @skipole/sdk@0.1.0-alpha.3`. The default `latest` tag selects the
+The verified JavaScript release is `0.1.0-alpha.4`; pin it with
+`npm install @skipole/sdk@0.1.0-alpha.4`. The default `latest` tag selects the
 real SDK, not npm's staging placeholder. This remains prerelease software.
 
 ### Alternatively, install reviewed SDK source
@@ -170,7 +170,7 @@ node scripts/prepare-release.mjs
 ```
 
 The release manifest is `release-manifest.json`. The pre-release packages are
-published: npm `@skipole/sdk` latest `0.1.0-alpha.3` and PyPI `skipole-data`
+published: npm `@skipole/sdk` latest `0.1.0-alpha.4` and PyPI `skipole-data`
 `0.1.0a3`. Registry publication is not independent paid-purchase verification.
 
 ## Security and publication

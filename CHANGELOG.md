@@ -15,6 +15,7 @@ Older entries below are historical and do not establish current client testing.
 
 - Add TypeScript declarations for the account-specific quote tier, unit price, total, maximum charge, billing basis, currency, and expiry.
 - Keep the JavaScript request and response handling unchanged; test compatibility with both older quote responses and the expanded response.
+- Published through the existing GitHub Actions npm Trusted Publishing workflow; verified the exact public install and `latest` tag.
 - Paid SDK fulfillment remains independently unverified.
 
 ## JavaScript 0.1.0-alpha.1 — npm publication
